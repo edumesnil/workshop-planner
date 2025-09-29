@@ -1,0 +1,269 @@
+{
+  "facility_layout_research": [
+    {
+      "study_name": "Workshop facility layout via White Shark Optimizer (WSO) with CAD–based validation (2025)",
+      "optimization_approach": "Metaheuristic (White Shark Optimizer) on unequal-area FLP with distance + closeness objectives; compared against GA and Sailfish Algorithm (SSA)",
+      "objective_weights": {},
+      "success_metrics": {
+        "travel_distance_reduction_vs_baseline_m": 381.0,
+        "travel_distance_reduction_vs_GA_m": 82.0,
+        "travel_distance_reduction_vs_SSA_m": 56.0,
+        "closeness_improvement_percent": 24.84
+      },
+      "source": "https://www.mdpi.com/2218-6581/12/2/31"
+    },
+    {
+      "study_name": "NSGA-II + discrete-event simulation for layout reconfiguration (WSC 2024, automotive assembly)",
+      "optimization_approach": "Modified NSGA-II with simulation; two-objective optimization (area utilization, throughput)",
+      "objective_weights": {
+        "area_utilization": 0.5,
+        "throughput_UPH": 0.5
+      },
+      "success_metrics": {
+        "area_utilization": "improved across all 6 scenarios (no quantified % given)",
+        "throughput_UPH": "maintained or slightly improved despite trade-off"
+      },
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "study_name": "CORELAP & ALDEP + FlexSim simulation (2021 case study)",
+      "optimization_approach": "Construction heuristics (CORELAP/ALDEP) with simulation validation",
+      "objective_weights": {},
+      "success_metrics": {
+        "productivity_parts_per_hour_CORELAP": 133,
+        "productivity_parts_per_hour_ALDEP": 79,
+        "layout_efficiency_CORELAP_percent": 19.607,
+        "layout_efficiency_ALDEP_percent": 7.028,
+        "distance_reduction_m_per_unit": 69.17
+      },
+      "source": "https://ijsred.com/volume4/issue6/IJSRED-V4I6P76.pdf"
+    },
+    {
+      "study_name": "Hybrid F-AHP + F-TOPSIS for facility layout selection (railcar case, 2023)",
+      "optimization_approach": "Multi-criteria scoring (F-AHP for weights; F-TOPSIS for ranking) on SLP-derived alternatives",
+      "objective_weights": {
+        "productivity_weight_geometric_mean": 0.612,
+        "notes": "Productivity weight reported in 0.592–0.632 range (geometric mean)"
+      },
+      "success_metrics": {
+        "closeness_coefficients": [0.92, 0.90],
+        "productivity_increase_units": {"before": 288, "after": 567}
+      },
+      "source": "https://www.mdpi.com/2227-9717/11/3/869"
+    },
+    {
+      "study_name": "COHSR constraints for aisles/clearances (Canada-wide, last amended 2025-03-26)",
+      "optimization_approach": "Constraint programming / hard constraints integrated into FLP (penalty→infeasible)",
+      "objective_weights": {
+        "constraint_policy": "Treat violations as infinite penalty; satisfy before objective optimization"
+      },
+      "success_metrics": {
+        "regulatory_min_pedestrian_pathway_mm": 750,
+        "side_clearance_each_side_mm": 150,
+        "overhead_clearance_min_mm": 150
+      },
+      "source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-86-304/page-27.html#h-1329355"
+    },
+    {
+      "study_name": "WorkSafeBC Wood Dust Control & Wood Products Industry Guidance (2017–2023)",
+      "optimization_approach": "Constraint/requirements integrated to layout (no recirculation of hardwood dust without approval; capture at source; explosion/migration barriers)",
+      "objective_weights": {},
+      "success_metrics": {
+        "controls": ["source capture", "adequate makeup air", "no-recirculation policy", "housekeeping zones"],
+        "intended_outcomes": ["reduced combustible dust accumulation", "reduced exposure"]
+      },
+      "source": "https://www.worksafebc.com/en/health-safety/hazard-exposures/wood-dust#section-nav-subtopic-wood-dust-management"
+    },
+    {
+      "study_name": "Ontario WSPS Woodworking Machine Safeguarding (CSA Z432 & lockout expectations)",
+      "optimization_approach": "Layout and guarding constraints tied to safeguarding standards; separation zones around cutters/feed paths",
+      "objective_weights": {},
+      "success_metrics": {
+        "outcomes": ["reduced amputation/ejection risk", "zone demarcation clarity"]
+      },
+      "source": "https://www.wsps.ca/training/safeguarding-of-woodworking-machines"
+    },
+    {
+      "study_name": "CCOHS Woodworking Machine Safety (national guidance)",
+      "optimization_approach": "Risk-based layout to minimize entanglement, kickback zones, and dust exposure",
+      "objective_weights": {},
+      "success_metrics": {
+        "controls": ["guards", "push sticks", "infeed/outfeed space", "dust collection"]
+      },
+      "source": "https://www.ccohs.ca/oshanswers/safety_haz/woodwork.html"
+    },
+    {
+      "study_name": "Constrained Single-Row Facility Layout (SRFLP) models (2018–2022)",
+      "optimization_approach": "Exact models (MIP/decision diagrams) for 1-D linear arrangements with adjacency/ordering constraints; ideal for narrow shops <500 sq ft",
+      "objective_weights": {},
+      "success_metrics": {
+        "scope": "improved solvability vs prior MIP; better run-times reported in CP 2022 study (qualitative)"
+      },
+      "source": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol235-cp2022/LIPIcs.CP.2022.14/LIPIcs.CP.2022.14.pdf"
+    },
+    {
+      "study_name": "Comparative review: CRAFT, CORELAP, ALDEP and hybrids (2024)",
+      "optimization_approach": "Survey of construction/improvement heuristics; guidance to combine SLP/REL charts with metaheuristics for rework-intensive shops",
+      "objective_weights": {},
+      "success_metrics": {
+        "insight": "Use construction (SLP/CORELAP/ALDEP) to seed, then improvement/metaheuristics to refine"
+      },
+      "source": "https://link.springer.com/chapter/10.1007/978-981-19-5305-4_14"
+    }
+  ],
+  "scoring_methodologies": [
+    {
+      "methodology": "SLP/REL-chart numeric closeness scoring (ALDEP/CORELAP conversion)",
+      "scoring_components": [
+        "A=64", "E=16", "I=4", "O=1", "U=0", "X=-1024",
+        "Adjacency only counts (shared border); corner-touch may be half-weight in some variants"
+      ],
+      "validation_metrics": {
+        "use_case": "Seed layouts; improves adjacency score; widely taught/used in Canada (Concordia INDU 421)"
+      },
+      "source": "https://users.encs.concordia.ca/~andrea/indu421/Presentation%2011%20%28Layout%20IV%29.pdf"
+    },
+    {
+      "methodology": "Alternative REL numeric mapping (low-magnitude weights)",
+      "scoring_components": ["A=4", "E=3", "I=2", "O=1", "U=0", "X=-4"],
+      "validation_metrics": {
+        "note": "Lower dynamic range; less ‘hard’ penalty than −1024 for X"
+      },
+      "source": "https://users.encs.concordia.ca/~andrea/indu421/Assignment%207.pdf"
+    },
+    {
+      "methodology": "Weighted sum of area utilization & throughput (NSGA-II WSC’24)",
+      "scoring_components": ["Area utilization (weight 0.5)", "Throughput (UPH, weight 0.5)"],
+      "validation_metrics": {
+        "result": "Area utilization improved in all scenarios without degrading UPH"
+      },
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "methodology": "Fuzzy AHP + Fuzzy TOPSIS (criteria-weighted ranking)",
+      "scoring_components": [
+        "F-AHP-derived criteria weights (e.g., productivity ≈0.592–0.632 geometric mean)",
+        "F-TOPSIS closeness coefficients (e.g., 0.92/0.90 for top alternatives)"
+      ],
+      "validation_metrics": {
+        "productivity_increase_units": {"before": 288, "after": 567}
+      },
+      "source": "https://www.mdpi.com/2227-9717/11/3/869"
+    },
+    {
+      "methodology": "Penalty-based constraint scoring (Canadian compliance first)",
+      "scoring_components": [
+        "Hard constraints (infeasible if breached): pedestrian path ≥0.75 m (COHSR 14.44), side clearance ≥150 mm (14.45), overhead clearance ≥150 mm (14.45)",
+        "Soft penalties for undesirable adjacencies: X rating ≈ −1024 (SLP practice)"
+      ],
+      "validation_metrics": {
+        "logic": "Infeasible if any COHSR hard constraints violated; otherwise apply adjacency penalties"
+      },
+      "source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-86-304/page-27.html#h-1329355"
+    },
+    {
+      "methodology": "Simulation-validated efficiency rating",
+      "scoring_components": [
+        "Layout efficiency E ≈ (1 − (displacement_proposed / displacement_initial)) × 100%",
+        "Throughput parts/hour under modeled demand"
+      ],
+      "validation_metrics": {
+        "example": {"E_percent_CORELAP": 19.607, "E_percent_ALDEP": 7.028, "throughput_pph_CORELAP": 133}
+      },
+      "source": "https://ijsred.com/volume4/issue6/IJSRED-V4I6P76.pdf"
+    },
+    {
+      "methodology": "Pareto non-dominated ranking + crowding distance",
+      "scoring_components": ["Front rank (min)", "Crowding distance (max)"],
+      "validation_metrics": {
+        "use": "Select diverse trade-off layouts (e.g., area vs UPH) for woodworking constraints"
+      },
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "methodology": "Fuzzy closeness relationship (F-AHP → fuzzy REL weights)",
+      "scoring_components": [
+        "Linguistic closeness factors → membership functions",
+        "AHP to derive factor weights → fuzzy closeness scores"
+      ],
+      "validation_metrics": {
+        "benefit": "Stabilizes rankings when qualitative judgments dominate (craft shops)"
+      },
+      "source": "https://jcme.iut.ac.ir/article_3005.html?lang=en"
+    }
+  ],
+  "optimization_algorithm_research": [
+    {
+      "algorithm_type": "CORELAP (construction heuristic)",
+      "effectiveness_rating": "High for seeding small workshops (≤10–15 stations) with adjacency goals",
+      "best_use_case": "Woodworking shops needing ‘REL-first’ adjacency; seed for later improvement",
+      "source": "https://ijsred.com/volume4/issue6/IJSRED-V4I6P76.pdf"
+    },
+    {
+      "algorithm_type": "ALDEP (construction heuristic)",
+      "effectiveness_rating": "Good for quick alternatives; sensitive to closeness weights and sweep width",
+      "best_use_case": "Fast what-ifs in narrow or irregular spaces",
+      "source": "https://ijsred.com/volume4/issue6/IJSRED-V4I6P76.pdf"
+    },
+    {
+      "algorithm_type": "CRAFT (pairwise-exchange improvement)",
+      "effectiveness_rating": "Moderate alone; strong when refining SLP/CORELAP seeds",
+      "best_use_case": "Fine-tuning path length using flow matrices for small layouts",
+      "source": "https://www.slideserve.com/mills/facility-design-week-9-computerized-layout-planning"
+    },
+    {
+      "algorithm_type": "Genetic Algorithm (GA)",
+      "effectiveness_rating": "High with good encoding; may converge slower than newer metaheuristics",
+      "best_use_case": "Mixed objectives (distance + adjacency) with discrete constraints",
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "algorithm_type": "NSGA-II (multi-objective GA)",
+      "effectiveness_rating": "High for trade-offs; widely used with simulation coupling",
+      "best_use_case": "Balancing area utilization vs throughput vs safety buffers",
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "algorithm_type": "Simulated Annealing (SA)",
+      "effectiveness_rating": "Good baseline metaheuristic; robust, simple tuning",
+      "best_use_case": "Distance minimization with few tight constraints",
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "algorithm_type": "Ant Colony Optimization (ACO)",
+      "effectiveness_rating": "Good on routing-like encodings; depends on pheromone design",
+      "best_use_case": "Sequence/ordering-heavy layouts, or SRFLP variants",
+      "source": "https://informs-sim.org/wsc24papers/con119.pdf"
+    },
+    {
+      "algorithm_type": "White Shark Optimizer (WSO)",
+      "effectiveness_rating": "High vs GA/SSA on workshop case (distance ↓, closeness ↑)",
+      "best_use_case": "Unequal-area FLP with strong adjacency goals",
+      "source": "https://www.mdpi.com/2218-6581/12/2/31"
+    },
+    {
+      "algorithm_type": "Constrained SRFLP (exact: MIP/Decision Diagrams)",
+      "effectiveness_rating": "High solution quality; moderate sizes solvable exactly",
+      "best_use_case": "Very small shops or single-row machine lines (benchtop tools, long narrow bays)",
+      "source": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol235-cp2022/LIPIcs.CP.2022.14/LIPIcs.CP.2022.14.pdf"
+    },
+    {
+      "algorithm_type": "GRASP/Path-Relinking for SRFLP (matheuristics)",
+      "effectiveness_rating": "High on single-row layouts; competitive run-times",
+      "best_use_case": "Tight, linear woodworking spaces (<500 sq ft) with ordered flow",
+      "source": "https://www.sciencedirect.com/science/article/pii/S0305054819300486"
+    },
+    {
+      "algorithm_type": "Reinforcement Learning (policy-based)",
+      "effectiveness_rating": "Experimental; promising on generalization but training-time heavy",
+      "best_use_case": "Rapid re-layout needs with simulated feedback loops",
+      "source": "https://www.mdpi.com/2073-431X/12/3/61"
+    },
+    {
+      "algorithm_type": "Fuzzy AHP / Fuzzy TOPSIS (MCDM selectors)",
+      "effectiveness_rating": "High for screening and weighting; not a placer but pairs well with SLP/metaheuristics",
+      "best_use_case": "Small shops where qualitative factors (noise/dust/kickback zones) dominate",
+      "source": "https://www.mdpi.com/2227-9717/11/3/869"
+    }
+  ]
+}

@@ -28,12 +28,14 @@ This directory contains detailed progress tracking and implementation guidance f
 ## Phase Dependencies
 
 ```
-Phase 1 (Research) → Phase 5 (Optimization Engine) ← Phase 2-4 (Data Layer)
-                            ↓
-Phase 6 (3D Visualization) ← Phase 5 (Optimization Results)
-                            ↓
-Phase 7 (Polish & UX) ← All Previous Phases
+Phase 1 (Research) → Phase 2-4 (Data Layer) → Phase 5 (Optimization Engine)
+                                                      ↓
+                     Phase 6 (3D Visualization) ← Phase 5 (Optimization Results)
+                                                      ↓
+                     Phase 7 (Polish & UX) ← All Previous Phases
 ```
+
+**Note**: Phase 5 (Optimization Engine) requires both Phase 1 research data AND Phases 2-4 data infrastructure to be complete.
 
 ## Key Features by Phase
 
@@ -42,6 +44,25 @@ Phase 7 (Polish & UX) ← All Previous Phases
 - Mobile tool optimization system
 - Multi-objective scoring framework
 - Default workshop template (213" × 103" basement)
+- Research prompt templates for systematic data collection
+
+### Foundation & Authentication (Phase 2)
+- Supabase integration and user authentication
+- Database schema for workshops and layouts
+- User session management and data persistence
+- Error handling and offline capabilities
+
+### Workshop Management (Phase 3)
+- Workshop creation and dimension input
+- Workshop templates and presets
+- Workshop data validation and storage
+- Workshop sharing and collaboration features
+
+### Tool System (Phase 4)
+- Comprehensive tool database with specifications
+- Tool selection and customization interface
+- Mobile tool flagging and caster management
+- Tool constraint definitions and clearance requirements
 
 ### Core Value (Phase 5)
 - One-click layout optimization (<2 seconds)
@@ -77,7 +98,21 @@ Each phase file contains:
 - Dependencies and integration points
 - Testing and validation requirements
 
+## Research-Driven Development
+
+Phase 1 uses structured research prompts in `../research-prompts/` to systematically collect academic findings and expert knowledge. These prompts ensure comprehensive coverage of:
+
+- Safety constraints and OSHA guidelines
+- Workflow patterns for different project types  
+- Space optimization strategies by workshop size
+- Mobile tool considerations and placement flexibility
+- Professional layout design principles
+- Multi-objective scoring algorithm weights
+
+The collected research is compiled into structured data files in `../src/data/research/` that drive the optimization algorithms.
+
 For high-level project information, see:
 - [README.md](../README.md) - Project overview and getting started
 - [CLAUDE.md](../CLAUDE.md) - Technical guidance for Claude Code
 - [Technical Specs](../Workshop%20Planner%20-%20Technical%20Specs.md) - Complete specification
+- [research-prompts/](../research-prompts/) - Structured research collection templates

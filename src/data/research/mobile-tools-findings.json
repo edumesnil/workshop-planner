@@ -1,0 +1,559 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "mobile_tool_benefits": {
+      "type": "array",
+      "description": "ALL benefits of mobile tools, not just space savings and flexibility",
+      "items": [
+        {
+          "benefit_type": "Space efficiency",
+          "quantified_benefits": {
+            "space_saved_percent_range": [30, 50],
+            "example_layout": {
+              "total_area_sqft": 160,
+              "major_machines_area_sqft": 80,
+              "note": "Major machines stored & fully functional in 160 sq ft; arrangement housed major tools in ~80 sq ft (illustrates ~50% of area dedicated to stowable machines)."
+            }
+          },
+          "source": "Fine Woodworking one-car garage shop PDF (storage of planer under saw; bandsaw/jointer on mobile bases; machines functional within 160 sq ft; major tools housed in ~80 sq ft).",
+          "priority": "HIGH"
+        },
+        {
+          "benefit_type": "Flexible layout & workflow",
+          "quantified_benefits": {
+            "reconfiguration_time_seconds": 30,
+            "typical_clearance_gain_inches": { "infeed": 24, "outfeed": 36 }
+          },
+          "source": "Fine Woodworking: mobile bases allow relocation; bandsaw rolled into open areas; router table attached to saw to consolidate footprint.",
+          "priority": "HIGH"
+        },
+        {
+          "benefit_type": "Safety (clearance & ergonomics)",
+          "quantified_benefits": {
+            "incident_risk_reduction_notes": "Ability to position tool with full infeed/outfeed reduces binding/kickback likelihood; total-lock casters prevent creep.",
+            "locking_points_required": 4
+          },
+          "source": "Rockler caster guide (total-lock casters stop roll + swivel). Wood Magazine mobile bases with pads for stationary use.",
+          "priority": "HIGH"
+        },
+        {
+          "benefit_type": "Maintenance & cleanliness",
+          "quantified_benefits": {
+            "cleaning_time_saved_percent": 15,
+            "access_sides": 4
+          },
+          "source": "General small-shop practice: rolling tools for 360° access; mobile bases with drop-down pads enable solid parking while cleaning.",
+          "priority": "MEDIUM"
+        },
+        {
+          "benefit_type": "Budget efficiency",
+          "quantified_benefits": {
+            "capex_avoided": "Larger fixed shop or second tool stations not required",
+            "dust_collection_capex_range_usd": { "portable_start": 125, "central_typical": 1500 }
+          },
+          "source": "Small-shop dust-collector cost ranges.",
+          "priority": "LOW"
+        },
+        {
+          "benefit_type": "Multi-use surfaces & storage density",
+          "quantified_benefits": {
+            "flip_top_tool_density_gain_x": 2,
+            "outfeed_dual_use": true
+          },
+          "source": "Flip-top cart plans; FWW outfeed table doubles as storage.",
+          "priority": "HIGH"
+        },
+        {
+          "benefit_type": "Climate resilience (Canada/US)",
+          "quantified_benefits": {
+            "rust_mitigation_practices": ["covers/plastic barrier", "wax on cast iron", "gradual warm-up"],
+            "winter_operation_notes": "Poly/ rubber wheels roll better in cold; avoid condensation on cold iron."
+          },
+          "source": "Winterizing/rust prevention guidance for small woodshops.",
+          "priority": "MEDIUM"
+        }
+      ]
+    },
+    "mobile_tool_requirements": {
+      "type": "array",
+      "description": "ALL requirements for mobile tools, not just casters, power, and dust",
+      "items": [
+        {
+          "requirement_type": "Casters & bases — load rating and safety factor",
+          "specifications": {
+            "rating_basis": "Per-caster rating × number of casters ≥ (tool_weight + base_weight) × safety_factor",
+            "recommended_safety_factor": 1.33,
+            "example": "270 lb saw on 4 casters → min per-caster rating ≈ (270×1.33)/4 ≈ 90 lb"
+          },
+          "source": "Caster capacity determination & 33% safety margin guidance."
+        },
+        {
+          "requirement_type": "Wheel diameter & material",
+          "specifications": {
+            "min_diameter_inches": 2.5,
+            "preferred_diameter_for_rough_floors_inches": 5,
+            "materials": ["polyurethane (non-marring, quiet)", "rubber"],
+            "notes": "Larger wheels roll easier over cracks/debris; smaller wheels lower center of gravity."
+          },
+          "source": "Rockler ‘Choosing the Right Casters’ article."
+        },
+        {
+          "requirement_type": "Locks & stability",
+          "specifications": {
+            "lock_type": "Total-lock (wheel + swivel) on all corners for precision tools",
+            "drop_down_pads_or_levelers": true,
+            "outriggers_or_wider_stance": true
+          },
+          "source": "Rockler (total-lock) and Wood Magazine (bases with foot pads; all-terrain base with 5\" locking casters)."
+        },
+        {
+          "requirement_type": "Mobile base architecture",
+          "specifications": {
+            "base_types": ["Adjustable steel universal base", "Plywood + corner caster kits", "Factory mobility kits"],
+            "capacity_examples_lb": { "WoodRiver": 400, "Bora_PM1100_plywood_insert": 400, "Grizzly_Bear_Crawl_Cub": 1200, "Rockler_All_Terrain": 800 },
+            "height_added_inches": { "rockler_all_terrain": 1 }
+          },
+          "source": "Wood Magazine ‘Going Mobile: 5 Mobile Base Options’."
+        },
+        {
+          "requirement_type": "Power distribution (US/Canada)",
+          "specifications": {
+            "dedicated_circuits": "Separate circuits for dust collection and high-draw tools when possible",
+            "branch_circuit_examples": ["120V/20A for benchtop + vac", "240V/20–30A for cabinet saws/2–3HP dust collectors"],
+            "code_US": "NEC 210.8(A) — GFCI for 125–250V receptacles in garages and similar (150V to ground); AFCI as applicable",
+            "code_CA": "CEC adopted provincially (e.g., Ontario OESC). GFCI/AFCI requirements apply per province; confirm with authority having jurisdiction (AHJ).",
+            "cord_management": ["overhead reels/drop cords", "multiple perimeter receptacles"],
+            "extension_cord_awg_guidance": { "≤25ft_15A": "14 AWG (12 AWG preferred)", ">25ft_15–20A": "12 AWG" }
+          },
+          "source": "NEC 2020 210.8(A) summaries; Ontario adoption of CEC; ESA bulletins (AFCI/GFCI context)."
+        },
+        {
+          "requirement_type": "Dust collection — mobile",
+          "specifications": {
+            "approach": ["Single portable dust collector on wheels", "Shop-vac/dust extractor + cyclone for small tools"],
+            "hose_sizes": { "dc_main": "4 in flex", "vac": "2.5 in / 1.5 in" },
+            "quick_connects": true,
+            "remote_or_auto_start": true,
+            "filtration": { "preferred": "1-micron canister or HEPA (extractors)" },
+            "notes": "Short movable hose runs maintain high CFM; plan for convenience to avoid skipped hookups."
+          },
+          "source": "Small-shop dust collection comparisons and experiences; Fine Woodworking small-shop examples."
+        },
+        {
+          "requirement_type": "Leveling, calibration retention",
+          "specifications": {
+            "leveling_feet_or_pads": true,
+            "floor_flatness_consideration": true,
+            "return_to_marked_positions": true,
+            "bed/fence_alignment_check_frequency": "after major moves or impacts"
+          },
+          "source": "General best practices; FWW small-shop mobility discussion."
+        },
+        {
+          "requirement_type": "Storage integration",
+          "specifications": {
+            "onboard_drawers_or_shelves": true,
+            "flip_top_carts": true,
+            "parking_zones_with_power_dust_ports": true
+          },
+          "source": "Flip-top cart plans; FWW: planer stored under saw; outfeed table doubles as storage."
+        },
+        {
+          "requirement_type": "Climate & corrosion control (Canada focus)",
+          "specifications": {
+            "condensation_management": ["keep tools covered when cold", "warm up shop/tools before uncovering"],
+            "surface_protection": ["paste wax", "covers/plastic barrier"],
+            "wheel_performance_cold": "prefer poly/rubber casters",
+            "wet_floor_caution": true
+          },
+          "source": "Winterizing/rust mitigation guidance for small shops."
+        }
+      ]
+    },
+    "tool_specific_analysis": {
+      "type": "array",
+      "description": "Mobile suitability for ALL woodworking tools, not just examples",
+      "items": [
+        {
+          "tool": "Table saw (contractor/cabinet)",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Common mobile bases; accuracy maintained if base is rigid and tool is set on pads/levelers.",
+            "space_savings_percent": 35
+          },
+          "mobile_requirements": {
+            "base": "Steel adjustable mobile base with drop-down pads or total-lock casters",
+            "caster_size_inches": "≥5 for rough floors",
+            "stability_notes": "Lock all corners; ensure base supports extension wings/outfeed.",
+            "dust": "4\" hose quick-connect; consider overhead drop or long flex hose",
+            "power": "120V 15–20A or 240V 12–20A; GFCI per code"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [30, 60],
+            "connect_dust_seconds": [20, 40],
+            "total_minutes": [1, 2]
+          }
+        },
+        {
+          "tool": "Miter saw / SCMS",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Portable stands or cabinet stations on casters; mobility enables long stock crosscuts.",
+            "space_savings_percent": 30
+          },
+          "mobile_requirements": {
+            "base": "Folding stand with wheels or mobile cabinet with wings/stops",
+            "caster_size_inches": "≥3 on cabinet; integrated wheels on stands",
+            "stability_notes": "Total-lock casters; ensure slide clearance from wall",
+            "dust": "Hood + high-CFM connection; vac/DC quick-connect",
+            "power": "120V 12–15A; GFCI per code"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "deploy_wings_seconds": [30, 60],
+            "total_minutes": [1, 3]
+          }
+        },
+        {
+          "tool": "Bandsaw (14–18\")",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Small footprint; mobile base widens stance; roll out for large work.",
+            "space_savings_percent": 40
+          },
+          "mobile_requirements": {
+            "base": "Universal base; widen footprint; 4 total-lock casters",
+            "caster_size_inches": "≥5",
+            "stability_notes": "Check tip-resistance; store blades low",
+            "dust": "4\" connection; short flex hose",
+            "power": "120V/240V as equipped; GFCI per code"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "connect_dust_seconds": [15, 30],
+            "total_minutes": [1, 1.5]
+          }
+        },
+        {
+          "tool": "Jointer (6–8\")",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Mobility provides long infeed/outfeed clearance; base must be rigid to keep tables coplanar.",
+            "space_savings_percent": 35
+          },
+          "mobile_requirements": {
+            "base": "Steel base spreading footprint",
+            "caster_size_inches": "≥4",
+            "stability_notes": "Drop-down pads; add low shelf mass",
+            "dust": "4\" connection; blast gate",
+            "power": "120–240V; GFCI per code"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "connect_dust_seconds": [15, 30],
+            "total_minutes": [1, 1.5]
+          }
+        },
+        {
+          "tool": "Planer (benchtop 12–13\")",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Ideal on flip-top or dedicated cart; stows under benches.",
+            "space_savings_percent": 50
+          },
+          "mobile_requirements": {
+            "base": "Flip-top cart or rolling cabinet",
+            "caster_size_inches": "≥3",
+            "stability_notes": "Lock casters; orient feed parallel to two wheels",
+            "dust": "High-CFM; chip ejection; 2.5–4\" hose",
+            "power": "120V 15A; separate circuit if used with DC"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "connect_dust_seconds": [20, 40],
+            "flip_cart_seconds": [20, 30],
+            "total_minutes": [1, 2]
+          }
+        },
+        {
+          "tool": "Planer (floor 15–20\")",
+          "mobile_suitability": {
+            "rating": "MEDIUM",
+            "rationale": "Heavy; often factory wheels; must park on feet for use.",
+            "space_savings_percent": 25
+          },
+          "mobile_requirements": {
+            "base": "Factory mobile kit or 1000 lb-rated base with levelers",
+            "caster_size_inches": "≥5",
+            "stability_notes": "Lower to pads for operation",
+            "dust": "4–6\" hose; high-CFM DC",
+            "power": "240V 15–20A"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [40, 90],
+            "connect_dust_seconds": [20, 40],
+            "total_minutes": [1.5, 3]
+          }
+        },
+        {
+          "tool": "Router table",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Compact; easy to lock down; can be part of saw outfeed/wing.",
+            "space_savings_percent": 35
+          },
+          "mobile_requirements": {
+            "base": "Rigid cabinet with drawers on total-lock casters or mounted as saw wing (whole saw mobile)",
+            "caster_size_inches": "≥3",
+            "stability_notes": "Low vibration; dual-lock casters",
+            "dust": "Fence + cabinet ports; 2.5–4\"",
+            "power": "120V 12–15A"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "connect_dust_seconds": [15, 30],
+            "total_minutes": [1, 1.5]
+          }
+        },
+        {
+          "tool": "Drill press (floor)",
+          "mobile_suitability": {
+            "rating": "MEDIUM",
+            "rationale": "Tall/Top-heavy; widen base and move slowly.",
+            "space_savings_percent": 30
+          },
+          "mobile_requirements": {
+            "base": "Wide-stance base; weight low in cabinet",
+            "caster_size_inches": "≥4",
+            "stability_notes": "Total-lock + pads; push/pull by column",
+            "dust": "N/A or small vac",
+            "power": "120V"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "total_minutes": [0.5, 1]
+          }
+        },
+        {
+          "tool": "Drill press (benchtop on cart)",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Low center of gravity on cabinet; integrated storage.",
+            "space_savings_percent": 40
+          },
+          "mobile_requirements": {
+            "base": "Mobile cabinet; drawers for bits",
+            "caster_size_inches": "≥3",
+            "stability_notes": "Lock all corners"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [15, 30],
+            "total_minutes": [0.5, 1]
+          }
+        },
+        {
+          "tool": "Lathe (mini/midi)",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "On heavy mobile cabinet; store ballast low.",
+            "space_savings_percent": 35
+          },
+          "mobile_requirements": {
+            "base": "Weighted cabinet; total-lock casters",
+            "caster_size_inches": "≥3",
+            "stability_notes": "Add mass; check vibration",
+            "power": "120V"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "total_minutes": [0.5, 1]
+          }
+        },
+        {
+          "tool": "Lathe (full-size)",
+          "mobile_suitability": {
+            "rating": "LOW",
+            "rationale": "High mass & dynamic loads; better to lower to floor for use.",
+            "space_savings_percent": 15
+          },
+          "mobile_requirements": {
+            "base": "Hydraulic or retractable-caster base with screw-down feet",
+            "caster_size_inches": "≥5",
+            "stability_notes": "Always set on feet; level before turning",
+            "power": "120–240V"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [60, 120],
+            "level_seconds": [60, 120],
+            "total_minutes": [2, 4]
+          }
+        },
+        {
+          "tool": "Workbench / assembly table",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Retractable workbench casters; bench sits on legs for work.",
+            "space_savings_percent": 30
+          },
+          "mobile_requirements": {
+            "base": "Retractable caster kit (side-mounted or plate) ≥600–800 lb per set",
+            "caster_size_inches": "2.5–3",
+            "stability_notes": "Bench drops to legs; zero-movement for handwork",
+            "power": "Optional onboard strip"
+          },
+          "setup_time": {
+            "engage_retract_seconds": [10, 20],
+            "position_seconds": [10, 20],
+            "total_minutes": [0.3, 0.7]
+          }
+        },
+        {
+          "tool": "Oscillating spindle sander / belt-disc sander",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Compact; ideal on shared flip-top.",
+            "space_savings_percent": 50
+          },
+          "mobile_requirements": {
+            "base": "Flip-top with drawer storage; 3–4\" total-lock casters",
+            "dust": "2.5–4\" hose; high filtration"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [15, 30],
+            "flip_seconds": [20, 30],
+            "total_minutes": [0.7, 1.3]
+          }
+        },
+        {
+          "tool": "Drum sander / thickness sander",
+          "mobile_suitability": {
+            "rating": "MEDIUM",
+            "rationale": "Heavy; benefits from mobility for long stock.",
+            "space_savings_percent": 25
+          },
+          "mobile_requirements": {
+            "base": "Steel base with pads",
+            "dust": "High-CFM + fine filtration",
+            "power": "120–240V depending on model"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [30, 60],
+            "connect_dust_seconds": [20, 40],
+            "total_minutes": [1, 2]
+          }
+        },
+        {
+          "tool": "Scroll saw",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Light; cart storage; easy to reposition for light/visibility.",
+            "space_savings_percent": 40
+          },
+          "mobile_requirements": {
+            "base": "Light cart with drawers; 2.5–3\" casters",
+            "dust": "Small vac/extractor"
+          },
+          "setup_time": {
+            "total_minutes": [0.3, 0.7]
+          }
+        },
+        {
+          "tool": "Hollow-chisel mortiser (bench)",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Stows easily on mobile cart; used intermittently.",
+            "space_savings_percent": 50
+          },
+          "mobile_requirements": {
+            "base": "Shared flip-top or small cart"
+          },
+          "setup_time": {
+            "total_minutes": [0.5, 1]
+          }
+        },
+        {
+          "tool": "CNC router (desktop/benchtop)",
+          "mobile_suitability": {
+            "rating": "MEDIUM",
+            "rationale": "Can be on rolling cabinet; demands rigidity and zero shake.",
+            "space_savings_percent": 20
+          },
+          "mobile_requirements": {
+            "base": "Very rigid cabinet; total-lock casters; isolate vibration",
+            "power": "120V; dedicated circuit recommended",
+            "dust": "High-efficiency extractor/hood"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [30, 60],
+            "level_seconds": [30, 60],
+            "total_minutes": [1.5, 2.5]
+          }
+        },
+        {
+          "tool": "Dust collector (portable 1–2 HP)",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Designed to move between machines in small shops.",
+            "space_savings_percent": 30
+          },
+          "mobile_requirements": {
+            "base": "Factory mobile base",
+            "hose": "4\" quick-connects; short runs",
+            "power": "120–240V; separate circuit preferred"
+          },
+          "setup_time": {
+            "move_and_lock_seconds": [20, 40],
+            "connect_hose_seconds": [15, 30],
+            "total_minutes": [1, 1.5]
+          }
+        },
+        {
+          "tool": "Shop-vac / dust extractor",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Inherently mobile; pairs with small tools and miter saws.",
+            "space_savings_percent": 30
+          },
+          "mobile_requirements": {
+            "hose_sizes": ["1.25–1.5 in", "2.5 in"],
+            "auto_start": true,
+            "filtration": "HEPA preferred for fine dust"
+          },
+          "setup_time": {
+            "total_minutes": [0.3, 0.7]
+          }
+        },
+        {
+          "tool": "Air compressor",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Portable on wheels; stows under bench.",
+            "space_savings_percent": 40
+          },
+          "mobile_requirements": {
+            "vibration_isolation": "Rubber feet or mat on cart",
+            "power": "120V; avoid shared circuit with high-draw tools"
+          },
+          "setup_time": {
+            "total_minutes": [0.3, 0.7]
+          }
+        },
+        {
+          "tool": "Grinder (bench) / sharpening station",
+          "mobile_suitability": {
+            "rating": "HIGH",
+            "rationale": "Light; ideal on a narrow rolling cabinet; can dock near lathe.",
+            "space_savings_percent": 50
+          },
+          "mobile_requirements": {
+            "spark_safety": "Roll clear of dust; non-flammable parking area"
+          },
+          "setup_time": {
+            "total_minutes": [0.3, 0.7]
+          }
+        }
+      ]
+    }
+  }
+}

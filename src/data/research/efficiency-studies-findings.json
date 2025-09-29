@@ -1,0 +1,446 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "small_workshop_studies": {
+      "type": "array",
+      "description": "Studies for ALL small workshop sizes and configurations, not just examples",
+      "items": [
+        {
+          "study_name": "One-car garage small-shop layout (folding outfeed + shared heights)",
+          "workshop_size_range": {"min_sq_ft": 150, "max_sq_ft": 220, "type": "garage"},
+          "optimization_techniques": [
+            "folding outfeed table (tablesaw)",
+            "set router table as tablesaw wing (shared height)",
+            "align long rip/outfeed toward garage door",
+            "mobile bases on major tools"
+          ],
+          "source_title": "Fine Woodworking (layout kit & small-shop features) + Wood Magazine garage plan",
+          "source_url": [
+            "https://www.finewoodworking.com/FWNPDFfree/011174022.pdf",
+            "https://www.woodmagazine.com/shop-tips/shops/workshops/one-car-garage-workshop-plan",
+            "https://www.finewoodworking.com/project-guides/shop-projects/best-outfeed-table-for-the-tablesaw"
+          ],
+          "quantified_benefits": {
+            "space_savings_percent": "35–50% reclaimed during non-use windows by folding outfeed (calculated: a 36\"×48\" outfeed = 12 sq ft; folded to ~3\" depth, floor area reclaimed ≈ 10–12 sq ft = 83–100%)",
+            "workflow_gain": "Shared-height surfaces reduce setup moves; outfeed doubles as bench (multi-function surface)",
+            "safety_gain": "Continuous surface behind blade reduces catch/kickback risk; documented best practice"
+          },
+          "trade_offs": {
+            "setup_time": "Folding hardware adds ~30–60 min to build; occasional latch/level checks",
+            "cost": "Hinges, torsion box or laminate top materials",
+            "accessibility": "Folded tables must clear door swing and egress; verify 900–1,100 mm walkway targets if others use the space"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Flip-top benchtop tool stand (two tools, one footprint)",
+          "workshop_size_range": {"min_sq_ft": 80, "max_sq_ft": 200, "type": "garage/shed/basement"},
+          "optimization_techniques": [
+            "flip-top cart for planer + sander (or drill press, etc.)",
+            "drawer storage in base",
+            "casters for stowability"
+          ],
+          "source_title": "Rockler product documentation; general small-shop usage",
+          "source_url": [
+            "https://www.rockler.com/flip-top-tool-stand"
+          ],
+          "quantified_benefits": {
+            "space_savings_percent": "≈50% footprint per tool (two tools in the space of one stand, manufacturer claim)",
+            "time_improvement": "Tool changeover ≈ 15–60 sec vs. relocating separate benchtop tools (observed typical for flip stands)",
+            "cost_range_cad": "≈$200–$400 (stand + materials), cheaper if shop-built"
+          },
+          "trade_offs": {
+            "setup_time": "Initial build ~3–5 hours",
+            "accessibility": "Heavier tools may need lift assistance when mounting",
+            "stability": "Locking casters and proper ballast important"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Wall-mounted dust collector + hard pipe trunk (floor area recovery & airflow)",
+          "workshop_size_range": {"min_sq_ft": 80, "max_sq_ft": 300, "type": "any"},
+          "optimization_techniques": [
+            "wall-mount cyclone/collector",
+            "smooth-walled duct for trunk; minimal flex hose",
+            "shortest run to high-chip tools"
+          ],
+          "source_title": "Oneida Air Systems; WOOD Magazine",
+          "source_url": [
+            "https://www.oneida-air.com/dust-collectors/wall-mount",
+            "https://www.woodmagazine.com/woodworking-tips/techniques/dust-collection/avoid-common-duct-design-flaws",
+            "https://www.oneida-air.com/blog/what-is-static-pressure-in-dust-collection"
+          ],
+          "quantified_benefits": {
+            "space_savings_percent": "Reclaims ≈6–9 sq ft vs. floor-standing unit (calculated: typical 24–36\" diameter footprint freed)",
+            "airflow_efficiency": "Flex hose has ~3× the resistance of smooth pipe (replace 10' flex with smooth → ≈67% lower resistance for that segment)",
+            "dust_control": "Shorter runs & larger smooth trunks improve CFM at tools (qualitative, supported by vendor engineering guidance)"
+          },
+          "trade_offs": {
+            "cost": "Wall brackets, ductwork, blast gates",
+            "setup_time": "System layout, mounting & sealing (half-day to weekend)",
+            "accessibility": "Filter/bag change at height needs safe access"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Fold-down wall bench (compact assembly/sanding station)",
+          "workshop_size_range": {"min_sq_ft": 60, "max_sq_ft": 180, "type": "garage/basement/shed"},
+          "optimization_techniques": [
+            "hinged torsion-box bench 24–30\" deep",
+            "French-cleat tool wall above",
+            "under-bench fold-out support"
+          ],
+          "source_title": "Family Handyman (folding workbench patterns)",
+          "source_url": [
+            "https://www.familyhandyman.com/project/how-to-build-a-folding-workbench/"
+          ],
+          "quantified_benefits": {
+            "space_savings_percent": "≈80–95% of bench footprint reclaimed when stowed (calculated: 60\"×24\"=10 sq ft; folded to ~4–6\" off wall → floor area ≈0–1 sq ft)",
+            "cost_range_cad": "≈$120–$300 in plywood/hardware",
+            "time_improvement": "Adds 8–10 sq ft usable surface on demand without permanent floor claim"
+          },
+          "trade_offs": {
+            "setup_time": "4–8 hours build",
+            "load_limit": "Requires robust wall anchoring (studs/masonry anchors)",
+            "ergonomics": "Bench height should match task (see ergonomics entries)"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Basement woodworking shop: humidity, insulation, ventilation (Canada-specific)",
+          "workshop_size_range": {"min_sq_ft": 100, "max_sq_ft": 300, "type": "basement"},
+          "optimization_techniques": [
+            "maintain RH 30–50% (dehumidifier if >50%)",
+            "insulate rim joists & walls; air seal",
+            "dedicated exhaust/vented finishing enclosure",
+            "vapor-aware storage (anti-rust) near dehumidified zone"
+          ],
+          "source_title": "Health Canada; Natural Resources Canada (Keeping the Heat In); CCOHS",
+          "source_url": [
+            "https://www.canada.ca/en/health-canada/services/publications/healthy-living/addressing-moisture-mould-your-home.html",
+            "https://natural-resources.canada.ca/energy-efficiency/home-energy-efficiency/keeping-heat-section-6-basement-insulation-floors-walls-crawl-spaces",
+            "https://www.ccohs.ca/oshanswers/ergonomics/lighting/lighting_survey.html"
+          ],
+          "quantified_benefits": {
+            "defect_reduction": "Lower RH reduces rust & finish defects; Health Canada recommends 30–50% RH for indoor spaces",
+            "energy_savings": "Air sealing & insulation reduce heating run-time in winter (NRCan guidance; % varies by envelope)",
+            "usable_space_gain": "By drying to ≤50% RH, more wall/corner volume becomes viable for material/tool storage without corrosion (qualitative but strongly supported)"
+          },
+          "trade_offs": {
+            "cost": "Dehumidifier $250–$500; insulation/air-sealing variable",
+            "setup_time": "Moisture testing (taped-poly test) + sealing before layout",
+            "accessibility": "Plan around low beams/ducts; protect egress paths"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Lighting upgrade for precision work (lux targets & fixture counts)",
+          "workshop_size_range": {"min_sq_ft": 80, "max_sq_ft": 300, "type": "any"},
+          "optimization_techniques": [
+            "target 500–1,000 lux general; 750–1,000 lux at bench",
+            "task lights at drill press, bandsaw, bench vise",
+            "high-CRI LED (≥80) for finishing color checks"
+          ],
+          "source_title": "CCOHS lighting ergonomics; IES quick references",
+          "source_url": [
+            "https://www.ccohs.ca/oshanswers/ergonomics/lighting/lighting_survey.html",
+            "https://sloanled.com/downloads/ReferenceGuide-RecommendedLightLevels-US-Canada.pdf"
+          ],
+          "quantified_benefits": {
+            "quality_improvement": "At 500–1,000 lux, reduced visual strain and error risk in fine layout and finishing (ergonomics guidance)",
+            "fixture_sizing_example": "100 sq ft bench zone at 750 lux ≈ 7,500 lumens maintained (calculated: lux × m²; 100 sq ft = 9.29 m²)"
+          },
+          "trade_offs": {
+            "cost": "LED strips/fixtures $150–$400 depending on CRI/output",
+            "setup_time": "Mounting & wiring; ensure clearance for fold-ups",
+            "glare": "Use diffusers/angles to avoid shadow/glare at blades"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "8-ft miter-saw station with stops (long-stock handling in small shops)",
+          "workshop_size_range": {"min_sq_ft": 120, "max_sq_ft": 250, "type": "any"},
+          "optimization_techniques": [
+            "8' wings for full-length support",
+            "fence with flip stops for repeatability",
+            "dust hood integration; mobile base"
+          ],
+          "source_title": "Woodworker’s Journal plan; Kreg station plans",
+          "source_url": [
+            "https://www.woodworkersjournal.com/wp-content/uploads/WJ156-Ultimate-Miter-Stand.pdf",
+            "https://learn.kregtool.com/projects-plans/miter-saw-stations/"
+          ],
+          "quantified_benefits": {
+            "time_improvement": "Repeat cuts with stops avoid re-measuring; setup time per batch reduced (qualitative; repeat-stop systems are standard practice)",
+            "space_efficiency": "Single 8' station replaces roller stands; stows against wall (footprint ≈ 24–30\"×96\")"
+          },
+          "trade_offs": {
+            "setup_time": "Build ~1–2 days",
+            "cost": "Plywood, slides, track/stop kit",
+            "mobility": "Casters needed in <200 sq ft to reclaim aisle"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "French-cleat wall + shallow cabinets (high-density vertical storage)",
+          "workshop_size_range": {"min_sq_ft": 60, "max_sq_ft": 300, "type": "any"},
+          "optimization_techniques": [
+            "45° cleats on wall studs",
+            "modular tool holders",
+            "shallow (10–12\") cabinets for hardware/finishes"
+          ],
+          "source_title": "Canadian Woodworking storage guidance (general) + common cleat practice",
+          "source_url": [
+            "https://canadianwoodworking.com/techniques_and_tips/small-shop-storage-solutions/"
+          ],
+          "quantified_benefits": {
+            "storage_volume_gain": "≈16 ft³ per 8-ft run (calculated: 8 ft × 1 ft depth × 2 ft average vertical cabinet height)",
+            "floor_space_saved": "Equivalent to 12\"-deep floor cabinets removed (≈8 sq ft per 8-ft run)"
+          },
+          "trade_offs": {
+            "setup_time": "Rip cleats; anchor to studs",
+            "cost": "Plywood + screws; holders are DIY",
+            "accessibility": "Keep heaviest tools between 28–48\" AFF"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Portable spray/finishing shelters (contain overspray in tiny shops)",
+          "workshop_size_range": {"min_sq_ft": 80, "max_sq_ft": 300, "type": "any (esp. basement/garage)"},
+          "optimization_techniques": [
+            "pop-up spray tent (tabletop and large)",
+            "rear fan/filter add-on for airflow",
+            "folds to compact storage"
+          ],
+          "source_title": "Lee Valley / Wagner Spraytech product specs (dimensions)",
+          "source_url": [
+            "https://www.leevalley.com/en-ca/shop/tools/supplies/finishing/76184-portable-spray-shelters",
+            "https://www.wagnerspraytech.com/product/shelter/small-spray-shelter/"
+          ],
+          "quantified_benefits": {
+            "space_efficiency": "Large shelter ~8.5'×6'×5.5' uses temporary footprint; stows to closet size (manufacturer dims)",
+            "time_improvement": "Reduces room masking/setup; enables repeat finishing within one contained zone"
+          },
+          "trade_offs": {
+            "cost": "$50–$120",
+            "venting": "Use with fan/filter per maker; observe fume safety",
+            "accessibility": "Large tents need clear 6–9 ft span while deployed"
+          },
+          "priority": "MEDIUM"
+        },
+        {
+          "study_name": "Aisle/egress planning for micro-shops (clear widths reference)",
+          "workshop_size_range": {"min_sq_ft": 60, "max_sq_ft": 300, "type": "any"},
+          "optimization_techniques": [
+            "target 36\" working aisles near tools",
+            "wider near exit/doors; align long feeds"
+          ],
+          "source_title": "NBC/OBC corridor width references (public corridors) for context; adapt as internal targets in private shops",
+          "source_url": [
+            "https://www.nrc.canada.ca/en/certifications-evaluations-standards/codes-canada/codes-development-process/public-review/2022/pcfs/nbc20_divb_03.03.01.09._001711.html",
+            "https://www.buildingcode.online/320.html"
+          ],
+          "quantified_benefits": {
+            "workflow_gain": "Reduced backtracking and cart shuffling when maintaining ~36\" (900 mm) working aisles (internal target based on corridor norms)",
+            "safety_gain": "Clear egress routes reduce trip/impact risk (code principle applied as guideline)"
+          },
+          "trade_offs": {
+            "space_cost": "Reserve 10–15% of floor area for movement lanes in ≤200 sq ft shops",
+            "layout_constraint": "May limit simultaneous tool access in <120 sq ft"
+          },
+          "priority": "MEDIUM"
+        }
+      ]
+    },
+    "tool_placement_efficiency": {
+      "type": "array",
+      "description": "Efficiency principles for ALL workshop scenarios, not just examples",
+      "items": [
+        {
+          "principle": "Zone milling cluster (jointer → planer → tablesaw) with shared outfeed height",
+          "placement_rules": {
+            "rule_1": "Arrange along one wall with surfaces co-planar; outfeed directed to longest clear path/door",
+            "rule_2": "Bandsaw co-located if frequently resawing before/after milling",
+            "dimensions": "Ensure full board length + ~18–24\" clearance on infeed/outfeed"
+          },
+          "efficiency_gain": {
+            "movement_reduction": "Cuts walking between stations; single outfeed surface doubles as bench",
+            "space_efficiency": "Shared surfaces compress three machines into one workflow lane"
+          },
+          "source_title": "Fine Woodworking layout kit; FWW outfeed table guidance; community best practices"
+        },
+        {
+          "principle": "5S tool organization (shadow boards, labeled drawers) to reduce search time",
+          "placement_rules": {
+            "rule_1": "Frequently used hand tools within 500–700 mm reach of bench front edge",
+            "rule_2": "Shadow board outlines; standardized drawer labels for bits/fasteners"
+          },
+          "efficiency_gain": {
+            "time_improvement_percent": "18.75% reduction in search activity after 5S; area used decreased 11.2% (reported case study)",
+            "safety_quality": "Less clutter → fewer drops and defects"
+          },
+          "source_title": "Peer-reviewed and conference literature on 5S benefits"
+        },
+        {
+          "principle": "Store raw lumber/sheet goods near the door and miter station",
+          "placement_rules": {
+            "rule_1": "Vertical sheet cart parked within 3–5 ft of door/miter saw",
+            "rule_2": "Lumber rack at ~16\" stud spacing; heaviest tiers 24–48\" AFF"
+          },
+          "efficiency_gain": {
+            "movement_reduction_percent": "Calculated example: relocating rack from far wall (20 ft) to near door (5 ft) cuts carry distance ~75% on each retrieval in a 20×10 ft shop"
+          },
+          "source_title": "Miter station long-stock handling plans (Woodworker’s Journal/Kreg) and general workflow guidance"
+        },
+        {
+          "principle": "Hard pipe trunk + minimal flex per drop for dust collection",
+          "placement_rules": {
+            "rule_1": "Main trunk smooth steel/PVC; keep flex ≤3–4 ft per tool",
+            "rule_2": "Use 2×45° instead of 90° elbows; upsize main where feasible"
+          },
+          "efficiency_gain": {
+            "airflow_gain": "Corrugated flex ≈3× static resistance vs smooth pipe; reducing flex increases delivered CFM",
+            "energy": "Lower resistance reduces fan load at a given flow"
+          },
+          "source_title": "WOOD Magazine guidance; Oneida engineering notes; Bill Pentz references"
+        },
+        {
+          "principle": "Lighting for task precision",
+          "placement_rules": {
+            "rule_1": "Target 750–1,000 lux at bench; 500–750 lux general",
+            "rule_2": "Add localized task lights at drill press/bandsaw to eliminate shadows"
+          },
+          "efficiency_gain": {
+            "defect_reduction": "Adequate illuminance reduces layout/finish errors; lowers fatigue",
+            "calc_example": "Bench zone 9.3 m² × 750 lux ≈ 7,000 lumens maintained"
+          },
+          "source_title": "CCOHS & IES quick references"
+        },
+        {
+          "principle": "Aisles ≥ 900 mm (~36\") and keep exit runs the widest",
+          "placement_rules": {
+            "rule_1": "Plan a continuous 900–1,100 mm lane from door to key machines",
+            "rule_2": "No storage encroachments into egress lane"
+          },
+          "efficiency_gain": {
+            "movement_reduction": "Fewer tool-moving events to clear paths",
+            "safety_gain": "Reduced collision/trip risk"
+          },
+          "source_title": "NBC/OBC corridor width references (used as design targets in private shops)"
+        },
+        {
+          "principle": "Use flip-top/multi-function stations",
+          "placement_rules": {
+            "rule_1": "Pair seldom-simultaneous tools (planer+sander, spindle sander+scroll saw)",
+            "rule_2": "Match tool weights; ensure counterbalance"
+          },
+          "efficiency_gain": {
+            "space_savings_percent": "≈50% per tool vs separate carts",
+            "setup_time": "Seconds to rotate vs minutes to relocate heavy benchtop tools"
+          },
+          "source_title": "Rockler flip-top stand documentation"
+        }
+      ]
+    },
+    "storage_optimization": {
+      "type": "array",
+      "description": "Storage solutions for ALL workshop needs, not just lumber",
+      "items": [
+        {
+          "storage_type": "Lumber rack (wall-mounted) + vertical sheet cart",
+          "space_efficiency": {
+            "wall_rack_capacity": "Anchor to studs 16\" o.c.; 3–4 arms per post; 12–16\" projection per tier",
+            "vertical_cart": "Footprint ≈ 24–30\"×48–60\"; handles 4×8 sheets at 8–10 ft ceiling"
+          },
+          "placement_requirements": {
+            "near_miter_station": "Within 3–5 ft reduces handling time",
+            "clearance": "36\" aisle for sheet extraction and turn radius"
+          },
+          "source_title": "Canadian Woodworking storage guidance; miter station plans",
+          "source_url": [
+            "https://canadianwoodworking.com/techniques_and_tips/small-shop-storage-solutions/",
+            "https://www.woodworkersjournal.com/wp-content/uploads/WJ156-Ultimate-Miter-Stand.pdf"
+          ]
+        },
+        {
+          "storage_type": "French-cleat wall for hand tools/jigs",
+          "space_efficiency": {
+            "density_gain": "≈16 ft³ per 8-ft run with 12\"-deep modules (calculated)",
+            "floor_savings": "≈8 sq ft per 8-ft run vs floor cabinets"
+          },
+          "placement_requirements": {
+            "cleat_angle": "≈45° cleats; screw into studs",
+            "ergonomics": "Heavy tools 28–48\" AFF; light tools up to 72\" AFF"
+          },
+          "source_title": "General practice; Canadian Woodworking storage article",
+          "source_url": [
+            "https://canadianwoodworking.com/techniques_and_tips/small-shop-storage-solutions/"
+          ]
+        },
+        {
+          "storage_type": "Hardware & finish supplies (shallow drawers; sealed totes; flammables segregation)",
+          "space_efficiency": {
+            "drawer_depth": "Shallow 2–3\" drawers increase part visibility (less dead volume)",
+            "shelving": "10–12\" depth avoids over-stacking"
+          },
+          "placement_requirements": {
+            "ventilation": "Finishing supplies away from ignition; use sealed totes and keep in coolest, driest zone",
+            "labeling": "5S labels + color coding; FIFO"
+          },
+          "source_title": "5S literature; common finishing practice",
+          "source_url": [
+            "https://www.sciencedirect.com/science/article/pii/S2212827123005024"
+          ]
+        },
+        {
+          "storage_type": "Clamp storage (vertical racks over low-value wall zones)",
+          "space_efficiency": {
+            "density": "Racks at studs hold multiple bar/pipe clamps; shallow projection uses ‘dead’ wall zones",
+            "floor_savings": "Eliminates clamp bins on floor (2–4 sq ft reclaimed)"
+          },
+          "placement_requirements": {
+            "height": "Heavy clamps at 24–48\" AFF for safe lift",
+            "proximity": "Near assembly bench"
+          },
+          "source_title": "Canadian Woodworking storage solutions (general)",
+          "source_url": [
+            "https://canadianwoodworking.com/techniques_and_tips/small-shop-storage-solutions/"
+          ]
+        },
+        {
+          "storage_type": "Sanding/Sharpening station (with integrated vac)",
+          "space_efficiency": {
+            "footprint": "24–30\"×36–48\" mobile cart houses sander(s), abrasives, vac",
+            "multi_use": "Top doubles for small tool tune-ups"
+          },
+          "placement_requirements": {
+            "dust": "Short 2–4 ft flex to vac; HEPA if used indoors",
+            "power": "Dedicated 15A circuit preferred"
+          },
+          "source_title": "Dust collection best practices; vendor engineering notes",
+          "source_url": [
+            "https://www.woodmagazine.com/woodworking-tips/techniques/dust-collection/avoid-common-duct-design-flaws",
+            "https://www.oneida-air.com/blog/what-is-static-pressure-in-dust-collection"
+          ]
+        },
+        {
+          "storage_type": "Overhead/ceiling racks (rarely used jigs, forms)",
+          "space_efficiency": {
+            "volume_gain": "Ceiling bays store low-frequency items without floor impact",
+            "limit": "Avoid heavy loads over primary work areas"
+          },
+          "placement_requirements": {
+            "clearance": "Respect headroom; typical basement beams/ducts ~1.95–2.1 m affects placement",
+            "anchorage": "Lag into joists; load check"
+          },
+          "source_title": "Ceiling height references via OBC/NBC (context) & common shop practice",
+          "source_url": [
+            "https://www.ontario.ca/laws/regulation/240163",
+            "https://publications.gc.ca/site/eng/9.897526/publication.html"
+          ]
+        }
+      ]
+    }
+  }
+}

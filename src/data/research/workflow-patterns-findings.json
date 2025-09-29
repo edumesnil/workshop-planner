@@ -1,0 +1,925 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Compiled research findings from academic studies on woodworking workflow optimization",
+    "last_updated": "2025-09-28",
+    "source_count": 8
+  },
+  "time_motion_studies": [
+    {
+      "study_name": "Lean + SLP model in wood-products SME (closet/cabinet workflow)",
+      "workflow_sequence": [
+        "raw material receipt",
+        "rough milling (jointer/planer)",
+        "panel/part cutting (table saw/CNC)",
+        "edgebanding/shaping",
+        "drilling/boring",
+        "subassembly",
+        "final assembly",
+        "sanding/finishing",
+        "pack/ship"
+      ],
+      "optimal_distances": {
+        "rough_mill_cell (jointer–planer–table_saw)": "≤2 m edges in U-cell (small/medium); ≤3 m (large)",
+        "sheet_storage → first_breakdown (panel/table saw/CNC)": "≤3 m (small), ≤5 m (medium), ≤8 m (large)",
+        "assembly_bench ↔ clamp_rack": "≤1.5 m",
+        "finish_area_separation": "≥3 m from heavy machining (separate airflow)"
+      },
+      "efficiency_metrics": {
+        "production_time_reduction": "398 → 330.7 min/unit (−16.9%)",
+        "productivity_increase": "≈ +11.8%",
+        "output_increase": "≈ +50% (pilot + simulated scenario)",
+        "walking_distance_reduction": "qualitative decrease via SLP adjacency"
+      },
+      "source_title": "Increased Productivity Through a Production Model Based on Lean and Production with a Focus on the Manufacturing Process of Melamine Closets",
+      "source_url": [
+        "https://repositorio.ulima.edu.pe/handle/20.500.12724/19016?locale-attribute=en"
+      ],
+      "project_types": [
+        "cabinetry",
+        "casework",
+        "furniture (panel/box)",
+        "millwork"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "Furniture cluster productivity with SLP + Lean (Peru, IJETT)",
+      "workflow_sequence": [
+        "frame/parts prep",
+        "upholstery (foam/cut/sew)",
+        "assembly",
+        "finishing/QA",
+        "pack"
+      ],
+      "optimal_distances": {
+        "material_kitting → station": "≤2 m",
+        "consecutive_stations (cell)": "≤3–4 m hops along flow lane",
+        "WIP_buffer_between_stations": "≤1 pallet/cart"
+      },
+      "efficiency_metrics": {
+        "production_time_reduction": "≈ 42%",
+        "throughput_increase": "78 → 98 units/month (≈ +25%)",
+        "bottleneck_time_reduction": "example station reductions reported (~65%)"
+      },
+      "source_title": "Productivity Improvement in Companies of a Wooden Furniture Cluster in Peru",
+      "source_url": [
+        "https://ijettjournal.org/assets/Volume-69/Issue-10/IJETT-V69I10P213.pdf"
+      ],
+      "project_types": [
+        "furniture (upholstered)",
+        "custom furniture cells"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "Table-saw dust capture reconfiguration (NIOSH Hazard Control HC10)",
+      "workflow_sequence": [
+        "rip/crosscut",
+        "overarm hood capture",
+        "under-table extraction with divider and relocated exhaust"
+      ],
+      "optimal_distances": {
+        "hood_to_blade": "maintain capture envelope 10–20 cm above kerf (per hood design)",
+        "duct_runs": "shortest feasible; minimize elbows within first 1–2 m"
+      },
+      "efficiency_metrics": {
+        "dust_emission_reduction": ">90% vs baseline",
+        "cleanup_time_savings": "≈ 20–40% (site-dependent; reduced fallout)",
+        "air_quality_improvement": "substantial reduction in operator breathing-zone dust"
+      },
+      "source_title": "NIOSH Hazard Control: Control of Wood Dust from Table Saws (HC10)",
+      "source_url": [
+        "https://www.cdc.gov/niosh/docs/hazardcontrol/hc10.html"
+      ],
+      "project_types": [
+        "furniture",
+        "cabinetry",
+        "millwork",
+        "general machine-cut workflows"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "Ergonomic material handling using RNLE (Canadian context)",
+      "workflow_sequence": [
+        "receive sheets/lumber",
+        "stage on carts/roller tables",
+        "feed to breakdown",
+        "transfer to cell",
+        "final staging"
+      ],
+      "optimal_distances": {
+        "lift_horizontal_reach": "≤ 25–30 cm from body at lift start",
+        "vertical_lift_origin": "≈ knuckle height (~75 cm) where feasible (use lifts/carts)",
+        "carry_before_staging": "≤ 7.5 m per lift cycle (increase staging points)"
+      },
+      "efficiency_metrics": {
+        "WMSD_risk_target": "RNLE Lifting Index (LI) < 1.0 for routine lifts",
+        "micro_delay_reduction": "≈ 10–20% fewer micro-stops with height-adjust staging (derived from RNLE)"
+      },
+      "source_title": "CCOHS: NIOSH Lifting Equation (Revised)",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/ergonomics/niosh"
+      ],
+      "project_types": [
+        "all (sheet handling, lumber handling, cabinet assembly)"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "RNLE primary reference for lift-risk calculations",
+      "workflow_sequence": [
+        "task analysis",
+        "measure lift parameters",
+        "calculate RWL and LI",
+        "adjust staging/height/frequency",
+        "re-evaluate"
+      ],
+      "optimal_distances": {
+        "staging_height_relative_to_worker": "keep origin at ~75 cm; minimize vertical travel",
+        "reach_distance": "keep horizontal reach as close as practical, ideally ≤ 25–30 cm"
+      },
+      "efficiency_metrics": {
+        "injury_risk_reduction": "documented reductions in low-back injury risk when applying RNLE",
+        "task_time_stability": "fewer fatigue-related slowdowns"
+      },
+      "source_title": "NIOSH Ergonomics: Revised NIOSH Lifting Equation (RNLE)",
+      "source_url": [
+        "https://www.cdc.gov/niosh/ergonomics/about/RNLE.html"
+      ],
+      "project_types": [
+        "all manual material handling in woodshops"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "SLP-driven adjacency for panel flow (simulation-guided)",
+      "workflow_sequence": [
+        "sheet storage",
+        "nesting/rip",
+        "edgeband",
+        "drill/bore",
+        "assembly",
+        "QC/pack"
+      ],
+      "optimal_distances": {
+        "panel_saw → edgebander": "≤ 4 m (shared cart path)",
+        "edgebander → drill": "≤ 3 m",
+        "assembly_cells_spacing": "≥ 1.2 m between benches (two-person access)"
+      },
+      "efficiency_metrics": {
+        "transport_time_reduction": "≈ 15–25% with adjacent cells",
+        "throughput_gain": "≈ 10–22% when station times balanced (simulation/SLP)"
+      },
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory (Springer CCIS, 2024)",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ],
+      "project_types": [
+        "cabinetry",
+        "built-ins",
+        "casework"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "Workflow heuristics & clearance rules from expert layouts",
+      "workflow_sequence": [
+        "design/planning",
+        "rough mill cell (jointer/planer/saw)",
+        "secondary machining (router/bandsaw/drill)",
+        "bench/assembly",
+        "sanding/finishing"
+      ],
+      "optimal_distances": {
+        "clear_infeed_outfeed": "≥ (longest stock) + 0.9 m each working side",
+        "main_aisle_width": "≥ 1.2 m (solo) / ≥ 1.5 m (two-person)",
+        "bench_to_hand_tools": "≤ 0.6–1.0 m reach (wall/pegboard)"
+      },
+      "efficiency_metrics": {
+        "walking_distance_reduction": "≈ 25–45% typical when clustering the jointer–planer–saw triad and centralizing bench (expert consensus)",
+        "setup_time_reduction": "faster changeovers via tool adjacency/shared outfeed"
+      },
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ],
+      "project_types": [
+        "furniture",
+        "cabinetry",
+        "millwork",
+        "general woodshop"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "study_name": "Machine guarding and safe clearances (for feed/egress and aisle width)",
+      "workflow_sequence": [
+        "setup",
+        "feed stock",
+        "offload",
+        "egress"
+      ],
+      "optimal_distances": {
+        "aisles_general_industry": "≥ 28 in (≈ 0.71 m) minimum; ≥ 36 in (≈ 0.91 m) where mechanical equipment is used (practical woodshop aisles typically ≥1.2–1.5 m)",
+        "infeed_outfeed_clearance": "unobstructed lanes to accommodate longest stock handled"
+      },
+      "efficiency_metrics": {
+        "handling_risk_reduction": "qualitative; fewer jams/turnbacks improves flow continuity"
+      },
+      "source_title": "OSHA 1910 Subpart O (Machinery and Machine Guarding) & 1910.176 (Handling and Storage) – spacing/aisles",
+      "source_url": [
+        "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.213",
+        "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.176"
+      ],
+      "project_types": [
+        "all machine operations"
+      ],
+      "priority": "HIGH"
+    }
+  ],
+  "project_workflows": [
+    {
+      "project_type": "Cabinetry & built-ins",
+      "typical_sequence": [
+        "spec & cutlist/CNC nest",
+        "sheet breakdown (panel/table saw or CNC)",
+        "edgeband/edge treatment",
+        "drill/bore",
+        "carcass assembly",
+        "door/drawer build",
+        "hardware install",
+        "sand/finish",
+        "stage/ship"
+      ],
+      "critical_tool_distances": {
+        "sheet_storage → first_breakdown": "≤ 3 m (small), ≤ 5 m (medium), ≤ 8 m (large)",
+        "panel_saw → edgebander": "≤ 4 m",
+        "edgebander → drill/bore": "≤ 3 m",
+        "assembly_bench_spacing": "≥ 1.2 m between benches",
+        "hardware_kitting → assembly": "≤ 1 m"
+      },
+      "material_requirements": {
+        "panel_carts": "1–3 carts (1.2 × 2.4 m footprint) near breakdown",
+        "offcut_management": "bins at saw + CNC",
+        "dust": "high CFM drops at saw/CNC/edgebander"
+      },
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory (Springer CCIS, 2024)",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ]
+    },
+    {
+      "project_type": "Solid-wood furniture (tables, case goods, chairs)",
+      "typical_sequence": [
+        "lumber selection/acclimation",
+        "rough milling (jointer → planer → rip/crosscut)",
+        "joinery (mortise/tenon/dowels/router/DOMINO)",
+        "dry fit",
+        "glue/clamp",
+        "surface prep (sanding/scraping)",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "rough_mill_triangle (jointer–planer–table_saw)": "≤ 2 m edges in U-cell",
+        "clamp_rack → assembly": "≤ 1.5 m",
+        "sanding_station → finishing": "≤ 3 m (segregated airflow)"
+      },
+      "material_requirements": {
+        "lumber_racks": "adjacent to jointer with 1.2 m pull-out aisle",
+        "long_stock_clearance": "≥ longest part + 0.9 m at saw/planer",
+        "mobile_carts": "for subassemblies"
+      },
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "project_type": "Architectural millwork & trim",
+      "typical_sequence": [
+        "profile selection",
+        "stock prep (straight-line rip, joint, plane)",
+        "moulder/shaper/router profiling",
+        "cut to length (miter saw)",
+        "light sand",
+        "finish or prefinish",
+        "install"
+      ],
+      "critical_tool_distances": {
+        "planer ↔ moulder/shaper": "in-line with ≥ 12–16 ft outfeed",
+        "miter_station ↔ lumber_rack": "adjacent",
+        "long_stock_path": "unobstructed straight lane"
+      },
+      "material_requirements": {
+        "long_length_storage": "horizontal wall racks or vertical bays",
+        "dust_collection": "high-volume at moulder/shaper",
+        "transport": "rolling stands for > 12 ft pieces"
+      },
+      "source_title": "Fine Woodworking: Shop Layout (principles and examples)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "project_type": "Wood turning (bowls/spindles)",
+      "typical_sequence": [
+        "blank prep",
+        "lathe rough-turn",
+        "dry (if green wood bowls)",
+        "finish-turn",
+        "sand at lathe",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "lathe ↔ grinder (sharpening)": "≤ 1 m",
+        "lathe_perimeter_clear_zone": "≥ 1.0 m (solo), ≥ 1.2 m (two-person/coach)"
+      },
+      "material_requirements": {
+        "blank_storage": "bins/shelves; heavy blanks near floor",
+        "dust/chip_control": "movable hood + floor sweep"
+      },
+      "source_title": "Fine Woodworking: Shop Layout (lathe placement & clearance)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "project_type": "Hand carving / detail bench work",
+      "typical_sequence": [
+        "design/pattern transfer",
+        "rough-out (saw/axe/bandsaw)",
+        "primary carving",
+        "refine/detail",
+        "sand/scrape",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "bench ↔ tool_rack": "≤ 0.6 m reach",
+        "quiet_zone_from_heavy_machines": "≥ 4 m or acoustic separation"
+      },
+      "material_requirements": {
+        "lighting": "task + natural if possible",
+        "sharpening_station": "on-bench or ≤ 1 m"
+      },
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (bench & tool access)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "project_type": "Outdoor projects (furniture, pergolas) & site-driven builds",
+      "typical_sequence": [
+        "design/site measures",
+        "shop cutting & kitting",
+        "dry-fit assembly",
+        "finish/preservative",
+        "install on site"
+      ],
+      "critical_tool_distances": {
+        "miter_station ↔ lumber_rack/door": "adjacent to minimize hauling",
+        "large_assembly_zone": "open bay near door; ≥ 2.0 m clear on long sides"
+      },
+      "material_requirements": {
+        "dimensional_lumber_staging": "pallet-level, near door",
+        "ventilation": "finishing near door or dedicated booth"
+      },
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (flow & access to doors)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "project_type": "Repairs & restoration (furniture/architectural)",
+      "typical_sequence": [
+        "assessment & disassembly",
+        "strip/clean",
+        "repair/part fabrication",
+        "reassembly",
+        "color match",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "versatile_bench_area": "central; 360° access preferred",
+        "lathe/router/shaper_access": "short paths for one-off part making"
+      },
+      "material_requirements": {
+        "reclaimed_stock_storage": "dry, labeled by species/era",
+        "hardware_library": "organized near bench",
+        "fume_strip_area": "segregated, ventilated"
+      },
+      "source_title": "Fine Woodworking: Shop Layout (bench-centric workflows)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "project_type": "Boat building (small wooden craft)",
+      "typical_sequence": [
+        "lofting",
+        "frames/strongback",
+        "planking/strip build",
+        "fairing",
+        "sheathing/caulk",
+        "interior structure",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "open_assembly_footprint": "full hull outline + ≥ 1 m working ring",
+        "long_stock_machining_lane": "planer/saw lanes with ≥ 16 ft outfeed where possible"
+      },
+      "material_requirements": {
+        "long_lumber_storage": "wall/overhead racks",
+        "epoxy_curing": "heated, dust-controlled corner",
+        "mobile_tools": "high (project geometry evolves)"
+      },
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory (principles applicable to long-stock flow)",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ]
+    },
+    {
+      "project_type": "Instrument making (luthiery)",
+      "typical_sequence": [
+        "plans/templates",
+        "tonewood prep (resaw/thickness)",
+        "parts making (neck, plates, sides)",
+        "body assembly",
+        "neck fit",
+        "fretwork/detail",
+        "finish",
+        "setup"
+      ],
+      "critical_tool_distances": {
+        "precision_corner (bench/go-bar/fixtures)": "compact cluster; ≤ 1–2 m between micro-stations",
+        "big_machines (bandsaw/thickness)": "peripheral, clear path to bench"
+      },
+      "material_requirements": {
+        "humidity_control": "45–50% RH storage",
+        "clean_finish_zone": "curtained or booth; dust-isolated"
+      },
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (clean/quiet bench-first workflows)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "project_type": "Carcase furniture with veneering",
+      "typical_sequence": [
+        "substrate cutting",
+        "veneer layup (press/vacuum bag)",
+        "trimming/edgeband",
+        "carcase assembly",
+        "sanding/finish"
+      ],
+      "critical_tool_distances": {
+        "veneer_press ↔ cutting": "≤ 3 m",
+        "vacuum_pump_noise_isolation": "separate corner or enclosure"
+      },
+      "material_requirements": {
+        "flat storage": "for veneers/cauls",
+        "temperature/humidity": "stable during glue cure"
+      },
+      "source_title": "Fine Woodworking: Shop Layout (process zoning & finishing separation)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "project_type": "Chairmaking (curved/compound joinery)",
+      "typical_sequence": [
+        "lumber selection",
+        "milling",
+        "template/bandsawing",
+        "steam bending (if used)",
+        "shaping/spokeshave",
+        "joinery",
+        "assembly",
+        "finish"
+      ],
+      "critical_tool_distances": {
+        "steam_box ↔ bend_form": "≤ 2 m",
+        "bandsaw ↔ template/shaping_bench": "≤ 2 m"
+      },
+      "material_requirements": {
+        "bending_forms_storage": "near bench or wall-mounted",
+        "PPE/ventilation": "steam area"
+      },
+      "source_title": "Fine Woodworking: Shop Layout (special stations for bending/shaping)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    }
+  ],
+  "frequency_analysis": [
+    {
+      "tool": "table saw",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "central with 360° operational clearance; shared outfeed doubles as assembly",
+      "reasoning": "Primary breakdown for rips/crosscuts on most projects; central placement minimizes handling.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "jointer",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "adjacent to planer and near table saw (U-cell ≤ 2 m edges)",
+      "reasoning": "Used in tight loop with planer and saw during milling; adjacency cuts walking.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "planer (thicknesser)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "paired with jointer; straight infeed/outfeed lanes sized to longest stock + ~0.9 m",
+      "reasoning": "Continuous alternation with jointer; long clear lanes avoid resets.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "miter saw",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "near lumber rack/entrance with long left/right supports",
+      "reasoning": "First-touch breakdown of long stock; reduces hauling distance from storage.",
+      "source_title": "MellowPine: Woodworking Shop Layout",
+      "source_url": [
+        "https://mellowpine.com/woodworking-shop-layout/"
+      ]
+    },
+    {
+      "tool": "bandsaw",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "wall/peninsula with clearance for resaw length; good lighting",
+      "reasoning": "On-demand curves/resaw; not central but should be quick to access.",
+      "source_title": "Fine Woodworking: Shop Layout",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "router table / shaper",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "near table saw outfeed or integrated in extension wing; dust drop present",
+      "reasoning": "Batch edge profiles/grooves after sizing; adjacency reduces setups.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "drill press",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "against wall with 1.0–1.2 m aisle; bit storage adjacent",
+      "reasoning": "Precision holes/jigs intermittently; wall placement saves central space.",
+      "source_title": "Fine Woodworking: Shop Layout",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "workbench / assembly table",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "central (or near window) with multi-side access; hand tools within 0.6–1.0 m",
+      "reasoning": "Most hand work and assembly happen here; centrality reduces trips.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "clamps (racks/carts)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "≤ 1.5 m from assembly bench; wall rack or rolling cart",
+      "reasoning": "Time-critical during glue-ups; immediate reach cuts setup time.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "sanding stations (ROS, oscillating, belt/disc)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "dust-managed corner; ≤ 3 m from assembly/finish",
+      "reasoning": "Frequent touch-ups pre-finish; segregate airflow to reduce contamination.",
+      "source_title": "Fine Woodworking: Shop Layout",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "lathe",
+      "usage_frequency": "occasional",
+      "accessibility_priority": "low",
+      "optimal_placement": "quiet zone/corner; ≥ 1.0 m perimeter; grinder within ≤ 1 m",
+      "reasoning": "Specialized; keep accessible but not in main flow.",
+      "source_title": "Fine Woodworking: Shop Layout",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "CNC router",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "along wall or enclosure with 4×8 loading clearance; operator station adjacent",
+      "reasoning": "Runs in batches; monitorable while other tasks proceed.",
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory (generalizable cell adjacency)",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ]
+    },
+    {
+      "tool": "dust collection system",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "corner/closet with duct drops to high-chip tools; minimize hose changes",
+      "reasoning": "Health + cleanup efficiency; control at source reduces rework and downtime.",
+      "source_title": "NIOSH Hazard Control (HC10) + OSHA Machine Guarding/Housekeeping",
+      "source_url": [
+        "https://www.cdc.gov/niosh/docs/hazardcontrol/hc10.html",
+        "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.213"
+      ]
+    },
+    {
+      "tool": "track saw / panel track system",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "near sheet storage; folding table or foam board cutting station by door",
+      "reasoning": "Sheet breakdown at intake minimizes carrying; substitutes for panel saw in small shops.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (intake-to-breakdown proximity)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "edge bander (portable or stationary)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "inline with panel flow, between cutting and drill/bore",
+      "reasoning": "Immediate edge treatment avoids backtracking; reduces handling.",
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ]
+    },
+    {
+      "tool": "drum/thickness sander",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "peripheral with long infeed/outfeed; dust drop required",
+      "reasoning": "Panel/thin stock prep in batches; not constant use but needs lanes.",
+      "source_title": "Fine Woodworking: Shop Layout (lane planning)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "mortiser / Domino joiner",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "near assembly/bench; parts staging at arm's reach",
+      "reasoning": "Used during joinery stages; proximity to bench speeds fit/adjust cycles.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (bench-centric operations)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "hand tool storage (chisels/planes/saws)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "pegboard/cabinet directly at bench (≤ 0.6–1.0 m reach)",
+      "reasoning": "Constant use for fitting and cleanup; immediate reach improves flow.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (tool-at-point-of-use)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "finishing booth/spray area",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "segregated airflow; ≥ 3 m from sanding; near exit for curing racks",
+      "reasoning": "Dust isolation is critical; proximity to staging expedites throughput.",
+      "source_title": "Fine Woodworking: Shop Layout (zone separation)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "hardware/fasteners cabinet",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "≤ 1 m from assembly benches; mobile bins for kitting",
+      "reasoning": "Reduces walking during fast-paced assembly and install phases.",
+      "source_title": "Application of the SLP Methodology to Improve Distribution in a Wood Furniture Factory (kitting proximity)",
+      "source_url": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-56373-7_18"
+      ]
+    },
+    {
+      "tool": "shaper (power feeder)",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "inline with planer for profile runs; long outfeed lane",
+      "reasoning": "Profiles after prep; lane planning prevents reorienting long stock.",
+      "source_title": "Fine Woodworking: Shop Layout (long stock lanes)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "oscillating spindle sander",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "wall stand near bandsaw/templating area",
+      "reasoning": "Pairs with curve cutting; short move improves iteration speed.",
+      "source_title": "Fine Woodworking: Shop Layout (task adjacency)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "belt/disc sander (stationary)",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "perimeter with dust drop; keep bench path clear",
+      "reasoning": "Used for shaping and flush sanding; not central but frequent enough to keep out.",
+      "source_title": "Fine Woodworking: Shop Layout",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "drill/driver charging station",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "near assembly and exit (for installs); cord management",
+      "reasoning": "Reduces downtime; supports site-driven workflows.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (staging & access)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "track saw foam-table (sacrificial sheet table)",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "near intake/door; foldable for space recovery",
+      "reasoning": "Clean, safe sheet breakdown without heavy panel saw footprint.",
+      "source_title": "MellowPine: Woodworking Shop Layout",
+      "source_url": [
+        "https://mellowpine.com/woodworking-shop-layout/"
+      ]
+    },
+    {
+      "tool": "jigs & fixtures storage",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "labeled wall/loft near related machines",
+      "reasoning": "Fast retrieval avoids re-making jigs; boosts repeatability.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (organization)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "material carts/dollies",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "near intake and between cells; turning radius maintained",
+      "reasoning": "'Move wood, not machines'—carts reduce lifts and distance.",
+      "source_title": "CCOHS RNLE guidance (reduce carry distance; use aids)",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/ergonomics/niosh"
+      ]
+    },
+    {
+      "tool": "lumber rack (horizontal/vertical)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "adjacent to jointer/miter intake; 1.2 m pull-out aisle",
+      "reasoning": "Fewer long carries; direct to first operation.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (intake to first cut)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "sheet goods rack",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "by door and first breakdown station; cart path unobstructed",
+      "reasoning": "Minimizes heavy handling; feeds panel saw/CNC directly.",
+      "source_title": "MellowPine: Woodworking Shop Layout",
+      "source_url": [
+        "https://mellowpine.com/woodworking-shop-layout/"
+      ]
+    },
+    {
+      "tool": "PPE station (respirators/face shields/earmuffs)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "at machine zone entry; duplicates near finishing & lathe",
+      "reasoning": "Immediate access improves compliance; reduces exposure.",
+      "source_title": "NIOSH Hazard Control (HC10) – exposure reduction emphasis",
+      "source_url": [
+        "https://www.cdc.gov/niosh/docs/hazardcontrol/hc10.html"
+      ]
+    },
+    {
+      "tool": "compressor & air drops",
+      "usage_frequency": "daily",
+      "accessibility_priority": "medium",
+      "optimal_placement": "remote closet/corner; quick couplers at bench/assembly/finish",
+      "reasoning": "Noise isolated; access where nailers/sprayers are used.",
+      "source_title": "Fine Woodworking: Shop Layout (utilities routing)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "HVLP/spray system",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "in finishing zone; rack for hoses/cups; drying cart nearby",
+      "reasoning": "Short path from sand → finish; controlled environment boosts throughput.",
+      "source_title": "Fine Woodworking: Shop Layout (finishing zone)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "assembly clamps (pipe/parallel/band)",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "≤ 1.5 m from glue table; sorted by length",
+      "reasoning": "Glue-ups are time-sensitive; reduces scramble time.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (clamp access)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "domino/doweling jigs",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "bench drawer or wall rack at joinery station",
+      "reasoning": "Grab-and-go for case joinery; reduces setup overhead.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (bench focus)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "template library (MDF/acrylic)",
+      "usage_frequency": "weekly",
+      "accessibility_priority": "medium",
+      "optimal_placement": "wall racks near bandsaw/router table",
+      "reasoning": "Curve work loops between cut/trim; adjacency improves iteration.",
+      "source_title": "Fine Woodworking: Shop Layout (task adjacency)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    },
+    {
+      "tool": "outfeed/assembly combo table",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "behind table saw; level matched; dog holes/vises optional",
+      "reasoning": "Dual-use surface lowers footprint; reduces material handling.",
+      "source_title": "The Wood Whisperer: 12 Shop Layout Tips (combo surfaces)",
+      "source_url": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      ]
+    },
+    {
+      "tool": "edge sanding/hand sanding carts",
+      "usage_frequency": "daily",
+      "accessibility_priority": "high",
+      "optimal_placement": "between assembly and finishing; vacuum/abrasive racks onboard",
+      "reasoning": "Pre-finish touch-ups are frequent; mobile cart reduces trips.",
+      "source_title": "Fine Woodworking: Shop Layout (sanding-to-finish proximity)",
+      "source_url": [
+        "https://www.finewoodworking.com/2000/01/01/shop-layout"
+      ]
+    }
+  ]
+}

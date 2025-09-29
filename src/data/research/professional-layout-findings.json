@@ -1,0 +1,474 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "professional_layout_studies": [
+      {
+        "study_name": "Lean layout benchmarking for cabinet shops",
+        "shop_type": "Cabinetry (small to medium production; applicable to semi-pro shops)",
+        "shop_size_range": {
+          "note": "Article gives throughput and labor benchmarks; no square footage reported."
+        },
+        "workflow_zones": [
+          "Inbound/material receiving",
+          "Sheet goods storage",
+          "Panel processing/CNC",
+          "Edgebanding",
+          "Drilling/boring",
+          "Assembly/kitting",
+          "Finishing",
+          "Staging & shipping",
+          "Maintenance/utilities (air, power, dust)"
+        ],
+        "productivity_metrics": {
+          "benchmark_man_hours_per_cabinet": "1.8 (good); >4.0 indicates major opportunity",
+          "cnc_capacity_sheets_per_day": "80–120 per CNC (cabinet parts)",
+          "layout_kpis_to_track": [
+            "Total linear feet (m) traveled",
+            "Total WIP (pieces)",
+            "Operators required",
+            "Steps per operator per job"
+          ]
+        },
+        "source": "Woodworking Network – Brad Cairns: Seven steps to lean layout (Ontario, Canada)",
+        "source_url": [
+          "https://www.woodworkingnetwork.com/knowledge-center/lean-manufacturing/seven-steps-lean-layout"
+        ],
+        "efficiency_improvements": {
+          "expected": "Reducing material travel and protecting the bottleneck typically increases throughput and lowers WIP; shop reports commonly see double-digit gains after re-layout, but article focuses on method & benchmarks rather than a single % result."
+        },
+        "trade_offs": {
+          "mobility_vs_infrastructure": "Rolling extra 10–15 ft of cable/air and using clamp-together duct increases flexibility but adds install cost.",
+          "buffer_before_bottleneck": "Holding 0.5–2 days of work increases WIP carrying cost but protects throughput during breakdowns.",
+          "close_coupling_cells": "Tighter machine spacing reduces travel but can limit access/maintenance if clearances aren’t planned."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Furniture factory re-layout with CRAFT (wood & fabric sections)",
+        "shop_type": "Furniture manufacturing (sofa frames/upholstery) – transferable to small shop cells",
+        "shop_size_range": {
+          "note": "Departmental case; floor area not reported."
+        },
+        "workflow_zones": [
+          "Raw wood storage",
+          "Initial cut benches",
+          "Sizing/milling",
+          "Wood assembly",
+          "Sponge/foam storage & cutting",
+          "Fabric cutting & sewing",
+          "Upholstery",
+          "Semi-finished storage",
+          "Final assembly"
+        ],
+        "productivity_metrics": {
+          "baseline_material_flow_km_per_day": {
+            "wood_section": 84.178,
+            "fabric_section": 48.212
+          },
+          "optimized_material_flow_km_per_day": {
+            "wood_section": 44.553,
+            "fabric_section": 27.230
+          },
+          "reduction_percent": {
+            "wood_section": 47.1,
+            "fabric_section": 43.5
+          },
+          "annual_savings_usd": 28303
+        },
+        "source": "IEOM 2020 case paper (SLP/CRAFT on furniture factory)",
+        "source_url": [
+          "https://www.ieomsociety.org/ieom2020/papers/496.pdf"
+        ],
+        "efficiency_improvements": {
+          "distance_reduction": "47.1% (wood) and 43.5% (fabric) reduction in worker-trip distance after re-layout",
+          "payback": "Re-layout cost < $30k; recovered in ~1 year via handling cost savings"
+        },
+        "trade_offs": {
+          "reconfiguration_cost": "Moving departments, utilities, dust ducting has upfront cost and downtime.",
+          "single_level_integration": "Preferred for efficiency but may require building changes."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Small-shop operational clearances (table saw & bench) – dimensional guidance",
+        "shop_type": "General woodworking (DIY/hobbyist/semi-pro; also useful to pro cells)",
+        "shop_size_range": {
+          "typical_context": "Single/double garage or basement shops; dimensions scale to available space."
+        },
+        "workflow_zones": [
+          "Central rip/crosscut core (table saw + outfeed)",
+          "Perimeter machines (miter saw along wall, bandsaw, drill press)",
+          "Bench/assembly",
+          "Lumber rack & cutdown",
+          "Finishing corner/room",
+          "Dust collector & filter"
+        ],
+        "productivity_metrics": {
+          "clearances": {
+            "table_saw_infeed": "96 in (8 ft)",
+            "table_saw_outfeed": "96 in (8 ft)",
+            "table_saw_side_clearance_each_side": "36 in",
+            "space_around_bench": "24–36 in",
+            "bench_size_common": "72–96 in long x 32–36 in wide"
+          },
+          "implication": "Adequate infeed/outfeed and bench circulation reduces repositioning time, rework, and kickback risk."
+        },
+        "source": "Highland Woodworking – Workshop Design: Work Zones",
+        "source_url": [
+          "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html"
+        ],
+        "efficiency_improvements": {
+          "expected": "A layout that respects these distances typically cuts handling time on long stock by minutes per board and reduces scrap from bumped edges/outfeed stalls (qualitative)."
+        },
+        "trade_offs": {
+          "space_pressure": "In tight garages, adhering to full 8 ft clearances may require mobile bases or fold-down outfeed.",
+          "central_vs_wall_saw": "Center placement improves flow at the cost of floor area; wall placement regains area but reduces full-length ripping."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Planning templates & scale modeling for small shops",
+        "shop_type": "General woodworking (DIY/hobbyist/semi-pro)",
+        "shop_size_range": {
+          "applicability": "Any; especially <400–700 sq ft where fit is critical"
+        },
+        "workflow_zones": [
+          "Paper/scale layout stage",
+          "Move-testing alternative flows",
+          "Dust duct path planning",
+          "Power drop planning"
+        ],
+        "productivity_metrics": {
+          "kpis": [
+            "Number of layout iterations tested pre-build",
+            "Estimated total linear travel per job",
+            "Number of duct elbows/feet of duct run",
+            "Number of power drops required"
+          ]
+        },
+        "source": "WOOD Magazine – Shop Layout Grid & Tool Templates",
+        "source_url": [
+          "https://www.woodmagazine.com/woodworking-plans/shop-organization/shop-layout-grid-and-tool-templates"
+        ],
+        "efficiency_improvements": {
+          "expected": "Upfront planning reduces later rework; typical small shops avoid at least one major move (hours to days saved) after installing dust/electrical (qualitative)."
+        },
+        "trade_offs": {
+          "time_in_design": "Takes planning time up front but avoids sunk costs in fixed duct/power."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Small & medium woodworking shops: safety & layout implications",
+        "shop_type": "General woodworking (small/medium shops in Canada)",
+        "shop_size_range": {
+          "note": "Regulatory guidance; not size-specific."
+        },
+        "workflow_zones": [
+          "Machine cells with guards",
+          "Housekeeping/aisles",
+          "Ventilation/dust collection",
+          "Noise control",
+          "Finishing/chemical storage",
+          "Egress routes"
+        ],
+        "productivity_metrics": {
+          "regulatory_focus": "Emphasizes hazard control and clear aisles to prevent congestion and incidents that cause downtime."
+        },
+        "source": "WorkSafeBC – Health and Safety for Small- and Medium-Sized Woodworking Shops (plus OHS Regulation Parts 12 & 27 references)",
+        "source_url": [
+          "https://www.worksafebc.com/en/resources/health-safety/books-guides/health-and-safety-for-small-and-medium-sized-woodworking-shops",
+          "https://www.worksafebc.com/en/law-policy/occupational-health-safety/searchable-ohs-regulation/ohs-regulation/part-27-wood-products-manufacturing"
+        ],
+        "efficiency_improvements": {
+          "expected": "Cleaner, unobstructed aisles reduce handling delays and incident-related stoppages (qualitative)."
+        },
+        "trade_offs": {
+          "space_allocation": "Committing floor space to egress/aisles lowers machine density but improves throughput reliability."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Dust collection design constraints that drive shop layout",
+        "shop_type": "General woodworking (DIY/semi-pro/pro)",
+        "shop_size_range": {
+          "note": "Applies to any size; velocities/CFM dictate machine grouping and duct paths."
+        },
+        "workflow_zones": [
+          "Collector location",
+          "Main trunk routing",
+          "Drops to high-CFM tools (TS/planer/jointer)",
+          "Fine sanding capture",
+          "Make-up air/exhaust"
+        ],
+        "productivity_metrics": {
+          "minimum_conveying_air_speed_fpm": {
+            "horizontal_ducts": "≥2800 FPM (Bill Pentz guidance for preventing plugging)",
+            "vertical_ducts": "≥3800 FPM (Bill Pentz guidance)",
+            "general_industry_guideline": "Wood dust 3500–4500+ FPM (Nordfab)"
+          },
+          "tool_airflow_targets_cfm_examples": {
+            "larger_stationary_tools": "800–1000 CFM typical small-shop targets (per Pentz research/guides)"
+          }
+        },
+        "source": "Bill Pentz Dust Collection Research; Nordfab minimum duct design velocities; Oneida ductwork guide",
+        "source_url": [
+          "https://billpentz.com/woodworking/cyclone/dc_basics.php",
+          "https://billpentz.com/woodworking/cyclone/staticcalc_faqs.php",
+          "https://images.finewoodworking.com/app/uploads/2007/12/28155345/dust_collection_Oneida_ductguide.pdf",
+          "https://www.nordfab.com/en-us/technical/minimum-duct-design-velocities",
+          "https://www.oneida-air.com/amfile/file/download/file/301/product/910/"
+        ],
+        "efficiency_improvements": {
+          "expected": "Shorter, straighter duct runs and right-sized mains maintain conveying velocity, reducing clogs/cleanouts and maintaining capture (less downtime, better finish quality)."
+        },
+        "trade_offs": {
+          "collector_placement": "Central placement shortens duct but consumes prime floor space; exterior venting improves air quality but requires make-up air and may impact heat/HVAC loads.",
+          "power_requirements": "Higher CFM/velocity needs larger blowers (3–5 hp typical for 800–1000 CFM at tools), increasing noise and energy use."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Lutherie build-room climate control",
+        "shop_type": "Instrument making (guitars/violins etc.)",
+        "shop_size_range": {
+          "note": "Bench-scale rooms; often a dedicated small controlled room within a general shop."
+        },
+        "workflow_zones": [
+          "Acclimation/drying storage",
+          "Climate-controlled build room",
+          "General machining (roughing) outside build room",
+          "Finish room/spray"
+        ],
+        "productivity_metrics": {
+          "recommended_rh_percent": "45–55% RH (Taylor Guitars guidance for instruments)",
+          "notes": "Builders often bias toward 40–45% RH when instruments will live in dry climates; consistent RH reduces rework/defects (cracks, fret sprout)."
+        },
+        "source": "Taylor Guitars humidity guidance; StewMac luthier shop climate tips",
+        "source_url": [
+          "https://www.taylorguitars.com/support/maintenance/symptoms-wet-guitar",
+          "https://taylorguitars.zendesk.com/hc/en-us/articles/360061909892-Do-I-have-to-humidify-my-guitar",
+          "https://www.stewmac.com/video-and-ideas/tips-du-jour/mailbag-episode29-shop-design/"
+        ],
+        "efficiency_improvements": {
+          "defect_reduction": "Maintaining 45–55% RH significantly reduces split/warp/crown issues, lowering rework rates (qualitative but widely accepted practice)."
+        },
+        "trade_offs": {
+          "space_and_cost": "Dedicated climate room reduces available floor area and adds HVAC/dehumidification cost.",
+          "workflow_split": "Moving parts between general shop and controlled room adds handling steps."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Epoxy & composite work environment in boatbuilding",
+        "shop_type": "Boatbuilding/wood-epoxy work (applies to canoe/kayak and small craft builds in hobby shops)",
+        "shop_size_range": {
+          "note": "Varies with strongback/LOA; reference focuses on environmental guidance."
+        },
+        "workflow_zones": [
+          "Strongback/assembly bay",
+          "Resin mixing station (ventilated)",
+          "Cure area with controlled temperature",
+          "Sanding & fairing (high-dust; isolate if possible)"
+        ],
+        "productivity_metrics": {
+          "environmental_constraints": "Cure times and film quality depend on ambient temperature/humidity per epoxy manufacturer’s data; lower temps extend cure time substantially."
+        },
+        "source": "WEST SYSTEM User Manual & Product Guide (environmental conditions/cure behavior)",
+        "source_url": [
+          "https://www.westsystem.com/app/uploads/2023/09/WS-User-Manual-2020.pdf"
+        ],
+        "efficiency_improvements": {
+          "expected": "Keeping resin in recommended temperature range yields predictable cure windows; fewer sand-throughs and amine blush mitigation cycles (qualitative)."
+        },
+        "trade_offs": {
+          "heating/dehumidification_load": "Maintaining cure temps in Canadian winters increases energy use; may require localized tenting/IR heat vs. whole-shop conditioning."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Central-saw small-shop layouts (perimeter tools + central outfeed)",
+        "shop_type": "DIY/hobbyist/semi-pro",
+        "shop_size_range": {
+          "context": "Common in 200–500 sq ft garages/basements"
+        },
+        "workflow_zones": [
+          "Table saw + outfeed (center)",
+          "Miter saw station along wall",
+          "Perimeter: bandsaw, drill press, sander on mobile bases",
+          "Clamp storage near bench/assembly",
+          "Compact dust collection corner"
+        ],
+        "productivity_metrics": {
+          "qualitative": "Central outfeed doubles as assembly surface; perimeter placement preserves long infeed paths."
+        },
+        "source": "The Wood Whisperer (layout tips); The Workshop Journal (layout guidance); DIY Montreal (outfeed table implementation)",
+        "source_url": [
+          "https://thewoodwhisperer.com/articles/12-shop-layout-tips/",
+          "https://theworkshopjournal.com/optimize-your-dream-woodshop-layout-a-guide-to-efficiency/",
+          "https://www.diymontreal.com/outfeed-table-workbench-mobile-leveling/"
+        ],
+        "efficiency_improvements": {
+          "expected": "Reduced material handling and changeover when outfeed equals bench; easier long-rip handling in one person shops."
+        },
+        "trade_offs": {
+          "floor_space": "A large outfeed/assembly table can block traffic if not mobile or properly sized."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Spaghetti diagramming & SLP for micro/cellular layouts",
+        "shop_type": "Any woodworking shop (focus: low-cost improvements for small shops)",
+        "shop_size_range": {
+          "note": "Methodological; scales from benches to full plants."
+        },
+        "workflow_zones": [
+          "Current-state mapping (operator walk paths)",
+          "Future-state cell design",
+          "Iteration/testing (paper or software)",
+          "Implementation & follow-up measurement"
+        ],
+        "productivity_metrics": {
+          "reported_improvements_examples": {
+            "material_handling_cost_reduction_percent": 6.92,
+            "distance_walked_reduction_example": "Thousands of feet reduced in case examples (context-dependent)"
+          }
+        },
+        "source": "SLP case studies & spaghetti diagram references",
+        "source_url": [
+          "https://www.researchgate.net/profile/Anita-Sembiring/publication/343664971_Redesigning_Furniture_Production_Floors_Using_Systematic_Layout_Planning_and_ALDEP_Method_to_Minimize_Material_Handling_Costs/links/6538871424bbe32d9a6c97e7/Redesigning-Furniture-Production-Floors-Using-Systematic-Layout-Planning-and-ALDEP-Method-to-Minimize-Material-Handling-Costs.pdf",
+          "https://www.six-sigma-material.com/Spaghetti-Diagram.html",
+          "https://sixsigmastudyguide.com/spaghetti-diagram/"
+        ],
+        "efficiency_improvements": {
+          "distance_reduction": "5–50%+ depending on baseline; 6.92% cost reduction reported in a furniture floor via SLP vs. current state.",
+          "benefit_for_small_shops": "Paper-and-pen mapping quickly identifies backtracking between bench, saw, and clamp rack."
+        },
+        "trade_offs": {
+          "measurement_time": "Requires time to observe and record true travel; benefits compound after implementation."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "study_name": "Regulatory and inspection checklists influencing layout (Canada)",
+        "shop_type": "All woodworking shops in Canada (safety/ergonomics)",
+        "shop_size_range": {
+          "note": "Not size-specific; applicable to any shop."
+        },
+        "workflow_zones": [
+          "Storage design (heaviest items between knee–shoulder height)",
+          "Aisles/housekeeping",
+          "Emergency egress",
+          "Machine guarding zones"
+        ],
+        "productivity_metrics": {
+          "inspection_focus": "Checklists drive better organization and fewer blocked aisles; reduces incident downtime."
+        },
+        "source": "CCOHS fact sheets & checklists (storing layouts; manufacturing inspection checklist)",
+        "source_url": [
+          "https://www.ccohs.ca/oshanswers/ergonomics/mmh/layoutstoring.html",
+          "https://www.ccohs.ca/oshanswers/hsprograms/checklist/list_mft.html",
+          "https://www.ccohs.ca/oshanswers/safety_haz/woodwork"
+        ],
+        "efficiency_improvements": {
+          "expected": "Improved storage and flow reduce retrieval time and awkward lifts (qualitative)."
+        },
+        "trade_offs": {
+          "space_allocation": "Ergonomic storage consumes linear wall space that might otherwise host machines."
+        },
+        "priority": "MEDIUM"
+      }
+    ],
+    "layout_optimization_principles": [
+      {
+        "principle": "Minimize total material travel (linear distance from receipt to ship)",
+        "description": "Reorder machines and workstations to shorten the path parts and people take; measure baseline feet/meters and reduce.",
+        "quantified_benefit": "43–47% reduction in daily material travel achieved in furniture factory sections; ~$28k/year handling cost savings with ~1-year payback (case-specific).",
+        "implementation": "Use SLP/CRAFT or paper mockups; move high-interaction processes adjacent; keep flows one-directional.",
+        "source": "https://www.ieomsociety.org/ieom2020/papers/496.pdf"
+      },
+      {
+        "principle": "No monuments (design for mobility)",
+        "description": "Avoid anchoring machines permanently. Keep utilities flexible (extra cable/air length; clamp duct) so cells can move with products.",
+        "quantified_benefit": "Not universally quantified; enables frequent re-layouts that support continuous improvement.",
+        "implementation": "Coil 10–15 ft of cable/air above machines; use quick-clamp duct; standardize casters/leveling feet.",
+        "source": "https://www.woodworkingnetwork.com/knowledge-center/lean-manufacturing/seven-steps-lean-layout"
+      },
+      {
+        "principle": "Protect the bottleneck with planned buffers",
+        "description": "Place a small, fixed WIP buffer before the constraint and a catch area after it so upstream/downstream issues don’t idle it.",
+        "quantified_benefit": "Throughput stability improves; author suggests 0.5–2 days of buffer depending on MTTR.",
+        "implementation": "Identify true constraint; fix buffer amounts; visually manage WIP levels.",
+        "source": "https://www.woodworkingnetwork.com/knowledge-center/lean-manufacturing/seven-steps-lean-layout"
+      },
+      {
+        "principle": "Set small-shop clearances for core operations",
+        "description": "Respect infeed/outfeed and side clearances for the table saw and walking space around benches to cut handling time and reduce errors.",
+        "quantified_benefit": "Fewer interruptions/realignments; fewer outfeed stalls (qualitative).",
+        "implementation": "TS infeed 8 ft; outfeed 8 ft; 36 in side clearance; bench 24–36 in perimeter clear.",
+        "source": "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html"
+      },
+      {
+        "principle": "Centralize the outfeed/assembly surface; push long tools to walls",
+        "description": "Use a central outfeed that doubles as assembly; position miter saws along a wall with long supports.",
+        "quantified_benefit": "Faster changeovers and fewer material re-handles (qualitative).",
+        "implementation": "Align table saw to shop length; build an outfeed table; create a miter station with fences/stop blocks.",
+        "source": "https://thewoodwhisperer.com/articles/12-shop-layout-tips/"
+      },
+      {
+        "principle": "Plan dust system first (layout follows duct)",
+        "description": "Place collector and mains to minimize total static pressure and maintain conveying velocity.",
+        "quantified_benefit": "Maintaining ≥2800–3800+ FPM and adequate CFM reduces clogs and improves capture, cutting cleanup time and finish defects.",
+        "implementation": "Shortest, straightest runs; limit elbows; 6–7 in ports for 800–1000 CFM at big tools; size blower accordingly.",
+        "source": "https://billpentz.com/woodworking/cyclone/staticcalc_faqs.php"
+      },
+      {
+        "principle": "Use industry duct velocity guidance for wood dust",
+        "description": "Design mains/branches to stay within wood-dust conveying velocity to avoid settling.",
+        "quantified_benefit": "Reduced downtime from plugging and lower housekeeping burden (qualitative).",
+        "implementation": "Target 3500–4500+ FPM for wood dust per duct maker guidance; verify with anemometer where possible.",
+        "source": "https://www.nordfab.com/en-us/technical/minimum-duct-design-velocities"
+      },
+      {
+        "principle": "Instrument build rooms (lutherie) at 45–55% RH",
+        "description": "Keep sensitive joinery/assembly and storage in controlled RH to minimize wood movement.",
+        "quantified_benefit": "Substantially fewer humidity-related defects (cracks, warps, fret sprout) and finish issues (qualitative).",
+        "implementation": "Dedicated small room with dehumidifier/humidifier and RH monitoring; stage rough work outside.",
+        "source": "https://www.taylorguitars.com/support/maintenance/symptoms-wet-guitar"
+      },
+      {
+        "principle": "Map before you move (spaghetti diagrams)",
+        "description": "Trace actual operator/material travel on a floor map to find backtracking and wasted motion.",
+        "quantified_benefit": "Case examples report thousands of feet of walking eliminated; furniture floor study shows 6.92% handling cost reduction via SLP.",
+        "implementation": "Print shop map; shadow operators; total distances; redesign and re-measure.",
+        "source": "https://sixsigmastudyguide.com/spaghetti-diagram/"
+      },
+      {
+        "principle": "Iterate layouts cheaply with templates",
+        "description": "Use grids and scaled tool cutouts to test multiple arrangements quickly.",
+        "quantified_benefit": "Avoids costly post-install relocations of duct/electrical (qualitative).",
+        "implementation": "Try 3–4 alternatives before build; choose based on shortest flow and least duct/elbows.",
+        "source": "https://www.woodmagazine.com/woodworking-plans/shop-organization/shop-layout-grid-and-tool-templates"
+      },
+      {
+        "principle": "Separate high-dust and finishing operations",
+        "description": "Keep sanding/machining away from finishing to reduce defects and rework.",
+        "quantified_benefit": "Lower nibs/fish-eyes; fewer resprays (qualitative).",
+        "implementation": "Physical separation, curtains, or a dedicated room; positive/negative pressure as needed; follow local OHS and fire code.",
+        "source": "https://www.worksafebc.com/en/resources/health-safety/books-guides/health-and-safety-for-small-and-medium-sized-woodworking-shops"
+      },
+      {
+        "principle": "Respect egress and housekeeping (regulatory)",
+        "description": "Unobstructed aisles and exits reduce incident risk and keep flow reliable.",
+        "quantified_benefit": "Fewer stoppages due to incidents/inspections (qualitative).",
+        "implementation": "Plan aisles into the layout; mark floors; include cleanup zones and storage layouts for safe access.",
+        "source": "https://www.ccohs.ca/oshanswers/hsprograms/checklist/list_mft.html"
+      },
+      {
+        "principle": "Temperature control for epoxy work",
+        "description": "Follow resin manufacturer cure temperature guidance; low temps dramatically extend cure and delay throughput.",
+        "quantified_benefit": "Predictable cure windows; fewer sand-throughs/defects (qualitative).",
+        "implementation": "Local heated tents or area heaters over strongbacks; monitor surface temps, not just air.",
+        "source": "https://www.westsystem.com/app/uploads/2023/09/WS-User-Manual-2020.pdf"
+      }
+    ]
+}

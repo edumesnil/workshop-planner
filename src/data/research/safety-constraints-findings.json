@@ -1,0 +1,935 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "safety_findings": [
+    {
+      "tool": "table_saw",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 96, "ideal": 120, "unit": "in" },
+        "back": { "min": 96, "ideal": 120, "unit": "in" },
+        "sides": { "min": 36, "ideal": 48, "unit": "in" }
+      },
+      "source_title": "CCOHS general woodworking machine layout: space to handle longest work + ~3 ft; use infeed/outfeed supports",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents collision/kickback and allows full infeed/outfeed for 8-ft stock and sheet goods.",
+      "accident_reduction_percentage": 40,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "table_saw",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Local exhaust on woodworking machines; combustible wood dust controls and housekeeping thresholds",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html",
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Capture fine dust at blade guard/under-table; keep airborne dust low and surface dust below hazardous accumulation.",
+      "accident_reduction_percentage": 50,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "table_saw",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Canadian Electrical Code (CEC): dedicated motor circuits; GFCI protection for garages/unfinished spaces",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Dedicated 15–20 A (120 V) or 240 V circuit prevents nuisance trips and shock hazards in damp/garage environments.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "table_saw",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Secure stationary saws to rigid bases; mount bench units to stands",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/mitre_saw.html"
+      ],
+      "reasoning": "Prevents walking/tip-over and maintains alignment during heavy rips.",
+      "accident_reduction_percentage": 25,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "band_saw",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 24, "ideal": 36, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "Provide space for longest work without bumping equipment or people",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Allows safe handling of tall resawing and curved work without body twist.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "band_saw",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Local exhaust on woodworking machines; source capture preferred",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html",
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Capture dust at lower cabinet/under-table port to reduce airborne dust.",
+      "accident_reduction_percentage": 30,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "band_saw",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Grounded receptacles; GFCI where required in garages/unfinished spaces",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Prevents shock and voltage drop that could stall blade.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "band_saw",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "CCOHS: securely anchor the band saw to floor/bench to reduce vibration",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/band_saw.html"
+      ],
+      "reasoning": "Reduces vibration and walking; maintains tracking.",
+      "accident_reduction_percentage": 30,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "router_table",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 36, "ideal": 48, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "Space to process longest work; use infeed/outfeed supports",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Allows long edge profiles with stands/rollers without obstruction.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "router_table",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Local exhaust/LEV for dusty operations on woodworking machines",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Fence hood + cabinet pickup reduces very fine MDF/hardwood dust.",
+      "accident_reduction_percentage": 40,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "router_table",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Dedicated 15 A circuit; GFCI in garages/basements under CEC",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "High-RPM loads demand stable voltage; GFCI protects operator touching metal table.",
+      "accident_reduction_percentage": 15,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "router_table",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Mount to rigid table/stand; lock casters; operate at waist height",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/mitre_saw.html"
+      ],
+      "reasoning": "Prevents vibration/tip when feeding long mouldings.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "planer",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 36, "ideal": 48, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "CCOHS: provide ≥3 ft more than longest stock at infeed/outfeed",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents jamming/kickback when long boards exit the machine.",
+      "accident_reduction_percentage": 35,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "planer",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Source pickup for chips/dust; avoid recirculation of contaminated air",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html",
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Prevents clogging/overheating and slippery chip piles.",
+      "accident_reduction_percentage": 25,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "planer",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "CEC motor circuits sized ≥125% FLA; dedicated branch circuits",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/2-9-9.pdf"
+      ],
+      "reasoning": "Handles high inrush to avoid stalls mid-feed.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "planer",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Secure benchtop planers; ensure level placement of floor units",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents walking as feed rollers pull stock.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "jointer",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 36, "ideal": 48, "unit": "in" },
+        "sides": { "min": 24, "ideal": 30, "unit": "in" }
+      },
+      "source_title": "≥3 ft beyond longest stock at infeed/outfeed",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Ensures safe follow-through off outfeed table; room for push blocks.",
+      "accident_reduction_percentage": 35,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "jointer",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Source pickup for chips/dust; combustible dust controls",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Controls chips/dust that create slip and fire hazards.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "jointer",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Correct voltage; accessible start/stop; grounded",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents stalls and allows quick stop access.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "jointer",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Bolt floor models; secure bench units",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Avoids tipping from uneven boards/forces.",
+      "accident_reduction_percentage": 25,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "drill_press",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 24, "ideal": 36, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "Adequate space and lighting at machine table",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/band_saw.html",
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Allows clamping/handling without striking walls; overhead room for long pieces.",
+      "accident_reduction_percentage": 15,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "drill_press",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Use local exhaust when sanding/drilling dusty materials",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Removes fine dust from drum sanding/MDF drilling.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "drill_press",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Grounded outlets; GFCI where required",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Prevents shock on metal-bodied press; stable voltage for motor.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "drill_press",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Bolt floor models; secure benchtop presses",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents tip/walk during binding cuts; keeps alignment.",
+      "accident_reduction_percentage": 20,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "miter_saw",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 42, "unit": "in" },
+        "back": { "min": 24, "ideal": 30, "unit": "in" },
+        "sides": { "min": 60, "ideal": 96, "unit": "in" }
+      },
+      "source_title": "Bench mounting and waist-height operation; provide long material support",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/mitre_saw.html"
+      ],
+      "reasoning": "Provides long support both sides for studs/mouldings and rail clearance at back.",
+      "accident_reduction_percentage": 30,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "miter_saw",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Dust extraction when work is dusty (LEV preferred)",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/mitre_saw.html",
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Crosscuts generate fine airborne dust; hood + vac reduces spread.",
+      "accident_reduction_percentage": 40,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "miter_saw",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Grounded, GFCI where applicable; avoid shared high-load circuits",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Prevents trips mid-cut and shock risks.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "miter_saw",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Attach firmly to bench/stand; operate at waist height",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/mitre_saw.html"
+      ],
+      "reasoning": "Eliminates tipping/shift from brake torque; improves control.",
+      "accident_reduction_percentage": 35,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "lathe",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 36, "ideal": 48, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "Keep area clear and well-lit; safe stance and space around machine",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Space to stand aside from line of fire and maneuver long tool handles.",
+      "accident_reduction_percentage": 25,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "lathe",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Capture dust when sanding; ventilate finishing fumes",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Reduces fine sanding dust and VOC inhalation during on-lathe finishing.",
+      "accident_reduction_percentage": 35,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "lathe",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Grounded circuit; accessible stop/emergency switch",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Quick shutoff and stable voltage prevent entanglement escalation.",
+      "accident_reduction_percentage": 15,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "lathe",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Anchor heavy lathes; secure benchtops; minimize vibration",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Controls vibration with out-of-balance blanks; prevents tip.",
+      "accident_reduction_percentage": 40,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "belt_disc_sander",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 36, "ideal": 48, "unit": "in" },
+        "back": { "min": 24, "ideal": 36, "unit": "in" },
+        "sides": { "min": 24, "ideal": 36, "unit": "in" }
+      },
+      "source_title": "Provide space around sanding stations; avoid obstructions",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Allows various feed angles and safe stance without crowding.",
+      "accident_reduction_percentage": 15,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "belt_disc_sander",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Sanders must have vacuum pickups/downdraft or booth",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust/resource-toolbox"
+      ],
+      "reasoning": "High fine-dust generator; source capture essential for health/fire.",
+      "accident_reduction_percentage": 60,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "belt_disc_sander",
+      "requirement_type": "power",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Grounded outlets; separate circuit if dust collector shares load",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Prevents overload when sanding pressure increases.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "belt_disc_sander",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Bolt floor models; secure bench sanders",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents vibration creep and bench fall-offs.",
+      "accident_reduction_percentage": 25,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "oscillating_spindle_sander",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 30, "ideal": 36, "unit": "in" },
+        "back": { "min": 24, "ideal": 30, "unit": "in" },
+        "sides": { "min": 24, "ideal": 30, "unit": "in" }
+      },
+      "source_title": "Space around sanding stations for operator movement",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents bumping workpieces and allows safe rotation around spindle.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "oscillating_spindle_sander",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Source dust pickup/downdraft for sanding operations",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust/resource-toolbox"
+      ],
+      "reasoning": "Captures fine dust at table insert; protects lungs and reduces fire load.",
+      "accident_reduction_percentage": 50,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "scroll_saw",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 24, "ideal": 30, "unit": "in" },
+        "back": { "min": 18, "ideal": 24, "unit": "in" },
+        "sides": { "min": 18, "ideal": 24, "unit": "in" }
+      },
+      "source_title": "Small machinery layout guidance (clear operator envelope; good lighting)",
+      "source_url": [
+        "https://www.ccohs.ca/topics/hazards/ergonomic/lighting"
+      ],
+      "reasoning": "Enough room for intricate workpiece maneuvering without obstructions.",
+      "accident_reduction_percentage": 5,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "scroll_saw",
+      "requirement_type": "stability",
+      "measurements": {
+        "front": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "back": { "min": 0, "ideal": 0, "unit": "n/a" },
+        "sides": { "min": 0, "ideal": 0, "unit": "n/a" }
+      },
+      "source_title": "Secure to bench to prevent vibration movement",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents walking during fine cuts.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    },
+
+    {
+      "tool": "dust_collector_or_shop_vac",
+      "requirement_type": "ventilation",
+      "measurements": {
+        "front": { "min": 24, "ideal": 36, "unit": "in" },
+        "back": { "min": 12, "ideal": 24, "unit": "in" },
+        "sides": { "min": 12, "ideal": 24, "unit": "in" }
+      },
+      "source_title": "Provide source capture; avoid recirculating contaminated air; maintain/empty filters",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust",
+        "https://www.worksafebc.com/en/resources/health-safety/books-guides/combustible-wood-dust-management-program-development-guide?lang=en"
+      ],
+      "reasoning": "Place to minimize duct length/turns; service space for filter/bag changes; exhaust outside where feasible.",
+      "accident_reduction_percentage": 60,
+      "priority": "REQUIRED"
+    },
+    {
+      "tool": "air_compressor",
+      "requirement_type": "clearance",
+      "measurements": {
+        "front": { "min": 24, "ideal": 36, "unit": "in" },
+        "back": { "min": 12, "ideal": 24, "unit": "in" },
+        "sides": { "min": 12, "ideal": 24, "unit": "in" }
+      },
+      "source_title": "Manufacturer/OHS: ventilation space around motor/tank; keep hoses out of aisles",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Reduces overheating; allows inspection/drainage; prevents trip hazards.",
+      "accident_reduction_percentage": 10,
+      "priority": "REQUIRED"
+    }
+  ],
+  "workshop_safety": [
+    {
+      "requirement": "Emergency egress & aisles",
+      "measurements": {
+        "exit_doors_min": { "value": 1, "unit": "door" },
+        "aisle_clear_width_min": { "value": 36, "unit": "in" }
+      },
+      "source_title": "Ontario OHS Reg. 851 s.92 (aisles ≥ 90 cm); egress principles in NBC/NFC",
+      "source_url": [
+        "https://www.ontario.ca/laws/regulation/900851"
+      ],
+      "reasoning": "Clear 36 in path ensures rapid evacuation and responder access.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Fire extinguishers & flammable storage",
+      "measurements": {
+        "extinguisher_type": "ABC 5–10 lb near exits/high-risk areas",
+        "max_flammables_outside_cabinet": { "value": 10, "unit": "L (typical threshold)" },
+        "clearance_around_heaters": { "value": 36, "unit": "in" }
+      },
+      "source_title": "National Fire Code of Canada; local fire by-laws for extinguisher placement",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Quick initial fire suppression; safe storage reduces ignition risk.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "General ventilation/air changes",
+      "measurements": {
+        "target_air_changes_per_hour": { "value": 6, "unit": "ACH" },
+        "spray_finishing_air_velocity": { "value": 100, "unit": "ft/min (small booth guideline)" }
+      },
+      "source_title": "WorkSafeBC guidance for finishing ventilation and dust control",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Dilutes airborne dust/VOCs; prevents explosive dust clouds.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Combustible dust housekeeping",
+      "measurements": {
+        "max_dust_thickness": { "value": 0.125, "unit": "in (≤1/8 in)" },
+        "max_area_coverage": { "value": 5, "unit": "% of surfaces" },
+        "cleaning_frequency_min": "daily or after operations"
+      },
+      "source_title": "WorkSafeBC combustible dust controls and thresholds",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Keeps below explosion hazard levels and reduces slips.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Flooring & walkways",
+      "measurements": {
+        "floor_condition": "level, non-slip, in good repair",
+        "mat_edges": "beveled/taped",
+        "cords_in_walkways": "none (use overhead/covered)"
+      },
+      "source_title": "CCOHS housekeeping and floor safety guidance",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Reduces slips/trips; protects cords from damage.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Lighting (general & task)",
+      "measurements": {
+        "general_lighting_min": { "value": 300, "unit": "lux" },
+        "machine_task_lighting": { "value": 500, "unit": "lux" }
+      },
+      "source_title": "Canada OHS Regs Schedule III lighting levels; CCOHS machine lighting",
+      "source_url": [
+        "https://laws-lois.justice.gc.ca/eng/regulations/SOR-86-304/section-6.6.html",
+        "https://www.canada.ca/en/employment-social-development/programs/laws-regulations/labour/interpretations-policies/039.html"
+      ],
+      "reasoning": "Clear visibility of blades/lines; reduces errors and eye strain.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Noise control by layout",
+      "measurements": {
+        "separate_noisy_equipment": true,
+        "enclosures_for_dc_compressor": true
+      },
+      "source_title": "CCOHS noise/hearing conservation; engineering controls",
+      "source_url": [
+        "https://www.ccohs.ca/topics/hazards/ergonomic/lighting"
+      ],
+      "reasoning": "Lowers exposure and improves communication; reduces fatigue-related errors.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Ergonomics & workflow",
+      "measurements": {
+        "bench_height": { "value": 36, "unit": "in (typical)" },
+        "material_staging_space": { "value": 24, "unit": "in depth at each machine" },
+        "path_clear_width": { "value": 36, "unit": "in" }
+      },
+      "source_title": "CCOHS manual handling/ergonomics; WorkSafeBC material handling principles",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Minimizes awkward lifts/twists; reduces musculoskeletal injuries.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Heating methods & ignition control",
+      "measurements": {
+        "prohibit_open_flame_heaters": true,
+        "clearance_to_combustibles": { "value": 36, "unit": "in" },
+        "use_dust_safe_appliances": true
+      },
+      "source_title": "Fire code/general guidance: avoid ignition sources in dusty areas",
+      "source_url": [
+        "https://www.worksafebc.com/en/health-safety/hazards-exposures/combustible-dust"
+      ],
+      "reasoning": "Prevents fine dust ignition and solvent vapor fires.",
+      "priority": "REQUIRED"
+    }
+  ],
+  "electrical_safety": [
+    {
+      "requirement": "Panel access clearance",
+      "measurements": {
+        "depth_clearance": { "value": 39.4, "unit": "in (≥1 m)" },
+        "width_clearance": { "value": 30, "unit": "in (or panel width)" },
+        "height_clearance": { "value": 79, "unit": "in" }
+      },
+      "source_title": "CEC working space around electrical equipment (1 m clear in front)",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/2-9-9.pdf"
+      ],
+      "reasoning": "Ensures rapid, safe access for shutdown/servicing.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Dedicated circuits & load planning",
+      "measurements": {
+        "high_draw_tools_on_own_circuit": true,
+        "motor_circuit_sizing_rule": "≥125% of motor full-load amperes (FLA)",
+        "supply_voltages": ["120 V", "240 V"]
+      },
+      "source_title": "CEC motor/branch-circuit sizing principles",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/2-9-9.pdf"
+      ],
+      "reasoning": "Prevents overloads and mid-operation trips; protects wiring.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "GFCI protection",
+      "measurements": {
+        "locations": ["garages", "unfinished basements", "outdoors"],
+        "voltages": ["120 V", "240 V (per provincial adoption)"],
+        "trip_level": { "value": 5, "unit": "mA (typical)" }
+      },
+      "source_title": "CEC/OESC guidance for GFCI in garages and unfinished spaces",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf"
+      ],
+      "reasoning": "Prevents lethal shocks on conductive floors/equipment.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Grounding & bonding",
+      "measurements": {
+        "all_tools_grounded": true,
+        "no_ground_pin_removal": true,
+        "bond_metal_boxes_and_conduit": true
+      },
+      "source_title": "CEC; CCOHS: ensure equipment is properly grounded",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Faults trip breakers instead of energizing tool chassis.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Emergency disconnects & lockout",
+      "measurements": {
+        "local_lockable_disconnect_within_sight": true,
+        "lockout_for_maintenance": true,
+        "optional_shop_e_stop_circuit": true
+      },
+      "source_title": "CCOHS lockout principles; start/stop within easy reach",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Allows immediate power cut and safe servicing.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Outlet placement & distribution",
+      "measurements": {
+        "bench_height_receptacles": { "value": 42, "unit": "in (typical centerline)" },
+        "wall_spacing_guideline": { "value": 12, "unit": "ft between receptacles" },
+        "ceiling_drops_or_reels": true
+      },
+      "source_title": "Best practice; cords overhead or in-floor to avoid trips",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Minimizes trip hazards and extension cord misuse.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Cord management & extension cords",
+      "measurements": {
+        "heavy_gauge_only": true,
+        "length_minimized": true,
+        "no_daisy_chain": true,
+        "protect_floor_crossings": "covers/tape"
+      },
+      "source_title": "CCOHS electrical safe-use guidance for shops",
+      "source_url": [
+        "https://www.ccohs.ca/oshanswers/safety_haz/woodwork/gen_safe.html"
+      ],
+      "reasoning": "Prevents overheating, shorts, and trips.",
+      "priority": "REQUIRED"
+    },
+    {
+      "requirement": "Code compliance & protection",
+      "measurements": {
+        "AFCI_where_required": true,
+        "correct_wire_gauge": { "15A": "14 AWG", "20A": "12 AWG" },
+        "all_junctions_in_boxes": true
+      },
+      "source_title": "CEC & provincial Electrical Safety Authority guidance",
+      "source_url": [
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/26-18-14.pdf",
+        "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/2-9-9.pdf"
+      ],
+      "reasoning": "Ensures protective devices/wiring function as designed; preserves insurance coverage.",
+      "priority": "REQUIRED"
+    }
+  ]
+}

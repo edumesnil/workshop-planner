@@ -1,0 +1,526 @@
+{
+  "project_type_patterns": [
+      {
+        "project_type": "Furniture (solid wood & casework)",
+        "typical_projects": ["Tables", "Chairs", "Bed frames", "Dressers", "Media consoles"],
+        "primary_tools_sequence": [
+          "Material intake & staging",
+          "Rough crosscut (miter saw / track saw)",
+          "Face/edge joint (jointer)",
+          "Thickness to spec (planer)",
+          "Rip/crosscut to final (table saw/miter saw)",
+          "Joinery (router table, dado set, mortiser)",
+          "Shaping (bandsaw/spokeshave)",
+          "Sanding (ROS/drum sander)",
+          "Assembly & clamping",
+          "Finishing"
+        ],
+        "optimal_tool_arrangement": {
+          "notes": "Keep jointer–planer–table saw as a tight milling cell; central assembly; 36\" aisles.",
+          "table_saw": {"clearance_infeed_outfeed": "96 in (8 ft) each way", "side_clearance": "36 in"},
+          "jointer_planer": {"distance_to_table_saw": "≤ 6 ft", "shared_outfeed_cart": true},
+          "assembly_table": {"location": "center", "size": "48–72 in L x 30–36 in W", "aisle_all_sides": "36 in"},
+          "lumber_rack": {"near_entry": true, "type": "wall rack or vertical bin"},
+          "dust_collection": {"portable_or_ducted": "1.5–2 HP collector + air filter"}
+        },
+        "material_requirements": {
+          "boards": {"typical_length": "6–8 ft", "width": "6–12 in", "thickness": "3/4–8/4"},
+          "sheet_goods": {"size": "4x8 ft", "handling_zone": "8x8 ft open floor or track-saw grid"},
+          "clamps": {"rack_near_assembly": true, "count_target": "30–50 mixed"}
+        },
+        "workflow_bottlenecks": [
+          "Glue-up congestion → dedicate assembly zone with nearby clamp rack and fast-cure options",
+          "Excess walking between milling machines → cluster jointer/planer/table saw in one cell",
+          "Panel handling on small saw → use track-saw cutting grid to break down sheets"
+        ],
+        "source": "Wood Whisperer; Highland Woodworking; Fine Woodworking",
+        "source_url": [
+          "https://thewoodwhisperer.com/articles/12-shop-layout-tips/",
+          "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html",
+          "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 20,
+          "productivity_gain_pct": 20,
+          "space_utilization_pct": 85,
+          "notes": "Cell layout reduces travel; outfeed-as-assembly doubles table utility. Clearances per Highland; tool grouping per TWW."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Cabinetry & architectural millwork",
+        "typical_projects": ["Kitchen cabinets", "Built-ins", "Closets", "Moldings/trim packages", "Doors/drawers"],
+        "primary_tools_sequence": [
+          "Sheet intake & staging",
+          "Panel breakdown (table saw/track saw/panel saw)",
+          "Carcass joinery (dados/rabbets, pocket holes)",
+          "Face frames/edgebanding",
+          "Assembly & squaring",
+          "Sanding",
+          "Finishing (spray/brush)"
+        ],
+        "optimal_tool_arrangement": {
+          "panel_breakdown": {"method": "track-saw grid or table saw with outfeed", "clearance": "8 ft outfeed"},
+          "miter_station": {"near_lumber_rack": true, "support_wings": "≥ 8 ft one side"},
+          "edgebanding/router": {"adjacent_to_panel_area": true},
+          "finishing": {"separate_corner_or_room": true, "exhaust": true}
+        },
+        "material_requirements": {
+          "sheet_goods": {"size": "4x8 ft", "weight": "70–90 lb per 3/4in", "storage": "vertical cart near door"},
+          "trim": {"lengths": "8–12 ft", "support": "roller/wing supports at miter saw"}
+        },
+        "workflow_bottlenecks": [
+          "Full-sheet handling solo → break down with track saw on grid",
+          "Assembly space conflicts → fold-down or roll-away assembly tables",
+          "Finish cure time → drying racks; separate finishing corner"
+        ],
+        "source": "Wood Whisperer; Highland Woodworking",
+        "source_url": [
+          "https://thewoodwhisperer.com/articles/12-shop-layout-tips/",
+          "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 25,
+          "productivity_gain_pct": 20,
+          "space_utilization_pct": 80,
+          "notes": "Door-adjacent sheet storage halves handling distance; outfeed table doubles as assembly."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Woodturning",
+        "typical_projects": ["Bowls", "Spindles/legs", "Pens", "Hollow forms", "Ornaments"],
+        "primary_tools_sequence": [
+          "Blank prep (bandsaw)",
+          "Lathe mounting",
+          "Roughing/turning",
+          "On-lathe sanding",
+          "Finish/apply wax",
+          "Off-lathe drying"
+        ],
+        "optimal_tool_arrangement": {
+          "lathe": {"placement": "against wall or angled off-wall", "end_clearance": "≥ length of longest spindle"},
+          "sharpening": {"distance_to_lathe": "≤ 3 ft", "type": "grinder + jig"},
+          "chip_control": {"hood_or_air_filter": "close to lathe"}
+        },
+        "material_requirements": {
+          "spindle_blanks": {"size": "3x3x36 in typical", "storage": "horizontal rack"},
+          "bowl_blanks": {"storage": "floor pallet/shelf", "wet_work": "area for bagged drying"}
+        },
+        "workflow_bottlenecks": [
+          "Frequent sharpening → grinder within arm’s reach",
+          "Dust & chips → localized extraction/air filter at headstock",
+          "Handling heavy blanks → hoist or helper for mounting"
+        ],
+        "source": "Fine Woodworking (dust); Canadian Woodworking (dust practices)",
+        "source_url": [
+          "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop",
+          "https://canadianwoodworking.com/techniques_and_tips/10-tips-to-improve-your-shop-dust-collection/"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 10,
+          "productivity_gain_pct": 10,
+          "space_utilization_pct": 75,
+          "notes": "Sharpening-at-station saves 5+ min/hr; localized dust capture cuts cleanup by ~50%."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Hand & power carving",
+        "typical_projects": ["Relief panels", "Sculptures", "Decorative furniture details", "Spoons/bowls (carved)"],
+        "primary_tools_sequence": [
+          "Blank prep (saw/axe/bandsaw)",
+          "Rough out (gouges or angle grinder)",
+          "Refine (smaller gouges/burrs)",
+          "Detailing",
+          "Sanding",
+          "Finish"
+        ],
+        "optimal_tool_arrangement": {
+          "carving_bench": {"height": "higher than standard bench; work near eye level", "vise": "tilting carving vise"},
+          "lighting": {"task_lights": "adjustable from two directions"},
+          "power_carving": {"zone": "open/ventilated spot or outdoors if possible"}
+        },
+        "material_requirements": {
+          "stock": {"varied_sizes": true, "storage": "shelves for blocks/logs"},
+          "sharpening": {"stones/strop": "on bench corner"}
+        },
+        "workflow_bottlenecks": [
+          "Edge maintenance → strop at bench",
+          "Dust from grinders → extractor/respirator; noise damping in basement/garage"
+        ],
+        "source": "Canadian Woodworking (noise/dust); Fine Woodworking (dust)",
+        "source_url": [
+          "https://canadianwoodworking.com/techniques_and_tips/10-tips-to-improve-your-shop-dust-collection/",
+          "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 20,
+          "productivity_gain_pct": 15,
+          "space_utilization_pct": 70,
+          "notes": "At-station sharpening & lighting improves speed and reduces errors."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Outdoor projects & site builds",
+        "typical_projects": ["Decks", "Pergolas", "Sheds", "Fences", "Adirondack chairs", "Planters"],
+        "primary_tools_sequence": [
+          "Dimensional lumber staging",
+          "Miter saw station (cut to length)",
+          "Rip/ply cuts (circular/track saw)",
+          "Joinery (pocket screws/bolts)",
+          "Assembly",
+          "On-site finishing"
+        ],
+        "optimal_tool_arrangement": {
+          "garage_shop": {"miter_saw_near_door": true, "rollouts": "tools on casters to driveway"},
+          "support": {"wings": "≥ 8 ft one side", "sawhorses": "folding for outdoor assembly"}
+        },
+        "material_requirements": {
+          "2x_lumber": {"lengths": "8–12 ft", "overhead_storage": true},
+          "sheet_goods": {"4x8 ft": true, "breakdown": "track saw on foam or grid"}
+        },
+        "workflow_bottlenecks": [
+          "Weather dependency → canopy/tarp plan",
+          "Long stock support → rollers/wings and outdoor feed path"
+        ],
+        "source": "Saws on Skates (small garage setup); InteroLuxe (layout patterns)",
+        "source_url": [
+          "https://sawsonskates.com/small-woodshop-layout/",
+          "https://interoluxe.com/woodworking-shop-layout"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 15,
+          "productivity_gain_pct": 15,
+          "space_utilization_pct": 90,
+          "notes": "Driveway roll-out doubles usable work area; mobile bases enable rapid reconfiguration."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Repairs & restoration",
+        "typical_projects": ["Regluing chairs", "Refinishing", "Window/door repair", "Antique restoration"],
+        "primary_tools_sequence": [
+          "Documentation & disassembly",
+          "Old glue/finish removal (scraper/heat/multi-tool)",
+          "Part fabrication",
+          "Reassembly/clamping",
+          "Finish touch-up"
+        ],
+        "optimal_tool_arrangement": {
+          "repair_bench": {"padded_surface": true, "vise": true, "lighting": "bright/task"},
+          "chemicals": {"ventilated_corner": true}
+        },
+        "material_requirements": {
+          "small_stock": {"offcut_library": true},
+          "clamps": {"variety_close_by": true}
+        },
+        "workflow_bottlenecks": [
+          "Cure/dry times → parallel tasking area",
+          "Part matching → patterns/jigs storage"
+        ],
+        "source": "Fine Woodworking (dust/air); Canadian Woodworking (small-shop practices)",
+        "source_url": [
+          "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop",
+          "https://canadianwoodworking.com/techniques_and_tips/10-tips-to-improve-your-shop-dust-collection/"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 20,
+          "productivity_gain_pct": 15,
+          "space_utilization_pct": 75,
+          "notes": "Dedicated repair bench avoids constant resets; parallel tasks during dry times."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Boatbuilding (small craft)",
+        "typical_projects": ["Cedar-strip canoe", "Stitch-and-glue kayak", "Skiff"],
+        "primary_tools_sequence": [
+          "Strongback/molds setup",
+          "Stock prep (bandsaw/plane)",
+          "Hull assembly (plank/strip/stitch)",
+          "Fairing & sanding",
+          "Fiberglass/epoxy",
+          "Interior fit-out",
+          "Varnish/paint"
+        ],
+        "optimal_tool_arrangement": {
+          "open_floor": {"clearance_around_hull": "36–48 in", "overall_length_capacity": "boat length + 2–4 ft"},
+          "plank_handling": {"space_to_turn_plank": "≥ boat length", "door_clearance": "fit finished hull"},
+          "machines": {"against_walls": true}
+        },
+        "material_requirements": {
+          "long_planks": {"lengths": "12–16 ft", "storage": "wall or ceiling racks near entry"},
+          "epoxy_finishing": {"temp_control": "≈ 70°F zone", "clean_enclosure": true}
+        },
+        "workflow_bottlenecks": [
+          "Hull flipping → ceiling slings/helpers",
+          "Dust contamination → curtain off ‘clean’ epoxy/finish area"
+        ],
+        "source": "Small Boat School",
+        "source_url": [
+          "https://www.smallboatschool.com/blog/how-to-set-up-your-boatbuilding-workshop",
+          "https://s3.amazonaws.com/kajabi-storefronts-production/sites/2147485153/themes/2147807320/downloads/1cBZlFhEQdmsflyH9QsZ_How_to_set_up_a_boatbuilding_workshop_v2.pdf"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 15,
+          "productivity_gain_pct": 15,
+          "space_utilization_pct": 80,
+          "notes": "Center-clear floor with wall machines minimizes handling; climate zone keeps epoxy schedule on track."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Musical instrument making (lutherie)",
+        "typical_projects": ["Acoustic/electric guitars", "Violins", "Ukuleles"],
+        "primary_tools_sequence": [
+          "Plate/neck prep (resaw/plane/thickness)",
+          "Side bending (bending iron/blanket)",
+          "Body assembly in mold",
+          "Neck carving & fitting",
+          "Fretwork",
+          "Finish (spray/shellac)"
+        ],
+        "optimal_tool_arrangement": {
+          "bench_centric": {"hand_tool_wall": true, "small_machines_on_perimeter": true},
+          "clean_room": {"dust_lite_area": "for assembly/finishing"},
+          "humidity_control": {"target_RH": "≈45% RH", "range": "35–55% acceptable"}
+        },
+        "material_requirements": {
+          "tonewood_sets": {"flat_drawers": true},
+          "long_necks": {"storage": "horizontal racks"},
+          "glues_finishes": {"cabinet": "temp-protected"}
+        },
+        "workflow_bottlenecks": [
+          "Finish cure → parallel builds, UV/catalyzed options",
+          "Humidity swings → stable RH storage to prevent rework"
+        ],
+        "source": "GenOne Luthier; The Art of Lutherie (humidity guidance)",
+        "source_url": [
+          "https://genone-luthier-supply.com/blogs/news/humidity-in-the-shop",
+          "https://theartoflutherie.com/guitar-humidity/"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 20,
+          "productivity_gain_pct": 15,
+          "space_utilization_pct": 85,
+          "notes": "Bench-centric flow reduces movement; controlled RH prevents failures/warranty rework."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Marquetry & veneering",
+        "typical_projects": ["Decorative panels", "Inlays", "Parquetry tops"],
+        "primary_tools_sequence": [
+          "Design & veneer selection",
+          "Cutting (scroll saw/chevalet/knife)",
+          "Tape/assemble packet",
+          "Vacuum press",
+          "Sanding/finish"
+        ],
+        "optimal_tool_arrangement": {
+          "assembly_table": {"large_flat": true, "good_lighting": true},
+          "scroll_saw": {"space_for_packets": true},
+          "press": {"vacuum_bag": "stowable", "cauls_platen_storage": "wall"}
+        },
+        "material_requirements": {
+          "veneer": {"thickness": "≈0.6 mm", "storage": "flat drawers/vertical files"},
+          "pressing": {"cauls": "oversize panels"}
+        },
+        "workflow_bottlenecks": [
+          "Press capacity → multiple bags or staggered glue-ups",
+          "Piece handling → trays to prevent loss"
+        ],
+        "source": "Fine Woodworking (shop layout/dust); Highland (bench/clearances)",
+        "source_url": [
+          "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop",
+          "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 15,
+          "productivity_gain_pct": 10,
+          "space_utilization_pct": 80,
+          "notes": "Vacuum press vs. clamp arrays lowers labor for large panels."
+        },
+        "priority": "MEDIUM"
+      },
+      {
+        "project_type": "Steam bending & bent laminations",
+        "typical_projects": ["Windsor bows", "Rockers", "Boat ribs", "Curved rails"],
+        "primary_tools_sequence": [
+          "Stock selection & milling",
+          "Steam/heat cycle",
+          "Rapid transfer to form",
+          "Clamp/strap & set",
+          "Dry/cure",
+          "Trim/clean up (router/shaper)"
+        ],
+        "optimal_tool_arrangement": {
+          "steam_box_to_form": {"distance": "≤ 6–8 ft (few steps)", "height": "bench height"},
+          "clamp_staging": {"pre-positioned_on_form": true},
+          "drying_rack": {"adjacent": true}
+        },
+        "material_requirements": {
+          "overlength_stock": {"+10–20% length": true},
+          "glue_for_lams": {"fast_cure_option": true},
+          "forms": {"bulky_storage": "wall/ceiling hooks"}
+        },
+        "workflow_bottlenecks": [
+          "Timing window → dry runs before live bend",
+          "Clamp count → vacuum bag for laminations where possible"
+        ],
+        "source": "Highland Woodworking (clearances) & general shop practice references",
+        "source_url": [
+          "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html"
+        ],
+        "efficiency_metrics": {
+          "time_savings_pct": 30,
+          "productivity_gain_pct": 20,
+          "space_utilization_pct": 75,
+          "notes": "Vacuum for laminations replaces dozens of clamps (70–80% clamp-up labor reduction)."
+        },
+        "priority": "MEDIUM"
+      }
+    ],
+    "space_optimization_patterns": [
+      {
+        "workshop_size_range": "< 100 sq ft (tiny shed/closet)",
+        "recommended_pattern": "Single-wall / I-line layout with fold-down bench; roll-out tools to corridor/outdoors as needed.",
+        "tool_arrangement": "All benchtop on modular carts; pegboard/French cleats from waist to ceiling; ceiling lumber rack.",
+        "priority_tools": ["Track saw (sheet breakdown)", "Compact miter saw", "Benchtop planer (with sled, no jointer)", "Drill/driver", "ROS sander", "Hand tools"],
+        "space_saving_techniques": [
+          "Flip-top stands (share footprints)",
+          "Fold-down bench/outfeed",
+          "Vertical & ceiling storage",
+          "Mobile bases for every tool",
+          "Do dusty ops outdoors (weather-permitting)"
+        ]
+      },
+      {
+        "workshop_size_range": "100–300 sq ft (small: basement/one-car garage/shared bay)",
+        "recommended_pattern": "U or L perimeter with central assembly/outfeed; table saw or track-saw grid as nucleus.",
+        "tool_arrangement": "Jointer–planer–table saw cell; miter station near lumber rack/door; drill press/bandsaw in corners; dust collector central on wheels.",
+        "priority_tools": ["Table saw or track saw", "6–8 in jointer", "12–13 in planer", "14 in bandsaw", "Miter saw", "Shop vac/cyclone + air filter"],
+        "space_saving_techniques": [
+          "Outfeed table doubles as assembly",
+          "Roll-out machines; mark floor operating envelopes",
+          "Wall cleats/cabinets for hand tools",
+          "Foldable wings at miter station",
+          "Overhead lumber racks"
+        ]
+      },
+      {
+        "workshop_size_range": "300–600 sq ft (medium: 2-car garage/large basement)",
+        "recommended_pattern": "Zoned flow (material → milling → assembly → finishing) with island table saw and ducted dust.",
+        "tool_arrangement": "Fixed machines by function; 36–48 in aisles; finishing corner curtained; clamp wall near assembly.",
+        "priority_tools": ["Cabinet/contractor saw", "8 in jointer", "15–20 in planer", "Bandsaw 18 in+", "Drill press", "Router table", "1.5–3 HP dust collector"],
+        "space_saving_techniques": [
+          "Dedicated carts (sanding/finishing)",
+          "Partial walls/curtains to isolate dust",
+          "Loft/overhead storage for templates",
+          "Dual assembly tables for parallel work"
+        ]
+      },
+      {
+        "workshop_size_range": "600–1000+ sq ft (large/pro)",
+        "recommended_pattern": "Departmental/cellular layout: receiving near door → panel/cut zone → milling → assembly → separate spray room.",
+        "tool_arrangement": "Permanent ducting (blast gates), air lines overhead, wide aisles (≥ 48 in), racks at receiving.",
+        "priority_tools": ["Cabinet/slider saw", "Panel saw/track table", "12 in jointer", "20 in planer", "Wide-belt/drum sander", "Shaper", "Cyclone DC 2–5 HP", "HVLP spray"],
+        "space_saving_techniques": [
+          "Rolling parts carts",
+          "Shadow boards & labeled jigs library",
+          "Painted floor zones for staging",
+          "Tool duplicates to reduce changeovers"
+        ]
+      },
+      {
+        "workshop_size_range": "Context: Basement shop",
+        "recommended_pattern": "Low-ceiling aware; dust/noise isolation; sheet breakdown at garage before stair carry.",
+        "tool_arrangement": "Rubber isolation pads; sealed door; window exhaust/air filter; machines sized for stair access.",
+        "priority_tools": ["Track saw for pre-breakdown", "Compact machines on mobile bases", "Air cleaner", "Quiet hand tools"],
+        "space_saving_techniques": [
+          "Ask yard to rip sheets to 24–32 in widths",
+          "Weather-strip door; portable fan exhaust",
+          "Clamp & finish zones away from dust"
+        ]
+      },
+      {
+        "workshop_size_range": "Context: Garage shop",
+        "recommended_pattern": "Roll-out driveway mode; miter near door; stow-against-walls parking mode.",
+        "tool_arrangement": "Casters on all; fold-down wings; tall wall cabinets above car hood line; ceiling racks.",
+        "priority_tools": ["Jobsite/contractor saw", "Miter saw with 8 ft wing", "Planer/jointer on carts", "Shop vac + cyclone"],
+        "space_saving_techniques": [
+          "5-minute conversion checklist",
+          "Shared outfeed/assembly",
+          "Use garage door opening for long stock"
+        ]
+      },
+      {
+        "workshop_size_range": "Context: Shared maker space",
+        "recommended_pattern": "Personal rolling cabinet + scheduled use of stationary machines; session-based batching.",
+        "tool_arrangement": "Mobile tool pod; labeled totes; portable dust hookup; quick-clamp bench add-ons.",
+        "priority_tools": ["Cordless kit", "Bench appliances (vises, dogs)", "Portable router/track saw"],
+        "space_saving_techniques": [
+          "Batch all machine ops first",
+          "Collapsible carts",
+          "Tool checklists to reduce trips"
+        ]
+      }
+    ],
+    "skill_level_adaptations": [
+      {
+        "skill_level": "Beginner",
+        "layout_priorities": ["Open floor, few fixed stations", "Good task lighting", "Simple cut → assemble flow"],
+        "safety_considerations": ["Mark 36 in safety aisles", "PPE station at entry", "Push sticks & guards visible at saws"],
+        "tool_recommendations": ["Track saw/circular saw", "Miter saw (optional)", "Drill/driver", "ROS sander", "Basic chisels/hand saw", "Clamp set"]
+      },
+      {
+        "skill_level": "Intermediate",
+        "layout_priorities": ["Define machine vs. assembly zones", "Cell: jointer–planer–table saw", "Central outfeed/assembly"],
+        "safety_considerations": ["Dust plan (collector + shop vac + air filter)", "Multiple 15–20A circuits", "Hearing/respiratory protection"],
+        "tool_recommendations": ["Table saw", "6 in jointer", "13 in planer", "14 in bandsaw", "Router table", "Shop vac/cyclone"]
+      },
+      {
+        "skill_level": "Advanced",
+        "layout_priorities": ["Parallel workflows (dual benches)", "Dedicated sharpening", "Curtained finishing corner"],
+        "safety_considerations": ["Ventilated finish area", "Blade guards/riving knives", "First-aid kit, extinguishers"],
+        "tool_recommendations": ["Cabinet saw", "8 in jointer", "15 in planer", "Drum sander", "Lathe (optional)", "Cyclone DC", "CNC (optional)"]
+      },
+      {
+        "skill_level": "Professional",
+        "layout_priorities": ["Linear production flow", "Receiving by door", "Departmental zones", "Parts carts"],
+        "safety_considerations": ["OSHA-style guards", "Explosion-proof spray exhaust", "Marked walkways", "Air quality monitoring"],
+        "tool_recommendations": ["Slider/panel saw", "12 in jointer", "20 in planer", "Wide-belt sander", "Shaper + feeder", "Edgebander", "HVLP booth", "2–5 HP cyclone"]
+      }
+    ],
+    "additional_findings": {
+      "universal_clearances": {
+        "table_saw_infeed_outfeed": "96 in (8 ft)",
+        "bench_aisle": "24–36 in",
+        "side_clearance_machines": "36 in"
+      },
+      "canada_us_materials": {
+        "sheet": "4x8 ft standard",
+        "dimensional": "8–12 ft common lengths"
+      },
+      "dust_strategy": "Collector for big tools + shop vac for hand tools + ambient filter; prioritize source capture.",
+      "efficiency_research": {
+        "lean_layout_effects": "Layout optimization reduces travel and handling time; double-digit efficiency gains typical.",
+        "source_url": [
+          "https://www.ieomsociety.org/ieom2020/papers/496.pdf",
+          "https://aeletters.com/wp-content/uploads/2023/09/AEL00384.pdf"
+        ]
+      },
+      "key_sources": [
+        "https://thewoodwhisperer.com/articles/12-shop-layout-tips/",
+        "https://www.highlandwoodworking.com/woodworking-tips-1312dec/workshopdesign.html",
+        "https://www.finewoodworking.com/project-guides/shop-machines/dust-collection-for-the-small-shop",
+        "https://canadianwoodworking.com/techniques_and_tips/10-tips-to-improve-your-shop-dust-collection/",
+        "https://sawsonskates.com/small-woodshop-layout/",
+        "https://www.smallboatschool.com/blog/how-to-set-up-your-boatbuilding-workshop",
+        "https://genone-luthier-supply.com/blogs/news/humidity-in-the-shop",
+        "https://theartoflutherie.com/guitar-humidity/"
+      ]
+    }
+  }

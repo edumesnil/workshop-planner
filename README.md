@@ -73,7 +73,12 @@ src/
 ├── stores/             # Zustand state management stores
 ├── types/              # TypeScript type definitions
 ├── data/               # Research data and optimization constraints
+│   └── research/       # Academic findings and data for optimization
 └── utils/              # Helper functions and utilities
+
+research-prompts/        # Research prompt templates for data collection
+├── *-research-prompt.md # Individual research area prompts
+└── scoring-algorithm-data-prompt.md # Scoring system research
 ```
 
 ## Core Architecture
@@ -117,6 +122,18 @@ The application is built around three main pillars:
 **Core Value Phase**: Phase 5 - Automated Optimization Engine (Target: Week 5-7)
 
 See [phases/](./phases/) directory for detailed progress tracking and implementation guidance for each development phase.
+
+### Research-Driven Development
+
+The project uses structured research prompts in `research-prompts/` to collect academic findings and expert knowledge, which are then compiled into data files in `src/data/research/`. This approach ensures optimization algorithms are based on validated research rather than assumptions.
+
+**Research Areas:**
+- Safety constraints and clearance requirements
+- Workflow patterns for different woodworking projects  
+- Space optimization strategies by workshop size
+- Mobile tool considerations and placement flexibility
+- Professional layout design principles
+- Scoring algorithm weights and penalty systems
 
 ### Next Steps
 1. Complete research data compilation (`src/data/research/`)
