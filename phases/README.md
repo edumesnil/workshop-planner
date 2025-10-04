@@ -40,11 +40,13 @@ Phase 1 (Research) → Phase 2-4 (Data Layer) → Phase 5 (Optimization Engine)
 ## Key Features by Phase
 
 ### Research Foundation (Phase 1)
-- Academic findings converted to structured constraint data
-- Mobile tool optimization system
-- Multi-objective scoring framework
+- ✅ Academic findings collected in JSON format (8 research files)
+- 🔄 ConstraintFactory: JSON → TypeScript constraint transformation
+- Mobile tool integration with dual-position system (deployed/parked)
+- Multi-objective scoring: **40% safety, 25% workflow, 20% space, 15% accessibility**
+- MVP project workflows: cabinetry, furniture, kitchen goods
+- Tiered constraint priority: REQUIRED > HIGH > MEDIUM > LOW
 - Default workshop template (213" × 103" basement)
-- Research prompt templates for systematic data collection
 
 ### Foundation & Authentication (Phase 2)
 - Supabase integration and user authentication
@@ -100,16 +102,26 @@ Each phase file contains:
 
 ## Research-Driven Development
 
-Phase 1 uses structured research prompts in `../research-prompts/` to systematically collect academic findings and expert knowledge. These prompts ensure comprehensive coverage of:
+Phase 1 uses structured research prompts in `../research-prompts/` to systematically collect academic findings and expert knowledge. Research is stored as JSON in `../src/data/research/` and transformed to TypeScript constraints via ConstraintFactory.
 
-- Safety constraints and OSHA guidelines
-- Workflow patterns for different project types  
-- Space optimization strategies by workshop size
-- Mobile tool considerations and placement flexibility
-- Professional layout design principles
-- Multi-objective scoring algorithm weights
+**Research Coverage:**
+- ✅ Safety constraints (OSHA/Canadian clearances, accident reduction data)
+- ✅ Workflow patterns for 12 project types (MVP: 3 workflows)
+- ✅ Space optimization (30-50% mobile tool savings)
+- ✅ Mobile tool benefits and dual-position optimization
+- ✅ Multi-objective scoring weights: **40/25/20/15**
 
-The collected research is compiled into structured data files in `../src/data/research/` that drive the optimization algorithms.
+**MVP Constraint Scope:**
+- Safety clearances (REQUIRED priority)
+- Mobile tool boolean + constraints
+- Workflow adjacency for 3 project types
+
+**Deferred to Post-MVP:**
+- Ventilation/dust collection routing
+- Power circuit planning
+- Stability and vibration analysis
+
+See `PROJECT_SCOPE.md` for full workflow roadmap (12 project types).
 
 For high-level project information, see:
 - [README.md](../README.md) - Project overview and getting started

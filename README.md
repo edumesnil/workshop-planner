@@ -98,10 +98,10 @@ The application is built around three main pillars:
 4. **Performance Target**: <2 seconds optimization time
 
 **Multi-Objective Scoring:**
-- **Safety** (30%): OSHA guidelines and clearance requirements
-- **Workflow** (30%): Tool placement for common woodworking processes  
-- **Space Utilization** (20%): Maximize workshop space efficiency
-- **Accessibility** (20%): Ensure all tools are easily accessible
+- **Safety** (40%): OSHA/Canadian clearance requirements (research-backed)
+- **Workflow** (25%): Tool adjacency for project-specific workflows
+- **Space Utilization** (20%): Maximize workshop efficiency with mobile tools
+- **Accessibility** (15%): Ergonomic tool placement and reachability
 
 ## Key Features
 
@@ -136,10 +136,12 @@ The project uses structured research prompts in `research-prompts/` to collect a
 - Scoring algorithm weights and penalty systems
 
 ### Next Steps
-1. Complete research data compilation (`src/data/research/`)
-2. Implement constraint satisfaction system
-3. Build multi-objective scoring (30% safety, 30% workflow, 20% space, 20% accessibility)
-4. Design clean onboarding experience
+1. ✅ Research data compilation complete (8 JSON files in `src/data/research/`)
+2. Build ConstraintFactory (JSON → TypeScript transformation)
+3. Implement constraint satisfaction with tiered priorities (REQUIRED > HIGH > MEDIUM > LOW)
+4. Multi-objective scoring: 40% safety, 25% workflow, 20% space, 15% accessibility
+5. Mobile tool dual-position optimization (deployed vs parked)
+6. MVP workflows: cabinetry, furniture, kitchen goods
 
 ## Performance Requirements
 

@@ -32,15 +32,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Data Architecture
 ```
 src/data/
-├── research/        # Academic findings (OSHA, workflow studies)
-├── constraints/     # Safety, workflow, mobile tool rules
-└── scoring/         # Multi-objective: 30% safety, 30% workflow, 20% space, 20% accessibility
+├── research/        # JSON findings (OSHA, workflow studies) - ✅ COMPLETED
+├── constraints/     # ConstraintFactory transforms JSON → TypeScript
+├── workflows/       # MVP: cabinetry, furniture, kitchen goods
+└── scoring/         # Multi-objective: 40% safety, 25% workflow, 20% space, 15% accessibility
 ```
 
 ## Critical Implementation Patterns
 
 ### Mobile Tools Priority
 Tools with casters are **high priority** - affects placement flexibility and workflow optimization.
+
+**Implementation:**
+- `isMobile: boolean` on every tool
+- Dual-position system: `deployedPosition` (working) + `parkedPosition` (storage)
+- Mobile-specific constraints for stability and clearance
+- 30-50% space savings per research data
 
 ### Optimization Engine Pattern
 ```typescript

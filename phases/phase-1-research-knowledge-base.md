@@ -16,64 +16,92 @@ Build the foundational research-powered intelligence that drives the optimizatio
 - [x] Zustand state management foundation
 - [x] Documentation alignment (README, CLAUDE.md, specs)
 
-## Workshop Optimization Research 🔄 IN PROGRESS
+## Workshop Optimization Research ✅ COMPLETED
 
-### Safety Research
-- [ ] OSHA guidelines for woodworking tool clearances
-- [ ] Accident prevention studies and statistics
-- [ ] Fire safety requirements for workshops
-- [ ] Electrical safety standards for tool placement
-- [ ] Dust collection safety protocols
+### Safety Research ✅
+- [x] OSHA/Canadian guidelines for woodworking tool clearances
+- [x] Accident prevention studies with quantified reduction percentages
+- [x] Fire safety and combustible dust protocols (deferred: ventilation implementation)
+- [x] Electrical safety standards (deferred: power circuit planning)
+- [x] Stability requirements (deferred: post-MVP implementation)
 
-### Workflow Research
-- [ ] Time-motion studies for common woodworking tasks
-- [ ] Lumber → cut → assembly → finish workflow patterns
-- [ ] Small furniture and cabinetry project flows
-- [ ] Tool sequence optimization studies
-- [ ] **Mobile tools workflow advantages** (HIGH PRIORITY)
+### Workflow Research ✅
+- [x] Time-motion studies for 12 project types (cabinetry, furniture, millwork, etc.)
+- [x] Lean + SLP workflow optimization with quantified metrics (16.9% time reduction)
+- [x] Tool sequence patterns for MVP workflows (cabinetry, furniture, kitchen goods)
+- [x] Adjacency and distance optimization rules
+- [x] **Mobile tools workflow advantages** with 30-50% space savings data
 
-### Space Optimization Research
-- [ ] Small workshop space utilization studies
-- [ ] Tool placement efficiency research
-- [ ] Storage and workspace optimization
-- [ ] Basement workshop specific considerations
-- [ ] Mobile tool space savings analysis
+### Space Optimization Research ✅
+- [x] Small workshop space utilization (30-50% mobile tool savings)
+- [x] Tool placement efficiency with academic sources
+- [x] Storage density and workflow optimization
+- [x] Basement workshop considerations (213" × 103" template)
+- [x] Mobile tool space savings and flexibility analysis
 
 ## Knowledge Base Development 🔄 IN PROGRESS
 
-### File Structure to Create
+### Data Transformation Strategy
+**Approach**: Transform JSON research findings → TypeScript constraint functions
+
+**Current State:**
+- ✅ JSON research files completed (`src/data/research/*-findings.json`)
+- 🔄 ConstraintFactory to generate executable constraints from JSON
+- 🔄 TypeScript types for constraint system
+
+**How it works:**
+1. JSON stores raw research data (clearances, distances, priorities)
+2. ConstraintFactory reads JSON at build time
+3. Generates TypeScript constraint objects with `evaluate()` functions
+4. Engine executes constraints on tool positions, returns scores
+
+### File Structure (Updated)
 ```
 src/data/
-├── research/
-│   ├── safety-constraints.ts       # OSHA guidelines, clearance requirements
-│   ├── workflow-patterns.ts        # Tool placement for woodworking tasks
-│   ├── efficiency-studies.ts       # Academic space optimization findings
-│   └── mobile-tools-research.ts    # Mobile tool benefits and constraints
-├── constraints/
-│   ├── safety-rules.ts             # Required safety constraints (REQUIRED priority)
-│   ├── workflow-rules.ts           # Workflow efficiency constraints (HIGH priority)
-│   ├── mobile-tools.ts             # Mobile tool optimization rules (HIGH PRIORITY)
-│   └── space-rules.ts              # Space utilization constraints (MEDIUM priority)
-├── patterns/
-│   ├── small-furniture.ts          # Layout patterns for small furniture projects
-│   ├── cabinetry.ts               # Cabinet making specific workflows
-│   └── general-woodworking.ts      # Common woodworking project patterns
+├── research/                        # ✅ COMPLETED - JSON findings
+│   ├── safety-constraints-findings.json
+│   ├── workflow-patterns-findings.json
+│   ├── mobile-tools-findings.json
+│   └── scoring-algorithm-data-findings.json
+├── constraints/                     # 🔄 IN PROGRESS - Generated from JSON
+│   ├── ConstraintFactory.ts        # Transforms JSON → constraint functions
+│   ├── SafetyConstraints.ts        # Clearance rules (REQUIRED priority)
+│   ├── WorkflowConstraints.ts      # Adjacency/distance rules (HIGH priority)
+│   └── types.ts                    # Constraint system types
+├── workflows/                       # 🔄 IN PROGRESS - MVP project types
+│   ├── cabinetry.ts               # Cabinet workflow (MVP)
+│   ├── furniture.ts               # Furniture workflow (MVP)
+│   └── kitchen-goods.ts           # Kitchen goods workflow (MVP)
 └── scoring/
-    └── multi-objective.ts          # 30% safety, 30% workflow, 20% space, 20% accessibility
+    └── multi-objective.ts          # 40% safety, 25% workflow, 20% space, 15% accessibility
 ```
 
+### MVP Constraint Scope (Phase 2A)
+**Included:**
+- ✅ Safety clearances (all tools) - REQUIRED priority
+- ✅ Mobile tool boolean + mobile-specific constraints
+- ✅ Workflow adjacency rules for 3 project types
+- ✅ Tiered constraint priority (REQUIRED > HIGH > MEDIUM > LOW)
+
+**Deferred to Post-MVP:**
+- ⏳ Ventilation/dust collection routing
+- ⏳ Power circuit planning and load distribution
+- ⏳ Stability and vibration analysis
+
 ### Constraint System Implementation
-- [ ] Safety constraint generation with REQUIRED priority
-- [ ] Workflow constraint patterns with HIGH priority
-- [ ] Mobile tool constraint system (HIGH PRIORITY)
-- [ ] Space utilization constraints with MEDIUM priority
-- [ ] Constraint evaluation and scoring functions
+- [ ] Build ConstraintFactory to transform JSON → TypeScript
+- [ ] Generate SafetyConstraints from safety-constraints-findings.json
+- [ ] Generate WorkflowConstraints from workflow-patterns-findings.json
+- [ ] Integrate mobile tool boolean into constraint evaluation
+- [ ] Implement tiered constraint resolution (REQUIRED first, then optimize others)
+- [ ] Build multi-objective scoring with updated weights (40/25/20/15)
 
 ### Default Data Implementation
 - [ ] 213" × 103" basement workshop template with wall constraints
-- [ ] Expanded tool library with mobile/stationary distinction
-- [ ] Common woodworking tool clearance requirements
-- [ ] Mobile tool power access considerations
+- [ ] Tool library with `isMobile: boolean` distinction
+- [ ] Tool clearance requirements from research (JSON → constraints)
+- [ ] Mobile tool dual-position system (deployed vs parked)
+- [ ] Project type selector (cabinetry, furniture, kitchen goods)
 
 ## User Experience Design 🔄 IN PROGRESS
 
@@ -99,10 +127,12 @@ src/data/
 - [ ] Constraint priority system established
 
 ### Technical Implementation
-- [ ] Multi-objective scoring algorithm (30/30/20/20) implemented
-- [ ] Research-based constraint generation system
-- [ ] Default workshop template with realistic constraints
-- [ ] Mobile tool optimization system
+- [x] Research data collection complete (8 JSON files)
+- [ ] Multi-objective scoring algorithm (40/25/20/15) implemented
+- [ ] ConstraintFactory: JSON → TypeScript transformation pipeline
+- [ ] Tiered constraint priority system (REQUIRED > HIGH > MEDIUM > LOW)
+- [ ] Mobile tool integration with dual-position optimization
+- [ ] Project workflow selector (3 MVP types: cabinetry, furniture, kitchen goods)
 
 ### User Experience
 - [ ] Clean, intuitive onboarding flow designed
