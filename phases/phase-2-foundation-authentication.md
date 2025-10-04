@@ -1,7 +1,7 @@
 # Phase 2: Foundation & Authentication
 
-**Duration**: Week 2-3  
-**Status**: PENDING
+**Duration**: Week 2-3
+**Status**: IN PROGRESS
 
 ## Overview
 
@@ -9,88 +9,58 @@ Establish the technical foundation with Supabase integration, authentication sys
 
 ## Prerequisites from Phase 1
 - ✅ Project setup and dependencies installed
-- ⏳ Research data structure defined
+- ✅ Research data structure defined
+- ✅ Constraint system implemented with mobile tool support
 - ⏳ Default workshop template created
 
-## Supabase Configuration 📋 PENDING
+## Supabase Configuration ✅ COMPLETED
 
 ### Project Setup
-- [ ] Create Supabase project
-- [ ] Configure environment variables in `.env.local`
-- [ ] Set up database connection and test connectivity
-- [ ] Configure Row Level Security (RLS) policies
+- [x] Create Supabase project
+- [x] Configure environment variables in `.env.local`
+- [x] Set up database connection and test connectivity
+- [x] Configure Row Level Security (RLS) policies
 
-### Database Schema Creation
-```sql
--- Workshops table
-CREATE TABLE workshops (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
-  length INTEGER NOT NULL, -- in inches
-  width INTEGER NOT NULL,  -- in inches
-  constraints JSONB DEFAULT '{}', -- wall constraints, obstacles
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+### Database Schema Creation ✅ COMPLETED
 
--- Tools table
-CREATE TABLE tools (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
-  length INTEGER NOT NULL,
-  width INTEGER NOT NULL,
-  height INTEGER NOT NULL,
-  tool_type VARCHAR(100),
-  is_mobile BOOLEAN DEFAULT true, -- HIGH PRIORITY: mobile tool support
-  clearance_front INTEGER DEFAULT 0,
-  clearance_back INTEGER DEFAULT 0,
-  clearance_left INTEGER DEFAULT 0,
-  clearance_right INTEGER DEFAULT 0,
-  material_feed_length INTEGER DEFAULT 0,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+**Full schema:** `database-schema.sql` (423 lines)
 
--- Tool Templates table
-CREATE TABLE tool_templates (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(255) NOT NULL,
-  category VARCHAR(100) NOT NULL,
-  length INTEGER NOT NULL,
-  width INTEGER NOT NULL,
-  height INTEGER NOT NULL,
-  is_mobile BOOLEAN DEFAULT true,
-  clearance_front INTEGER DEFAULT 0,
-  clearance_back INTEGER DEFAULT 0,
-  clearance_left INTEGER DEFAULT 0,
-  clearance_right INTEGER DEFAULT 0,
-  material_feed_length INTEGER DEFAULT 0,
-  description TEXT,
-  is_public BOOLEAN DEFAULT true
-);
+**Tables created:**
+- `user_profiles` - User preferences with constraint weights (40/25/20/15)
+- `workshops` - Workshop dimensions and constraints (JSONB)
+- `tools` - User tools with mobile support (`is_mobile`, `deployed_position`, `parked_position`)
+- `tool_templates` - Public tool library (8 default tools seeded)
+- `layouts` - Optimization results with multi-objective scoring
 
--- Layouts table
-CREATE TABLE layouts (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  workshop_id UUID REFERENCES workshops(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
-  tool_positions JSONB NOT NULL,
-  optimization_type VARCHAR(50) DEFAULT 'multi_objective',
-  efficiency_score DECIMAL(5,2),
-  safety_score DECIMAL(5,2),
-  workflow_score DECIMAL(5,2),
-  space_score DECIMAL(5,2),
-  accessibility_score DECIMAL(5,2),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
+**Key features:**
+- ✅ JSONB structure matches TypeScript interfaces exactly
+- ✅ Mobile tool dual-position system (deployed vs parked)
+- ✅ RLS policies for complete data isolation
+- ✅ Validation constraints on dimensions, clearances, power
+- ✅ Indexes for performance (<500ms query target)
+- ✅ Auto-updating timestamps with triggers
 
-### Database Migrations
-- [ ] Create initial migration files
-- [ ] Run migrations on Supabase project
-- [ ] Verify table creation and constraints
-- [ ] Set up RLS policies for user data isolation
+### Database Migrations ✅ COMPLETED
+- [x] Create initial schema file (`database-schema.sql`)
+- [x] Run schema on Supabase project via SQL Editor
+- [x] Verify table creation and constraints
+- [x] Set up RLS policies for user data isolation
+- [x] Seed 8 default tool templates
+
+## TypeScript Integration ✅ COMPLETED
+
+### Database Types
+- [x] Update `src/types/database.ts` with mobile tool fields
+- [x] Add `is_mobile`, `deployed_position`, `parked_position` to ToolRow/Insert/Update
+- [x] Add `ToolTemplateRow`/Insert/Update interfaces
+- [x] Complete type safety for all 5 tables
+
+### Supabase Service Layer
+- [x] Update `src/services/supabase.ts` with typed client
+- [x] Add `db.toolTemplates` helpers (getAll, getByCategory)
+- [x] Add `db.userProfiles` helpers (get, create, update)
+- [x] Type-safe CRUD operations for all tables
+- [x] Auth helpers (signUp, signIn, signOut, onAuthStateChange)
 
 ## Authentication System 📋 PENDING
 

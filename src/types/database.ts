@@ -13,6 +13,11 @@ export interface Database {
         Insert: ToolInsert
         Update: ToolUpdate
       }
+      tool_templates: {
+        Row: ToolTemplateRow
+        Insert: ToolTemplateInsert
+        Update: ToolTemplateUpdate
+      }
       layouts: {
         Row: LayoutRow
         Insert: LayoutInsert
@@ -89,6 +94,19 @@ export interface ToolRow {
     right: number
     top: number
   }
+  is_mobile: boolean
+  deployed_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
+  }
+  parked_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
+  }
   created_at: string
   updated_at: string
 }
@@ -116,6 +134,19 @@ export interface ToolInsert {
     right: number
     top: number
   }
+  is_mobile?: boolean
+  deployed_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
+  }
+  parked_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
+  }
   created_at?: string
   updated_at?: string
 }
@@ -140,6 +171,19 @@ export interface ToolUpdate {
     left: number
     right: number
     top: number
+  }
+  is_mobile?: boolean
+  deployed_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
+  }
+  parked_position?: {
+    x: number
+    y: number
+    z: number
+    rotation: number
   }
   updated_at?: string
 }
@@ -259,4 +303,86 @@ export interface UserProfileUpdate {
     }
   }
   updated_at?: string
+}
+
+export interface ToolTemplateRow {
+  id: string
+  name: string
+  category: string
+  dimensions: {
+    length: number
+    width: number
+    height: number
+  }
+  power_requirement?: {
+    voltage: number
+    amperage: number
+    phase: number
+  }
+  dust_collection: boolean
+  min_clearance: {
+    front: number
+    back: number
+    left: number
+    right: number
+    top: number
+  }
+  is_mobile: boolean
+  description?: string
+  is_public: boolean
+  created_at: string
+}
+
+export interface ToolTemplateInsert {
+  id?: string
+  name: string
+  category: string
+  dimensions: {
+    length: number
+    width: number
+    height: number
+  }
+  power_requirement?: {
+    voltage: number
+    amperage: number
+    phase: number
+  }
+  dust_collection?: boolean
+  min_clearance: {
+    front: number
+    back: number
+    left: number
+    right: number
+    top: number
+  }
+  is_mobile?: boolean
+  description?: string
+  is_public?: boolean
+  created_at?: string
+}
+
+export interface ToolTemplateUpdate {
+  name?: string
+  category?: string
+  dimensions?: {
+    length: number
+    width: number
+    height: number
+  }
+  power_requirement?: {
+    voltage: number
+    amperage: number
+    phase: number
+  }
+  dust_collection?: boolean
+  min_clearance?: {
+    front: number
+    back: number
+    left: number
+    right: number
+    top: number
+  }
+  is_mobile?: boolean
+  description?: string
+  is_public?: boolean
 }

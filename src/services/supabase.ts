@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import type { WorkshopInsert, WorkshopUpdate, ToolInsert, ToolUpdate, LayoutInsert, UserProfileInsert, UserProfileUpdate } from '@/types/database'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -64,7 +65,7 @@ export const db = {
         .single()
     },
 
-    create: async (workshop: any) => {
+    create: async (workshop: WorkshopInsert) => {
       return await supabase
         .from('workshops')
         .insert(workshop)
@@ -72,7 +73,7 @@ export const db = {
         .single()
     },
 
-    update: async (id: string, updates: any) => {
+    update: async (id: string, updates: WorkshopUpdate) => {
       return await supabase
         .from('workshops')
         .update(updates)
@@ -98,7 +99,7 @@ export const db = {
         .order('name')
     },
 
-    create: async (tool: any) => {
+    create: async (tool: ToolInsert) => {
       return await supabase
         .from('tools')
         .insert(tool)
@@ -106,7 +107,7 @@ export const db = {
         .single()
     },
 
-    update: async (id: string, updates: any) => {
+    update: async (id: string, updates: ToolUpdate) => {
       return await supabase
         .from('tools')
         .update(updates)
@@ -123,6 +124,51 @@ export const db = {
     }
   },
 
+  toolTemplates: {
+    getAll: async () => {
+      return await supabase
+        .from('tool_templates')
+        .select('*')
+        .eq('is_public', true)
+        .order('category', { ascending: true })
+    },
+
+    getByCategory: async (category: string) => {
+      return await supabase
+        .from('tool_templates')
+        .select('*')
+        .eq('is_public', true)
+        .eq('category', category)
+    }
+  },
+
+  userProfiles: {
+    get: async (userId: string) => {
+      return await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', userId)
+        .single()
+    },
+
+    create: async (profile: UserProfileInsert) => {
+      return await supabase
+        .from('user_profiles')
+        .insert(profile)
+        .select()
+        .single()
+    },
+
+    update: async (userId: string, updates: UserProfileUpdate) => {
+      return await supabase
+        .from('user_profiles')
+        .update(updates)
+        .eq('id', userId)
+        .select()
+        .single()
+    }
+  },
+
   layouts: {
     getByWorkshop: async (workshopId: string) => {
       return await supabase
@@ -132,7 +178,7 @@ export const db = {
         .order('created_at', { ascending: false })
     },
 
-    create: async (layout: any) => {
+    create: async (layout: LayoutInsert) => {
       return await supabase
         .from('layouts')
         .insert(layout)
