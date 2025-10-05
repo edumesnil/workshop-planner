@@ -72,7 +72,6 @@ export function OnboardingFlow() {
         // Create user tools from templates
         const toolsToInsert = templates.map((template) => ({
           user_id: user.id,
-          workshop_id: workshopId,
           name: template.name,
           type: template.category,
           dimensions: template.dimensions,
