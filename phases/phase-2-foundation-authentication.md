@@ -11,7 +11,7 @@ Establish the technical foundation with Supabase integration, authentication sys
 - ✅ Project setup and dependencies installed
 - ✅ Research data structure defined
 - ✅ Constraint system implemented with mobile tool support
-- ⏳ Default workshop template created
+- ⏳ Workshop dimension presets (including custom 213" × 103")
 
 ## Supabase Configuration ✅ COMPLETED
 
@@ -65,8 +65,7 @@ Establish the technical foundation with Supabase integration, authentication sys
 ## Authentication System 📋 PENDING
 
 ### Authentication Flow
-- [ ] Email/password authentication setup
-- [ ] OAuth providers configuration (Google, GitHub)
+- [ ] Email/password authentication setup (email/password only, no OAuth)
 - [ ] User session management
 - [ ] Protected route implementation
 - [ ] Authentication state persistence
@@ -74,15 +73,23 @@ Establish the technical foundation with Supabase integration, authentication sys
 ### User Profile System
 - [ ] User profile creation on signup
 - [ ] Default preferences initialization
-- [ ] User onboarding state tracking
-- [ ] Profile management interface
+- [ ] User onboarding state tracking (3-step: workshop dimensions → add tools → optimization)
+- [ ] Workshop dimension presets (including custom 213" × 103" preset)
+- [ ] Unit conversion support (feet/meters in dimension inputs)
 
 ### Authentication Components
-- [ ] Login/signup forms with Radix UI
+- [ ] Login/signup forms with Radix UI (generic design, no custom branding)
 - [ ] Password reset functionality
 - [ ] Email verification handling
 - [ ] Authentication error handling
 - [ ] Loading states and user feedback
+
+### Onboarding Flow
+- [ ] Step 1: Workshop dimensions selector (presets + custom with feet/meters toggle)
+- [ ] Step 2: Tool selection from template library
+- [ ] Step 3: Initial optimization preview
+- [ ] Onboarding progress indicator
+- [ ] Skip/save for later functionality
 
 ## Enhanced Navigation 📋 PENDING
 
@@ -91,6 +98,7 @@ Establish the technical foundation with Supabase integration, authentication sys
 / - Homepage (public)
 /auth/login - Login page
 /auth/signup - Signup page
+/onboarding - Onboarding flow (protected, first-time users)
 /dashboard - User dashboard (protected)
 /workshops - Workshop management (protected)
 /workshops/:id - Individual workshop (protected)
@@ -112,7 +120,7 @@ Establish the technical foundation with Supabase integration, authentication sys
 - [ ] Tool management with mobile/stationary support
 - [ ] Layout persistence and retrieval
 - [ ] User preference management
-- [ ] Real-time subscriptions for collaborative features
+- [ ] Onboarding state tracking (completed steps, current workshop)
 
 ### Error Handling
 - [ ] Centralized error handling system
@@ -125,8 +133,9 @@ Establish the technical foundation with Supabase integration, authentication sys
 - [ ] Client-side validation with TypeScript
 - [ ] Server-side validation with Supabase
 - [ ] Data sanitization and security
-- [ ] Input constraints for workshop dimensions
+- [ ] Input constraints for workshop dimensions (feet/meters conversion)
 - [ ] Tool specification validation
+- [ ] Unit conversion utilities (feet ↔ meters → inches for storage)
 
 ## Testing & Validation 📋 PENDING
 
@@ -135,7 +144,7 @@ Establish the technical foundation with Supabase integration, authentication sys
 - [ ] Login/logout functionality testing
 - [ ] Protected route access testing
 - [ ] Session persistence testing
-- [ ] OAuth provider testing
+- [ ] Onboarding flow completion testing
 
 ### Database Testing
 - [ ] CRUD operations testing
@@ -188,3 +197,11 @@ Establish the technical foundation with Supabase integration, authentication sys
 - Page navigation: <1 second transitions
 - Data sync: Real-time updates within 1 second
 - Offline capability: Graceful degradation with LocalStorage
+
+## Future Scope (Post-MVP)
+
+### PROJECT_SCOPE: OAuth Integration
+- Google OAuth provider
+- GitHub OAuth provider
+- SSO configuration and testing
+- Multi-provider account linking
