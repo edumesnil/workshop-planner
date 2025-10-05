@@ -15,6 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Git Workflow
 
+- **Always typecheck before commit** - Run `npm run typecheck` before every commit
 - **Commit frequently** - Keep commits small to medium-sized for easy rollback
 - **Atomic changes** - Each commit should represent a single logical change
 - **Before large changes** - Commit current work first, then proceed with new changes
