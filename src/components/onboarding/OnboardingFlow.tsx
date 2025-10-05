@@ -45,14 +45,12 @@ export function OnboardingFlow() {
           .insert({
             user_id: user.id,
             name: 'My Workshop',
-            length: workshopData.length,
-            width: workshopData.width,
-            height: workshopData.height,
-            clearances: {
-              min_aisle_width: 36,
-              wall_clearance: 6,
-              door_swing_clearance: 36,
+            dimensions: {
+              length: workshopData.length,
+              width: workshopData.width,
+              height: workshopData.height,
             },
+            constraints: [],
           })
           .select()
           .single()
