@@ -13,13 +13,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run typecheck` - TypeScript validation
 - `npm run preview` - Preview production build
 
+## Git Workflow
+
+- **Commit frequently** - Keep commits small to medium-sized for easy rollback
+- **Atomic changes** - Each commit should represent a single logical change
+- **Before large changes** - Commit current work first, then proceed with new changes
+
 ## Architecture Essentials
 
 ### Tech Stack Purpose
 - **React Three Fiber** - 3D workshop visualization
 - **Zustand** - State management with LocalStorage persistence
 - **Supabase** - Auth + database (~18KB per user)
-- **Radix UI** - Accessible components
+- **HeroUI** - Component library (replaced Radix UI in Phase 2)
 - **Transformers.js** - Future conversational features
 
 ### Path Mapping
