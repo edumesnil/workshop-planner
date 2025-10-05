@@ -6,9 +6,11 @@ interface ToolTemplate {
   id: string
   name: string
   category: string
-  length: number
-  width: number
-  height: number
+  dimensions: {
+    length: number
+    width: number
+    height: number
+  }
   is_mobile: boolean
 }
 
@@ -118,7 +120,7 @@ export function ToolSelectionStep({ onNext, onBack, onSkip }: ToolSelectionStepP
                     <div className="flex flex-col">
                       <span className="font-medium">{tool.name}</span>
                       <span className="text-xs text-default-400">
-                        {(tool.length / 12).toFixed(1)}' × {(tool.width / 12).toFixed(1)}' × {(tool.height / 12).toFixed(1)}'
+                        {(tool.dimensions.length / 12).toFixed(1)}' × {(tool.dimensions.width / 12).toFixed(1)}' × {(tool.dimensions.height / 12).toFixed(1)}'
                         {tool.is_mobile && ' • Mobile'}
                       </span>
                     </div>

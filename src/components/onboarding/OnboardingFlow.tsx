@@ -74,14 +74,12 @@ export function OnboardingFlow() {
           user_id: user.id,
           workshop_id: workshopId,
           name: template.name,
-          category: template.category,
-          length: template.length,
-          width: template.width,
-          height: template.height,
+          type: template.category,
+          dimensions: template.dimensions,
           is_mobile: template.is_mobile,
-          power_requirements: template.power_requirements,
+          power_requirement: template.power_requirement,
           dust_collection: template.dust_collection,
-          noise_level: template.noise_level,
+          min_clearance: template.min_clearance,
         }))
 
         const { error: toolsError } = await supabase
