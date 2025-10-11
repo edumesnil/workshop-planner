@@ -1,5 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
-import type { WorkshopInsert, WorkshopUpdate, ToolInsert, ToolUpdate, LayoutInsert, UserProfileInsert, UserProfileUpdate } from '@/types/database'
+import type {
+  WorkshopInsert,
+  WorkshopUpdate,
+  ToolInsert,
+  ToolUpdate,
+  LayoutInsert,
+  UserProfileInsert,
+  UserProfileUpdate,
+  WorkshopToolInsert
+} from '@/types/database'
+import type { ToolCategory } from '@/types'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -131,14 +141,95 @@ export const db = {
         .select('*')
         .eq('is_public', true)
         .order('category', { ascending: true })
+        .then(result => {
+          if (result.data) {
+            // Sort by name within each category
+            result.data.sort((a, b) => a.name.localeCompare(b.name))
+          }
+          return result
+        })
     },
 
-    getByCategory: async (category: string) => {
+    getByCategory: async (category: ToolCategory) => {
       return await supabase
         .from('tool_templates')
         .select('*')
         .eq('is_public', true)
         .eq('category', category)
+        .order('name', { ascending: true })
+    }
+  },
+
+  workshopTools: {
+    /**
+     * Get all tools for a specific workshop with full tool details
+     */
+    getForWorkshop: async (workshopId: string) => {
+      return await supabase
+        .from('workshop_tools')
+        .select(`
+          id,
+          added_at,
+          tool:tools (*)
+        `)
+        .eq('workshop_id', workshopId)
+        .order('added_at', { ascending: false })
+    },
+
+    /**
+     * Add a tool to a workshop
+     */
+    addToWorkshop: async (workshopId: string, toolId: string) => {
+      const insert: WorkshopToolInsert = {
+        workshop_id: workshopId,
+        tool_id: toolId
+      }
+      return await supabase
+        .from('workshop_tools')
+        .insert(insert)
+        .select()
+        .single()
+    },
+
+    /**
+     * Remove a tool from a workshop
+     */
+    removeFromWorkshop: async (workshopId: string, toolId: string) => {
+      return await supabase
+        .from('workshop_tools')
+        .delete()
+        .eq('workshop_id', workshopId)
+        .eq('tool_id', toolId)
+    },
+
+    /**
+     * Check if a tool is already in a workshop
+     */
+    isInWorkshop: async (workshopId: string, toolId: string) => {
+      const { data, error } = await supabase
+        .from('workshop_tools')
+        .select('id')
+        .eq('workshop_id', workshopId)
+        .eq('tool_id', toolId)
+        .maybeSingle()
+
+      if (error) return { exists: false, error }
+      return { exists: !!data, error: null }
+    },
+
+    /**
+     * Get all workshops that use a specific tool
+     */
+    getWorkshopsForTool: async (toolId: string) => {
+      return await supabase
+        .from('workshop_tools')
+        .select(`
+          id,
+          added_at,
+          workshop:workshops (*)
+        `)
+        .eq('tool_id', toolId)
+        .order('added_at', { ascending: false })
     }
   },
 
