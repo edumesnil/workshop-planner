@@ -36,12 +36,13 @@ export interface WorkshopRow {
   id: string
   user_id: string
   name: string
+  description?: string
   dimensions: {
     length: number
     width: number
     height: number
   }
-  constraints: any[]
+  constraints: any
   created_at: string
   updated_at: string
 }
@@ -50,24 +51,26 @@ export interface WorkshopInsert {
   id?: string
   user_id: string
   name: string
+  description?: string
   dimensions: {
     length: number
     width: number
     height: number
   }
-  constraints?: any[]
+  constraints?: any
   created_at?: string
   updated_at?: string
 }
 
 export interface WorkshopUpdate {
   name?: string
+  description?: string
   dimensions?: {
     length: number
     width: number
     height: number
   }
-  constraints?: any[]
+  constraints?: any
   updated_at?: string
 }
 

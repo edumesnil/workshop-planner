@@ -8,6 +8,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { WorkshopsPage } from './pages/WorkshopsPage'
+import { WorkshopDetailPage } from './pages/WorkshopDetailPage'
 import { ToolsPage } from './pages/ToolsPage'
 
 function App() {
@@ -43,6 +44,14 @@ function App() {
           element={
             <ProtectedRoute>
               <WorkshopsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/workshops/:id"
+          element={
+            <ProtectedRoute>
+              <WorkshopDetailPage />
             </ProtectedRoute>
           }
         />

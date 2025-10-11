@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Git Workflow
 
 - **Always typecheck before commit** - Run `npm run typecheck` before every commit
-- **Commit frequently** - Keep commits small to medium-sized for easy rollback
+- **Commit frequently** - Keep commits medium-sized for easy rollback
 - **Atomic changes** - Each commit should represent a single logical change
 - **Before large changes** - Commit current work first, then proceed with new changes
 
@@ -74,10 +74,30 @@ interface ResearchConstraintEngine {
 ### User Experience Rules
 - **No export features** - browser-based only
 - **Clean onboarding** - step-by-step first-time experience
-- **Default template** - 213" × 103" basement workshop
+- **Desktop-first design** - optimize for desktop/tablet, not mobile-first
 
 ## Key Design Decisions
 
 **Automated vs Conversational**: Current phase focuses on constraint-based optimization. Conversational iteration planned for post-MVP via Transformers.js with modular constraint system.
 
 **Free Tier Strategy**: Supabase free tier supports 500+ users. Browser-based export (print/screenshot) instead of file storage.
+
+## Design System & UX Guidelines
+
+**Component Library**: HeroUI with default theme - clean, modern, accessible design system
+
+**Color Approach**:
+- Use HeroUI semantic colors (primary, success, danger, warning, default)
+- Target: Clean, modern, architectural aesthetic with natural colors and personality
+- Defer branding/custom theme until later phase
+
+**UX Copywriting**:
+- Apply systematic frameworks from `@context/ux-copywriting.md`
+- Error messages: 4 H's framework (Human, Helpful, Humble, Humorous when appropriate)
+- Interface text: VOICE method (Value-driven, Occasion-appropriate, Inclusive, Clear, Empathetic)
+- Defer copy decisions to `/copy-review` agent with proper context
+
+**Design Review**:
+- Use `/design-review` agent for systematic validation
+- Reference `@context/style-guide.md` for accessibility and interaction patterns
+- WCAG 2.2 AA compliance required

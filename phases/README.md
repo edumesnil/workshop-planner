@@ -6,59 +6,77 @@ This directory contains detailed progress tracking and implementation guidance f
 
 | Phase | Duration | Status | Focus |
 |-------|----------|--------|-------|
-| [Phase 1](./phase-1-research-knowledge-base.md) | Week 1-2 | **IN PROGRESS** | Research & Knowledge Base |
-| [Phase 2](./phase-2-foundation-authentication.md) | Week 2-3 | PENDING | Foundation & Authentication |
-| [Phase 3](./phase-3-workshop-management.md) | Week 3-4 | PENDING | Workshop Management |
+| [Phase 1](./phase-1-research-knowledge-base.md) | Week 1-2 | ✅ **COMPLETED** | Research & Knowledge Base |
+| [Phase 2](./phase-2-foundation-authentication.md) | Week 2-3 | ✅ **COMPLETED** | Foundation & Authentication |
+| [Phase 3A](./phase-3-workshop-management.md) | Week 3-4 | **IN PROGRESS** | Workshop Management (CRUD) |
+| [Phase 3B](./phase-3b-2d-floor-plan.md) | Week 4 | PENDING | 2D Floor Plan Editor |
 | [Phase 4](./phase-4-tool-system.md) | Week 4-5 | PENDING | Tool System |
 | [Phase 5](./phase-5-optimization-engine.md) | Week 5-7 | PENDING | **Automated Optimization Engine** ⭐ |
 | [Phase 6](./phase-6-3d-visualization.md) | Week 7-8 | PENDING | 3D Visualization |
 | [Phase 7](./phase-7-polish-ux.md) | Week 8-9 | PENDING | Polish & User Experience |
 
-## Current Priority: Phase 1
+## Current Priority: Phase 3A
 
-**Focus**: Building the research-powered intelligence foundation that drives optimization decisions.
+**Focus**: Workshop management system with CRUD operations and text-based constraint entry.
 
 **Key Tasks**:
-- Academic research compilation (OSHA, workflow studies, efficiency research)
-- Mobile tools optimization research (**HIGH PRIORITY**)
-- Constraint system implementation
-- Multi-objective scoring algorithm (30/30/20/20)
-- Clean onboarding experience design
+- Workshop library page with grid/list view
+- Create/edit/delete workshop functionality
+- Workshop detail page with tabbed interface
+- Text-based wall and obstacle constraint forms
+- Type definitions for `Workshop.constraints` field
+- HeroUI component integration with UX copywriting frameworks
 
 ## Phase Dependencies
 
 ```
-Phase 1 (Research) → Phase 2-4 (Data Layer) → Phase 5 (Optimization Engine)
+Phase 1 (Research) ✅ → Phase 2 (Auth) ✅ → Phase 3A (Workshop CRUD) → Phase 3B (2D Editor)
+                                                                              ↓
+                                            Phase 4 (Tool System) ← Phase 3A/3B (Workshop Data)
+                                                      ↓
+                           Phase 5 (Optimization Engine) ← Phase 1 + 2 + 3A + 4
                                                       ↓
                      Phase 6 (3D Visualization) ← Phase 5 (Optimization Results)
                                                       ↓
                      Phase 7 (Polish & UX) ← All Previous Phases
 ```
 
-**Note**: Phase 5 (Optimization Engine) requires both Phase 1 research data AND Phases 2-4 data infrastructure to be complete.
+**Key Notes**:
+- Phase 3B (2D editor) is optional - Phase 5 can work with text-based constraints from 3A
+- Phase 5 (Optimization Engine) requires Phase 1 research + Phases 2-4 data infrastructure
 
 ## Key Features by Phase
 
-### Research Foundation (Phase 1)
+### Research Foundation (Phase 1) ✅
 - ✅ Academic findings collected in JSON format (8 research files)
-- 🔄 ConstraintFactory: JSON → TypeScript constraint transformation
-- Mobile tool integration with dual-position system (deployed/parked)
-- Multi-objective scoring: **40% safety, 25% workflow, 20% space, 15% accessibility**
-- MVP project workflows: cabinetry, furniture, kitchen goods
-- Tiered constraint priority: REQUIRED > HIGH > MEDIUM > LOW
-- Default workshop template (213" × 103" basement)
+- ✅ ConstraintFactory: JSON → TypeScript constraint transformation
+- ✅ Mobile tool integration with dual-position system (deployed/parked)
+- ✅ Multi-objective scoring: **40% safety, 25% workflow, 20% space, 15% accessibility**
+- ✅ MVP project workflows: cabinetry, furniture, kitchen goods
+- ✅ Tiered constraint priority: REQUIRED > HIGH > MEDIUM > LOW
+- ✅ Default workshop template (213" × 103" basement)
 
-### Foundation & Authentication (Phase 2)
-- Supabase integration and user authentication
-- Database schema for workshops and layouts
-- User session management and data persistence
-- Error handling and offline capabilities
+### Foundation & Authentication (Phase 2) ✅
+- ✅ Supabase integration and user authentication
+- ✅ Database schema for workshops, tools, layouts, user_profiles
+- ✅ Email/password authentication with forgot password flow
+- ✅ Multi-step onboarding (dimensions, tool selection, summary)
+- ✅ HeroUI component migration and protected routes
 
-### Workshop Management (Phase 3)
-- Workshop creation and dimension input
-- Workshop templates and presets
-- Workshop data validation and storage
-- Workshop sharing and collaboration features
+### Workshop Management (Phase 3A) - IN PROGRESS
+- Workshop library page (grid view, create/edit/delete)
+- Workshop detail page with tabbed interface
+- Text-based constraint entry forms (walls and obstacles)
+- Workshop data validation and persistence
+- Type definitions for `Workshop.constraints` field
+- HeroUI components with UX copywriting frameworks
+
+### 2D Floor Plan Editor (Phase 3B) - PENDING
+- Canvas-based 2D workshop renderer
+- Interactive wall selection and configuration
+- Drag-drop obstacle placement
+- Zoom/pan controls with grid overlay
+- Visual constraint editing (replaces text forms from 3A)
 
 ### Tool System (Phase 4)
 - Comprehensive tool database with specifications

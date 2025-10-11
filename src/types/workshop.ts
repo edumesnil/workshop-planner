@@ -1,8 +1,11 @@
+import { WorkshopConstraints } from './constraints'
+
 export interface Workshop {
   id: string
   name: string
+  description?: string
   dimensions: Dimensions
-  constraints: any[] // Will be properly typed when constraint system is implemented
+  constraints: WorkshopConstraints
   createdAt: Date
   updatedAt: Date
 }
