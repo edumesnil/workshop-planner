@@ -52,40 +52,47 @@ Build interactive Canvas-based 2D floor plan editor for visual workshop constrai
 
 ## Implementation Stages
 
-### Stage 1: Workshop Builder Page & Canvas Foundation (Day 1)
+### Stage 1: Workshop Builder Page & Canvas Foundation ✅ COMPLETE
 **Goal:** Dedicated builder page with static workshop floor plan
 
-Pages to create:
+Pages created:
 1. `src/pages/WorkshopBuilderPage.tsx` - Main builder page with layout
 
-Components to create:
+Components created:
 2. `src/components/workshops/FloorPlan2D.tsx` - Canvas component (75% width)
 3. `src/components/workshops/BuilderSidebar.tsx` - Right sidebar (25% width)
 4. `src/utils/floorPlanRenderer.ts` - Canvas drawing utilities
 5. `src/hooks/useCanvasContext.ts` - Canvas setup hook
+6. `src/components/workshops/FloorPlanControls.tsx` - Placeholder controls
 
 Features:
-- [ ] Workshop builder page with 75/25 split layout
-- [ ] HTML Canvas with responsive sizing
-- [ ] Workshop boundary rendering
-- [ ] Grid overlay (6" increments, not 12")
-- [ ] Coordinate system (origin bottom-left, transform Y in render)
-- [ ] High DPI support (retina displays)
+- ✅ Workshop builder page with 75/25 split layout
+- ✅ HTML Canvas with responsive sizing
+- ✅ Workshop boundary rendering
+- ✅ Grid overlay (6" increments)
+- ✅ Coordinate system (origin bottom-left, transform Y in render)
+- ✅ High DPI support (retina displays)
+- ✅ Wall constraint visualization (colored bars)
+- ✅ Obstacle rendering with labels
 
-### Stage 2: Interactive Walls with Sidebar Forms (Day 2)
+### Stage 2: Interactive Walls with Sidebar Forms ✅ COMPLETE
 **Goal:** Click walls to edit constraints in sidebar
 
-Components to create:
-6. `src/hooks/useFloorPlanInteraction.ts` - Mouse click handling (no touch)
-7. `src/components/workshops/WallConstraintPanel.tsx` - Sidebar form for wall editing
+Components created:
+7. `src/hooks/useFloorPlanInteraction.ts` - Click detection logic
+8. `src/components/workshops/WallConstraintPanel.tsx` - Sidebar form for wall editing
 
 Features:
-- [ ] Click detection on walls
-- [ ] Highlight selected wall on canvas
-- [ ] Constraint visualization (colored bars on walls)
-- [ ] Sidebar panel shows form for selected wall
-- [ ] Real-time constraint preview on canvas
-- [ ] Save updates constraints and re-renders canvas
+- ✅ Click detection on wall boundaries
+- ✅ Highlight selected wall on canvas (blue border)
+- ✅ Constraint visualization (colored bars by type)
+- ✅ Sidebar panel shows form for selected wall
+- ✅ Add new constraints with type/position/width/clearance/notes
+- ✅ Display existing constraints for selected wall
+- ✅ Delete constraints with optimistic UI updates
+- ✅ Save updates to database and re-render canvas
+
+**UX Refinement Note:** Currently clicking wall *boundary* selects the wall and shows all its constraints. Future enhancement: click individual constraint bars on canvas to edit just that constraint (more direct manipulation).
 
 ### Stage 3: Obstacle Drag-Drop with Context Menu (Day 2-3)
 **Goal:** Drag obstacles from sidebar to canvas with context menus
