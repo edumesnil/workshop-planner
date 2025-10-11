@@ -7,13 +7,20 @@ import { DeleteConfirmModal } from './DeleteConfirmModal'
 
 interface WorkshopHeaderProps {
   workshop: Workshop
-  onUpdate: () => void
+  onUpdate: (updates: Partial<Workshop>) => void
 }
 
 export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
   const navigate = useNavigate()
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+
+  const handleEditSuccess = (updates?: Partial<Workshop>) => {
+    setIsEditOpen(false)
+    if (updates) {
+      onUpdate(updates)
+    }
+  }
 
   const handleDeleteSuccess = () => {
     setIsDeleteOpen(false)
@@ -25,7 +32,7 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
       <div className="mb-6">
         <Breadcrumbs className="mb-4">
           <BreadcrumbItem onPress={() => navigate('/workshops')}>
-            Workshops
+            My Workshops
           </BreadcrumbItem>
           <BreadcrumbItem>{workshop.name}</BreadcrumbItem>
         </Breadcrumbs>
@@ -40,10 +47,10 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
 
           <div className="flex gap-2">
             <Button variant="flat" onPress={() => setIsEditOpen(true)}>
-              Edit Workshop
+              Modify Workshop
             </Button>
             <Button color="danger" variant="light" onPress={() => setIsDeleteOpen(true)}>
-              Delete
+              Remove Workshop
             </Button>
           </div>
         </div>
@@ -53,10 +60,7 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
         isOpen={isEditOpen}
         workshop={workshop}
         onClose={() => setIsEditOpen(false)}
-        onSuccess={() => {
-          setIsEditOpen(false)
-          onUpdate()
-        }}
+        onSuccess={handleEditSuccess}
       />
 
       <DeleteConfirmModal

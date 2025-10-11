@@ -1,16 +1,23 @@
 import { Tabs, Tab } from '@heroui/react'
 import { Workshop } from '@/types/workshop'
 import { OverviewTab } from './OverviewTab'
+import { ConstraintsTab } from './ConstraintsTab'
 
 interface WorkshopTabsProps {
   workshop: Workshop
-  onUpdate: () => void
+  onUpdate: (updates: Partial<Workshop>) => void
+  selectedTab: string
+  onTabChange: (tab: string) => void
 }
 
-export function WorkshopTabs({ workshop }: WorkshopTabsProps) {
+export function WorkshopTabs({ workshop, onUpdate, selectedTab, onTabChange }: WorkshopTabsProps) {
   return (
     <div className="mt-6">
-      <Tabs aria-label="Workshop sections">
+      <Tabs
+        aria-label="Workshop sections"
+        selectedKey={selectedTab}
+        onSelectionChange={(key) => onTabChange(key as string)}
+      >
         <Tab key="overview" title="Overview">
           <div className="py-6">
             <OverviewTab workshop={workshop} />
@@ -18,9 +25,7 @@ export function WorkshopTabs({ workshop }: WorkshopTabsProps) {
         </Tab>
         <Tab key="constraints" title="Constraints">
           <div className="py-6">
-            <p className="text-default-500">
-              Constraint management coming in next step
-            </p>
+            <ConstraintsTab workshop={workshop} onUpdate={onUpdate} />
           </div>
         </Tab>
         <Tab key="tools" title="Tools">

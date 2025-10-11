@@ -26,7 +26,7 @@ export function DeleteConfirmModal({ isOpen, workshop, onClose, onSuccess }: Del
 
       onSuccess()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete workshop')
+      setError(err instanceof Error ? err.message : "Couldn't remove workshop. Check your connection and try again.")
     } finally {
       setLoading(false)
     }
@@ -44,14 +44,10 @@ export function DeleteConfirmModal({ isOpen, workshop, onClose, onSuccess }: Del
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader>Delete Workshop</ModalHeader>
+            <ModalHeader>Remove Workshop</ModalHeader>
             <ModalBody>
               <p className="text-default-700">
-                Are you sure you want to delete <strong>{workshop.name}</strong>?
-              </p>
-              <p className="text-default-600 text-sm mt-2">
-                This will permanently remove this workshop, including all wall constraints and obstacles.
-                Any layouts generated for this workshop will also be deleted.
+                You're about to permanently remove <strong>{workshop.name}</strong>. This will delete all associated layouts, constraints, and workshop data.
               </p>
               {error && (
                 <p className="text-danger text-sm mt-3">{error}</p>
@@ -59,10 +55,10 @@ export function DeleteConfirmModal({ isOpen, workshop, onClose, onSuccess }: Del
             </ModalBody>
             <ModalFooter>
               <Button variant="light" onPress={onClose} isDisabled={loading}>
-                Cancel
+                Keep Workshop
               </Button>
               <Button color="danger" onPress={handleDelete} isLoading={loading}>
-                Delete Workshop
+                Remove Permanently
               </Button>
             </ModalFooter>
           </>
