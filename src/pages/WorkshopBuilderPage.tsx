@@ -69,6 +69,27 @@ export function WorkshopBuilderPage() {
     setWorkshop({ ...workshop, ...updates })
   }
 
+  const handleAddObstacle = (name: string, dimensions: { length: number; width: number; height: number }) => {
+    if (!workshop) return
+
+    // Add obstacle at center of workshop
+    const centerX = workshop.dimensions.length / 2 - dimensions.length / 2
+    const centerY = workshop.dimensions.width / 2 - dimensions.width / 2
+
+    const newObstacle = {
+      id: `obstacle-${Date.now()}`,
+      name,
+      position: { x: centerX, y: centerY },
+      dimensions,
+      fixed: false,
+    }
+
+    const updatedObstacles = [...workshop.constraints.obstacles, newObstacle]
+    const updatedConstraints = { ...workshop.constraints, obstacles: updatedObstacles }
+
+    setWorkshop({ ...workshop, constraints: updatedConstraints })
+  }
+
   // Save function for debounced save hook
   const saveWorkshop = useCallback(async (workshopData: Workshop) => {
     await db.workshops.update(workshopData.id, {
@@ -172,6 +193,7 @@ export function WorkshopBuilderPage() {
           selectedWall={selectedWall}
           selectedObstacle={selectedObstacle}
           onUpdateWorkshop={handleUpdateWorkshop}
+          onAddObstacle={handleAddObstacle}
           onClearSelection={() => {
             setSelectedWall(null)
             setSelectedObstacle(null)
