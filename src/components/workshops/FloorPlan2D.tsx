@@ -1,8 +1,9 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 import { Workshop } from '@/types/workshop'
 import { WallSide } from '@/types/constraints'
 import { useCanvasContext } from '@/hooks/useCanvasContext'
 import { useFloorPlanZoom } from '@/hooks/useFloorPlanZoom'
+import { useCanvasKeyboardNav } from '@/hooks/useCanvasKeyboardNav'
 import { renderFloorPlan } from '@/utils/floorPlanRenderer'
 import { detectClick } from '@/hooks/useFloorPlanInteraction'
 import { useDragDrop } from '@/hooks/useDragDrop'
@@ -81,6 +82,108 @@ export function FloorPlan2D({
     setAnimationScale,
   } = useDragDrop(workshop)
 
+  // Keyboard navigation for accessibility
+  const handleObstacleMove = useCallback((id: string, dx: number, dy: number) => {
+    const obstacle = workshop.constraints.obstacles.find(o => o.id === id)
+    if (!obstacle) return
+
+    const newX = Math.max(0, Math.min(workshop.dimensions.length - obstacle.dimensions.length, obstacle.position.x + dx))
+    const newY = Math.max(0, Math.min(workshop.dimensions.width - obstacle.dimensions.width, obstacle.position.y + dy))
+
+    const updatedObstacles = workshop.constraints.obstacles.map(o =>
+      o.id === id ? { ...o, position: { x: newX, y: newY } } : o
+    )
+
+    onUpdateWorkshop({ constraints: { ...workshop.constraints, obstacles: updatedObstacles } })
+  }, [workshop, onUpdateWorkshop])
+
+  const handleKeyboardDelete = useCallback((type: 'wall' | 'obstacle', id: string) => {
+    if (type === 'wall') {
+      const updatedWalls = workshop.constraints.walls.filter(c => c.wall !== id as any)
+      onUpdateWorkshop({ constraints: { ...workshop.constraints, walls: updatedWalls } })
+    } else {
+      const updatedObstacles = workshop.constraints.obstacles.filter(o => o.id !== id)
+      onUpdateWorkshop({ constraints: { ...workshop.constraints, obstacles: updatedObstacles } })
+    }
+  }, [workshop, onUpdateWorkshop])
+
+  const {
+    focusedElement,
+    handleCanvasKeyDown,
+    setFocusedElement,
+  } = useCanvasKeyboardNav(
+    workshop,
+    onSelectWall,
+    onSelectObstacle,
+    handleObstacleMove,
+    handleKeyboardDelete
+  )
+
+  // Sync focus when obstacle is selected via click
+  useEffect(() => {
+    if (selectedObstacle) {
+      setFocusedElement({ type: 'obstacle', id: selectedObstacle })
+    } else {
+      setFocusedElement(null)
+    }
+  }, [selectedObstacle, setFocusedElement])
+
+  // Global mouseup listener to handle drag end even when cursor leaves canvas
+  useEffect(() => {
+    if (!dragState.isDragging) return
+
+    const handleGlobalMouseUp = () => {
+      if (!dragState.isDragging) return
+
+      const dragId = dragState.dragId
+      const dragType = dragState.dragType
+
+      const snapResult = endDrag()
+      if (!snapResult) return
+
+      // Update local state (optimistic update) - parent will handle database save
+      if (dragType === 'wall-constraint' && dragId) {
+        const constraint = workshop.constraints.walls.find(c => c.id === dragId)
+        if (!constraint) return
+
+        const updatedConstraint = {
+          ...constraint,
+          wall: snapResult.snappedToWall || constraint.wall,
+          position: snapResult.snappedToWall
+            ? snapResult.snappedToWall === WallSide.NORTH || snapResult.snappedToWall === WallSide.SOUTH
+              ? snapResult.position.x
+              : snapResult.position.y
+            : constraint.position,
+        }
+
+        const updatedWalls = workshop.constraints.walls.map(c =>
+          c.id === dragId ? updatedConstraint : c
+        )
+
+        const updatedConstraints = { ...workshop.constraints, walls: updatedWalls }
+        onUpdateWorkshop({ constraints: updatedConstraints })
+
+        setDropAnimationId(dragId)
+        setDropAnimationScale(1.1)
+      } else if (dragType === 'obstacle' && dragId) {
+        const updatedObstacles = workshop.constraints.obstacles.map(o =>
+          o.id === dragId
+            ? { ...o, position: snapResult.position }
+            : o
+        )
+
+        const updatedConstraints = { ...workshop.constraints, obstacles: updatedObstacles }
+        onUpdateWorkshop({ constraints: updatedConstraints })
+
+        setDropAnimationId(dragId)
+        setDropAnimationScale(1.1)
+      }
+    }
+
+    window.addEventListener('mouseup', handleGlobalMouseUp)
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp)
+  }, [dragState.isDragging, dragState.dragId, dragState.dragType, workshop, onUpdateWorkshop, endDrag])
+
   // Render loop
   useEffect(() => {
     if (!ctx || !canvasRef.current) return
@@ -96,10 +199,11 @@ export function FloorPlan2D({
       gridSize: 6, // 6" grid
       selectedWall,
       selectedObstacle,
+      focusedElement,
       dragState: dragState.isDragging ? dragState : undefined,
       dropAnimation: dropAnimationId ? { id: dropAnimationId, scale: dropAnimationScale } : null,
     })
-  }, [ctx, workshop, scale, offset, selectedWall, selectedObstacle, dragState, dropAnimationId, dropAnimationScale])
+  }, [ctx, workshop, scale, offset, selectedWall, selectedObstacle, focusedElement, dragState, dropAnimationId, dropAnimationScale])
 
   // Pick animation effect (scale up when grabbing)
   useEffect(() => {
@@ -442,6 +546,8 @@ export function FloorPlan2D({
 
       <canvas
         ref={canvasRef}
+        tabIndex={0}
+        onKeyDown={handleCanvasKeyDown}
         onClick={handleCanvasClick}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -449,7 +555,7 @@ export function FloorPlan2D({
         onMouseLeave={handlePanEnd}
         onWheel={handleWheel}
         onContextMenu={handleContextMenu}
-        className={`w-full h-full ${
+        className={`w-full h-full outline-none ${
           isPanning ? 'cursor-grabbing' :
           spacePressed ? 'cursor-grab' :
           dragState.isDragging ? 'cursor-grabbing' :

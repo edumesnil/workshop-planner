@@ -46,6 +46,7 @@ Phase 3C addresses critical accessibility gaps identified in design review, impl
 - Touch target size audit (44px enforcement)
 - Loading state overlays for async operations
 - Success feedback toasts
+- **Wall tab cycling removal** - Keep tab cycling obstacle-only (walls are configured once, then not needed in editing workflow)
 
 ---
 

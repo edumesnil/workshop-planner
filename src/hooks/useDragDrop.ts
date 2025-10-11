@@ -50,8 +50,43 @@ export function useDragDrop(workshop: Workshop) {
   ): SnapResult | null => {
     const { length, width } = workshop.dimensions
 
-    // North wall (top, y=0)
-    if (y <= WALL_SNAP_THRESHOLD) {
+    const nearNorth = y <= WALL_SNAP_THRESHOLD
+    const nearSouth = y + elementHeight >= width - WALL_SNAP_THRESHOLD
+    const nearEast = x + elementWidth >= length - WALL_SNAP_THRESHOLD
+    const nearWest = x <= WALL_SNAP_THRESHOLD
+
+    // Handle corners first - snap to both walls
+    if (nearNorth && nearEast) {
+      return {
+        position: { x: length - elementWidth, y: 0 },
+        snappedToWall: WallSide.NORTH,
+        snappedToGrid: true,
+      }
+    }
+    if (nearNorth && nearWest) {
+      return {
+        position: { x: 0, y: 0 },
+        snappedToWall: WallSide.NORTH,
+        snappedToGrid: true,
+      }
+    }
+    if (nearSouth && nearEast) {
+      return {
+        position: { x: length - elementWidth, y: width - elementHeight },
+        snappedToWall: WallSide.SOUTH,
+        snappedToGrid: true,
+      }
+    }
+    if (nearSouth && nearWest) {
+      return {
+        position: { x: 0, y: width - elementHeight },
+        snappedToWall: WallSide.SOUTH,
+        snappedToGrid: true,
+      }
+    }
+
+    // Handle single walls
+    if (nearNorth) {
       const snappedX = snapToGrid(x, 0).x
       return {
         position: { x: Math.max(0, Math.min(snappedX, length - elementWidth)), y: 0 },
@@ -60,8 +95,7 @@ export function useDragDrop(workshop: Workshop) {
       }
     }
 
-    // South wall (bottom, y=width)
-    if (y >= width - WALL_SNAP_THRESHOLD) {
+    if (nearSouth) {
       const snappedX = snapToGrid(x, 0).x
       return {
         position: { x: Math.max(0, Math.min(snappedX, length - elementWidth)), y: width - elementHeight },
@@ -70,8 +104,7 @@ export function useDragDrop(workshop: Workshop) {
       }
     }
 
-    // East wall (right, x=length)
-    if (x >= length - WALL_SNAP_THRESHOLD) {
+    if (nearEast) {
       const snappedY = snapToGrid(0, y).y
       return {
         position: { x: length - elementWidth, y: Math.max(0, Math.min(snappedY, width - elementHeight)) },
@@ -80,8 +113,7 @@ export function useDragDrop(workshop: Workshop) {
       }
     }
 
-    // West wall (left, x=0)
-    if (x <= WALL_SNAP_THRESHOLD) {
+    if (nearWest) {
       const snappedY = snapToGrid(0, y).y
       return {
         position: { x: 0, y: Math.max(0, Math.min(snappedY, width - elementHeight)) },
@@ -143,36 +175,71 @@ export function useDragDrop(workshop: Workshop) {
     })
   }, [workshop])
 
-  // Update drag position (called on mousemove) - NO SNAPPING during drag, just track raw position
+  // Update drag position (called on mousemove) - clamp to bounds, show wall snap preview
   const updateDragPosition = useCallback((
     workshopX: number,
     workshopY: number
   ): WallSide | undefined => {
     if (!dragState.isDragging || !dragState.dragId) return undefined
 
-    // Calculate new position accounting for offset (no snapping during drag)
-    const rawX = workshopX - dragState.offset.x
-    const rawY = workshopY - dragState.offset.y
+    // Calculate new position accounting for offset
+    let rawX = workshopX - dragState.offset.x
+    let rawY = workshopY - dragState.offset.y
 
-    // Determine which wall (if any) we're hovering near for visual preview
-    let hoverWall: WallSide | undefined
+    // Get element dimensions
+    let elementWidth = 0
+    let elementHeight = 0
+
     if (dragState.dragType === 'wall-constraint') {
       const constraint = workshop.constraints.walls.find(c => c.id === dragState.dragId)
       if (constraint) {
-        const wallSnap = snapToWall(rawX, rawY, constraint.width, 8)
-        hoverWall = wallSnap?.snappedToWall
+        elementWidth = constraint.width
+        elementHeight = 8
       }
     } else if (dragState.dragType === 'obstacle') {
       const obstacle = workshop.constraints.obstacles.find(o => o.id === dragState.dragId)
       if (obstacle) {
-        const wallSnap = snapToWall(rawX, rawY, obstacle.dimensions.length, obstacle.dimensions.width)
-        hoverWall = wallSnap?.snappedToWall
+        elementWidth = obstacle.dimensions.length
+        elementHeight = obstacle.dimensions.width
       }
+    }
+
+    const { length, width } = workshop.dimensions
+
+    // Check for wall snap BEFORE clamping
+    let wallSnapResult: SnapResult | null = null
+    let hoverWall: WallSide | undefined
+
+    if (dragState.dragType === 'wall-constraint') {
+      const constraint = workshop.constraints.walls.find(c => c.id === dragState.dragId)
+      if (constraint) {
+        wallSnapResult = snapToWall(rawX, rawY, constraint.width, 8)
+        hoverWall = wallSnapResult?.snappedToWall
+      }
+    } else if (dragState.dragType === 'obstacle') {
+      const obstacle = workshop.constraints.obstacles.find(o => o.id === dragState.dragId)
+      if (obstacle) {
+        wallSnapResult = snapToWall(rawX, rawY, obstacle.dimensions.length, obstacle.dimensions.width)
+        hoverWall = wallSnapResult?.snappedToWall
+      }
+    }
+
+    // Use wall snap position if snapping, otherwise clamp to bounds
+    let finalX: number
+    let finalY: number
+
+    if (wallSnapResult) {
+      finalX = wallSnapResult.position.x
+      finalY = wallSnapResult.position.y
+    } else {
+      // Only clamp if not snapping to wall
+      finalX = Math.max(0, Math.min(rawX, length - elementWidth))
+      finalY = Math.max(0, Math.min(rawY, width - elementHeight))
     }
 
     setDragState(prev => ({
       ...prev,
-      currentPos: { x: rawX, y: rawY },
+      currentPos: { x: finalX, y: finalY },
       hoverWall,
     }))
 
