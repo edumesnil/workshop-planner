@@ -24,6 +24,8 @@ export function detectClick(
 
   // Check if click is on a wall constraint first (higher priority than wall boundary)
   const barThickness = 8 / scale // Convert pixels to workshop units
+  const touchMargin = 10 / scale // Extra margin for easier clicking
+
   for (const constraint of workshop.constraints.walls) {
     let x = 0
     let y = 0
@@ -32,28 +34,28 @@ export function detectClick(
 
     switch (constraint.wall) {
       case WallSide.NORTH:
-        x = constraint.position
-        y = -barThickness
-        w = constraint.width
-        h = barThickness
+        x = constraint.position - touchMargin
+        y = -barThickness - touchMargin
+        w = constraint.width + (touchMargin * 2)
+        h = barThickness + (touchMargin * 2)
         break
       case WallSide.SOUTH:
-        x = constraint.position
-        y = width
-        w = constraint.width
-        h = barThickness
+        x = constraint.position - touchMargin
+        y = width - touchMargin
+        w = constraint.width + (touchMargin * 2)
+        h = barThickness + (touchMargin * 2)
         break
       case WallSide.EAST:
-        x = length
-        y = constraint.position
-        w = barThickness
-        h = constraint.width
+        x = length - touchMargin
+        y = constraint.position - touchMargin
+        w = barThickness + (touchMargin * 2)
+        h = constraint.width + (touchMargin * 2)
         break
       case WallSide.WEST:
-        x = -barThickness
-        y = constraint.position
-        w = barThickness
-        h = constraint.width
+        x = -barThickness - touchMargin
+        y = constraint.position - touchMargin
+        w = barThickness + (touchMargin * 2)
+        h = constraint.width + (touchMargin * 2)
         break
     }
 

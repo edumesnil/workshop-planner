@@ -7,8 +7,10 @@ interface DragState {
   dragType: 'wall-constraint' | 'obstacle' | null
   dragId: string | null
   startPos: { x: number; y: number } // Workshop coordinates
-  currentPos: { x: number; y: number } // Workshop coordinates
+  currentPos: { x: number; y: number } // Workshop coordinates (raw, unsnapped)
   offset: { x: number; y: number } // Offset from element origin to click point
+  hoverWall?: WallSide // Wall being hovered over (for preview)
+  animationScale?: number // Animation scale for pick/drop effects
 }
 
 interface SnapResult {
@@ -28,6 +30,7 @@ export function useDragDrop(workshop: Workshop) {
     startPos: { x: 0, y: 0 },
     currentPos: { x: 0, y: 0 },
     offset: { x: 0, y: 0 },
+    hoverWall: undefined,
   })
 
   // Snap position to 6" grid
@@ -140,88 +143,87 @@ export function useDragDrop(workshop: Workshop) {
     })
   }, [workshop])
 
-  // Update drag position (called on mousemove)
+  // Update drag position (called on mousemove) - NO SNAPPING during drag, just track raw position
   const updateDragPosition = useCallback((
     workshopX: number,
     workshopY: number
-  ): SnapResult | null => {
-    if (!dragState.isDragging || !dragState.dragId) return null
+  ): WallSide | undefined => {
+    if (!dragState.isDragging || !dragState.dragId) return undefined
 
-    // Calculate new position accounting for offset
+    // Calculate new position accounting for offset (no snapping during drag)
     const rawX = workshopX - dragState.offset.x
     const rawY = workshopY - dragState.offset.y
 
+    // Determine which wall (if any) we're hovering near for visual preview
+    let hoverWall: WallSide | undefined
+    if (dragState.dragType === 'wall-constraint') {
+      const constraint = workshop.constraints.walls.find(c => c.id === dragState.dragId)
+      if (constraint) {
+        const wallSnap = snapToWall(rawX, rawY, constraint.width, 8)
+        hoverWall = wallSnap?.snappedToWall
+      }
+    } else if (dragState.dragType === 'obstacle') {
+      const obstacle = workshop.constraints.obstacles.find(o => o.id === dragState.dragId)
+      if (obstacle) {
+        const wallSnap = snapToWall(rawX, rawY, obstacle.dimensions.length, obstacle.dimensions.width)
+        hoverWall = wallSnap?.snappedToWall
+      }
+    }
+
+    setDragState(prev => ({
+      ...prev,
+      currentPos: { x: rawX, y: rawY },
+      hoverWall,
+    }))
+
+    return hoverWall
+  }, [dragState, workshop, snapToWall])
+
+  // End drag and return final position WITH SNAPPING
+  const endDrag = useCallback((): SnapResult | null => {
+    if (!dragState.isDragging) return null
+
+    const rawPosition = dragState.currentPos
+    const finalId = dragState.dragId
     let snapResult: SnapResult | null = null
 
-    if (dragState.dragType === 'obstacle') {
-      const obstacle = workshop.constraints.obstacles.find(o => o.id === dragState.dragId)
-      if (!obstacle) return null
-
-      // Try wall snap first
-      snapResult = snapToWall(rawX, rawY, obstacle.dimensions.length, obstacle.dimensions.width)
-
-      // If no wall snap, snap to grid
-      if (!snapResult) {
-        const gridSnapped = snapToGrid(rawX, rawY)
-        snapResult = {
-          position: gridSnapped,
-          snappedToGrid: true,
-        }
-      }
-    } else if (dragState.dragType === 'wall-constraint') {
-      const constraint = workshop.constraints.walls.find(c => c.id === dragState.dragId)
+    // Apply snapping on release
+    if (dragState.dragType === 'wall-constraint') {
+      const constraint = workshop.constraints.walls.find(c => c.id === finalId)
       if (!constraint) return null
 
-      // Wall constraints can move along walls or switch to different walls
-      snapResult = snapToWall(rawX, rawY, constraint.width, 8) // 8px bar thickness
+      // Try wall snap first
+      snapResult = snapToWall(rawPosition.x, rawPosition.y, constraint.width, 8)
 
-      // If no wall snap, keep on current wall with grid-snapped position
+      // If no wall snap, snap to grid on current wall
       if (!snapResult) {
+        const gridSnapped = snapToGrid(rawPosition.x, rawPosition.y)
         const pos = getWallConstraintPosition(constraint, workshop.dimensions)
-        const gridSnapped = snapToGrid(rawX, rawY)
         snapResult = {
           position: { x: gridSnapped.x, y: pos.y },
           snappedToWall: constraint.wall,
           snappedToGrid: true,
         }
       }
-    }
-
-    if (snapResult) {
-      setDragState(prev => ({
-        ...prev,
-        currentPos: snapResult!.position,
-      }))
-    }
-
-    return snapResult
-  }, [dragState, workshop, snapToGrid, snapToWall])
-
-  // End drag and return final position
-  const endDrag = useCallback((): SnapResult | null => {
-    if (!dragState.isDragging) return null
-
-    const finalPosition = dragState.currentPos
-    const finalId = dragState.dragId
-
-    // Determine which wall (if any) the element snapped to
-    let snappedWall: WallSide | undefined
-    if (dragState.dragType === 'wall-constraint') {
-      const constraint = workshop.constraints.walls.find(c => c.id === finalId)
-      if (constraint) {
-        const wallSnap = snapToWall(finalPosition.x, finalPosition.y, constraint.width, 8)
-        snappedWall = wallSnap?.snappedToWall
-      }
     } else if (dragState.dragType === 'obstacle') {
       const obstacle = workshop.constraints.obstacles.find(o => o.id === finalId)
-      if (obstacle) {
-        const wallSnap = snapToWall(
-          finalPosition.x,
-          finalPosition.y,
-          obstacle.dimensions.length,
-          obstacle.dimensions.width
-        )
-        snappedWall = wallSnap?.snappedToWall
+      if (!obstacle) return null
+
+      // Try wall snap first
+      snapResult = snapToWall(
+        rawPosition.x,
+        rawPosition.y,
+        obstacle.dimensions.length,
+        obstacle.dimensions.width
+      )
+
+      // If no wall snap, snap to grid
+      if (!snapResult) {
+        const gridSnapped = snapToGrid(rawPosition.x, rawPosition.y)
+        snapResult = {
+          position: gridSnapped,
+          snappedToGrid: true,
+        }
       }
     }
 
@@ -232,14 +234,11 @@ export function useDragDrop(workshop: Workshop) {
       startPos: { x: 0, y: 0 },
       currentPos: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
+      hoverWall: undefined,
     })
 
-    return {
-      position: finalPosition,
-      snappedToWall: snappedWall,
-      snappedToGrid: true,
-    }
-  }, [dragState, workshop, snapToWall])
+    return snapResult
+  }, [dragState, workshop, snapToWall, snapToGrid])
 
   // Cancel drag (e.g., on Escape key)
   const cancelDrag = useCallback(() => {
@@ -250,7 +249,14 @@ export function useDragDrop(workshop: Workshop) {
       startPos: { x: 0, y: 0 },
       currentPos: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
+      hoverWall: undefined,
+      animationScale: undefined,
     })
+  }, [])
+
+  // Update animation scale
+  const setAnimationScale = useCallback((scale: number) => {
+    setDragState(prev => ({ ...prev, animationScale: scale }))
   }, [])
 
   return {
@@ -260,6 +266,7 @@ export function useDragDrop(workshop: Workshop) {
     updateDragPosition,
     endDrag,
     cancelDrag,
+    setAnimationScale,
   }
 }
 

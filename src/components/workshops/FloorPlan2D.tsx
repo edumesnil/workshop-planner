@@ -6,7 +6,6 @@ import { renderFloorPlan } from '@/utils/floorPlanRenderer'
 import { detectClick } from '@/hooks/useFloorPlanInteraction'
 import { useDragDrop } from '@/hooks/useDragDrop'
 import { ContextMenu } from './ContextMenu'
-import { db } from '@/services/supabase'
 
 interface FloorPlan2DProps {
   workshop: Workshop
@@ -45,6 +44,9 @@ export function FloorPlan2D({
     targetId: null,
   })
 
+  const [dropAnimationId, setDropAnimationId] = useState<string | null>(null)
+  const [dropAnimationScale, setDropAnimationScale] = useState<number>(1.0)
+
   const {
     dragState,
     startDragWallConstraint,
@@ -52,6 +54,7 @@ export function FloorPlan2D({
     updateDragPosition,
     endDrag,
     cancelDrag,
+    setAnimationScale,
   } = useDragDrop(workshop)
 
   // Render loop
@@ -70,10 +73,87 @@ export function FloorPlan2D({
       selectedWall,
       selectedObstacle,
       dragState: dragState.isDragging ? dragState : undefined,
+      dropAnimation: dropAnimationId ? { id: dropAnimationId, scale: dropAnimationScale } : null,
     })
-  }, [ctx, workshop, scale, offset, selectedWall, selectedObstacle, dragState])
+  }, [ctx, workshop, scale, offset, selectedWall, selectedObstacle, dragState, dropAnimationId, dropAnimationScale])
+
+  // Pick animation effect (scale up when grabbing)
+  useEffect(() => {
+    if (!dragState.isDragging) return
+
+    const startTime = Date.now()
+    const duration = 150 // ms - faster than drop
+    let animationFrame: number
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Ease-out quad for smooth scale up
+      const easeOutQuad = (t: number) => t * (2 - t)
+
+      // Scale from 1.0 up to 1.1
+      const animScale = 1 + (0.1 * easeOutQuad(progress))
+
+      setAnimationScale(animScale)
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate)
+      } else {
+        // Keep at final scale while dragging
+        setAnimationScale(1.1)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame)
+    }
+  }, [dragState.isDragging, dragState.dragId, setAnimationScale])
+
+  // Drop animation effect (elastic bounce when releasing)
+  useEffect(() => {
+    if (!dropAnimationId) return
+
+    const startTime = Date.now()
+    const duration = 300 // ms
+    let animationFrame: number
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Elastic ease-out for bounce effect
+      const easeOutElastic = (t: number) => {
+        const c4 = (2 * Math.PI) / 3
+        return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1
+      }
+
+      // Scale from 1.1 down to 1.0 with elastic bounce
+      const animScale = 1 + (0.1 * (1 - easeOutElastic(progress)))
+
+      setDropAnimationScale(animScale)
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate)
+      } else {
+        setDropAnimationId(null)
+        setDropAnimationScale(1.0)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame)
+    }
+  }, [dropAnimationId])
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // Don't start drag on right-click
+    if (e.button !== 0) return
+
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -110,15 +190,18 @@ export function FloorPlan2D({
     updateDragPosition(workshopX, workshopY)
   }
 
-  const handleMouseUp = async () => {
+  const handleMouseUp = () => {
     if (!dragState.isDragging) return
+
+    const dragId = dragState.dragId
+    const dragType = dragState.dragType
 
     const snapResult = endDrag()
     if (!snapResult) return
 
-    // Update database with new position
-    if (dragState.dragType === 'wall-constraint' && dragState.dragId) {
-      const constraint = workshop.constraints.walls.find(c => c.id === dragState.dragId)
+    // Update local state (optimistic update) - parent will handle database save
+    if (dragType === 'wall-constraint' && dragId) {
+      const constraint = workshop.constraints.walls.find(c => c.id === dragId)
       if (!constraint) return
 
       const updatedConstraint = {
@@ -132,26 +215,32 @@ export function FloorPlan2D({
       }
 
       const updatedWalls = workshop.constraints.walls.map(c =>
-        c.id === dragState.dragId ? updatedConstraint : c
+        c.id === dragId ? updatedConstraint : c
       )
 
       const updatedConstraints = { ...workshop.constraints, walls: updatedWalls }
-      const { error } = await db.workshops.update(workshop.id, { constraints: updatedConstraints })
-      if (!error) {
-        onUpdateWorkshop({ constraints: updatedConstraints })
-      }
-    } else if (dragState.dragType === 'obstacle' && dragState.dragId) {
+
+      // Update local state immediately
+      onUpdateWorkshop({ constraints: updatedConstraints })
+
+      // Start drop animation
+      setDropAnimationId(dragId)
+      setDropAnimationScale(1.1)
+    } else if (dragType === 'obstacle' && dragId) {
       const updatedObstacles = workshop.constraints.obstacles.map(o =>
-        o.id === dragState.dragId
+        o.id === dragId
           ? { ...o, position: snapResult.position }
           : o
       )
 
       const updatedConstraints = { ...workshop.constraints, obstacles: updatedObstacles }
-      const { error } = await db.workshops.update(workshop.id, { constraints: updatedConstraints })
-      if (!error) {
-        onUpdateWorkshop({ constraints: updatedConstraints })
-      }
+
+      // Update local state immediately
+      onUpdateWorkshop({ constraints: updatedConstraints })
+
+      // Start drop animation
+      setDropAnimationId(dragId)
+      setDropAnimationScale(1.1)
     }
   }
 
@@ -215,26 +304,22 @@ export function FloorPlan2D({
     }
   }
 
-  const handleDeleteConstraint = async (constraintId: string) => {
+  const handleDeleteConstraint = (constraintId: string) => {
     const updatedWalls = workshop.constraints.walls.filter(c => c.id !== constraintId)
     const updatedConstraints = { ...workshop.constraints, walls: updatedWalls }
 
-    const { error } = await db.workshops.update(workshop.id, { constraints: updatedConstraints })
-    if (!error) {
-      onUpdateWorkshop({ constraints: updatedConstraints })
-      onSelectWall(null)
-    }
+    // Update local state - parent will handle database save
+    onUpdateWorkshop({ constraints: updatedConstraints })
+    onSelectWall(null)
   }
 
-  const handleDeleteObstacle = async (obstacleId: string) => {
+  const handleDeleteObstacle = (obstacleId: string) => {
     const updatedObstacles = workshop.constraints.obstacles.filter(o => o.id !== obstacleId)
     const updatedConstraints = { ...workshop.constraints, obstacles: updatedObstacles }
 
-    const { error } = await db.workshops.update(workshop.id, { constraints: updatedConstraints })
-    if (!error) {
-      onUpdateWorkshop({ constraints: updatedConstraints })
-      onSelectObstacle(null)
-    }
+    // Update local state - parent will handle database save
+    onUpdateWorkshop({ constraints: updatedConstraints })
+    onSelectObstacle(null)
   }
 
   // Handle Escape key to cancel drag

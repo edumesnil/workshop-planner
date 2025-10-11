@@ -6,6 +6,13 @@ interface DragState {
   dragType: 'wall-constraint' | 'obstacle' | null
   dragId: string | null
   currentPos: { x: number; y: number }
+  hoverWall?: WallSide
+  animationScale?: number // Animation scale for pick/drop effects
+}
+
+interface DropAnimation {
+  id: string
+  scale: number
 }
 
 interface RenderContext {
@@ -18,10 +25,11 @@ interface RenderContext {
   selectedWall?: WallSide | null
   selectedObstacle?: string | null
   dragState?: DragState
+  dropAnimation?: DropAnimation | null
 }
 
 export function renderFloorPlan(context: RenderContext): void {
-  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle, dragState } = context
+  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle, dragState, dropAnimation } = context
 
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -35,8 +43,8 @@ export function renderFloorPlan(context: RenderContext): void {
   // Draw components in order (back to front)
   drawGrid(ctx, workshop, scale, gridSize)
   drawWorkshopBoundary(ctx, workshop, scale, selectedWall)
-  drawWallConstraints(ctx, workshop, scale, selectedWall, dragState)
-  drawObstacles(ctx, workshop, scale, selectedObstacle, dragState)
+  drawWallConstraints(ctx, workshop, scale, selectedWall, dragState, dropAnimation)
+  drawObstacles(ctx, workshop, scale, selectedObstacle, dragState, dropAnimation)
 
   // Restore context state
   ctx.restore()
@@ -162,7 +170,8 @@ function drawWallConstraints(
   workshop: Workshop,
   scale: number,
   selectedWall?: WallSide | null,
-  dragState?: DragState
+  dragState?: DragState,
+  dropAnimation?: DropAnimation | null
 ): void {
   const { walls } = workshop.constraints
   const { length, width } = workshop.dimensions
@@ -170,6 +179,12 @@ function drawWallConstraints(
   walls.forEach((wall) => {
     const isBeingDragged = dragState?.dragType === 'wall-constraint' && dragState?.dragId === wall.id
     const isSelected = selectedWall === wall.wall
+
+    // Get animation scale - prioritize drag animation, then drop animation
+    const animScale =
+      (isBeingDragged && dragState?.animationScale) ? dragState.animationScale :
+      (dropAnimation?.id === wall.id) ? dropAnimation.scale :
+      1.0
 
     // Color by type
     const colors: Record<string, string> = {
@@ -194,14 +209,37 @@ function drawWallConstraints(
 
     const barThickness = 8 // pixels
 
-    // Use drag position if being dragged
+    // Use drag position if being dragged (with rotation preview)
     if (isBeingDragged && dragState) {
-      x = dragState.currentPos.x * scale
-      y = dragState.currentPos.y * scale
-      w = wall.width * scale
-      h = barThickness
-      // Show as draggable/semi-transparent
-      ctx.globalAlpha = 0.7
+      // Use hoverWall for rotation preview, fallback to original wall
+      const displayWall = dragState.hoverWall || wall.wall
+
+      ctx.globalAlpha = 0.7 // Show as draggable/semi-transparent
+
+      // Calculate dimensions based on the preview wall orientation
+      const isHorizontal = displayWall === WallSide.NORTH || displayWall === WallSide.SOUTH
+
+      if (isHorizontal) {
+        x = dragState.currentPos.x * scale
+        w = wall.width * scale
+        h = barThickness
+        // Adjust y based on which wall we're previewing on
+        if (displayWall === WallSide.NORTH) {
+          y = -barThickness
+        } else { // SOUTH
+          y = width * scale
+        }
+      } else { // Vertical (EAST or WEST)
+        y = dragState.currentPos.y * scale
+        w = barThickness
+        h = wall.width * scale
+        // Adjust x based on which wall we're previewing on
+        if (displayWall === WallSide.EAST) {
+          x = length * scale
+        } else { // WEST
+          x = -barThickness
+        }
+      }
     } else {
       switch (wall.wall) {
         case WallSide.NORTH: // Top wall
@@ -231,9 +269,25 @@ function drawWallConstraints(
       }
     }
 
+    // Apply animation scale if present
+    if (animScale !== 1.0) {
+      ctx.save()
+      // Calculate center point for scaling
+      const centerX = x + w / 2
+      const centerY = y + h / 2
+      // Translate to center, scale, translate back
+      ctx.translate(centerX, centerY)
+      ctx.scale(animScale, animScale)
+      ctx.translate(-centerX, -centerY)
+    }
+
     // Draw wall constraint bar
     ctx.fillRect(x, y, w, h)
     ctx.strokeRect(x, y, w, h)
+
+    if (animScale !== 1.0) {
+      ctx.restore()
+    }
 
     if (isBeingDragged) {
       ctx.globalAlpha = 1.0 // Reset alpha
@@ -272,13 +326,20 @@ function drawObstacles(
   workshop: Workshop,
   scale: number,
   selectedObstacle?: string | null,
-  dragState?: DragState
+  dragState?: DragState,
+  dropAnimation?: DropAnimation | null
 ): void {
   const { obstacles } = workshop.constraints
 
   obstacles.forEach((obstacle) => {
     const isBeingDragged = dragState?.dragType === 'obstacle' && dragState?.dragId === obstacle.id
     const isSelected = selectedObstacle === obstacle.id
+
+    // Get animation scale - prioritize drag animation, then drop animation
+    const animScale =
+      (isBeingDragged && dragState?.animationScale) ? dragState.animationScale :
+      (dropAnimation?.id === obstacle.id) ? dropAnimation.scale :
+      1.0
 
     // Use drag position if being dragged, otherwise use stored position
     const x = (isBeingDragged && dragState ? dragState.currentPos.x : obstacle.position.x) * scale
@@ -288,6 +349,18 @@ function drawObstacles(
 
     if (isBeingDragged) {
       ctx.globalAlpha = 0.7 // Semi-transparent when dragging
+    }
+
+    // Apply animation scale if present
+    if (animScale !== 1.0) {
+      ctx.save()
+      // Calculate center point for scaling
+      const centerX = x + w / 2
+      const centerY = y + h / 2
+      // Translate to center, scale, translate back
+      ctx.translate(centerX, centerY)
+      ctx.scale(animScale, animScale)
+      ctx.translate(-centerX, -centerY)
     }
 
     // Fill
@@ -305,6 +378,10 @@ function drawObstacles(
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(obstacle.name, x + w / 2, y + h / 2)
+
+    if (animScale !== 1.0) {
+      ctx.restore()
+    }
 
     if (isBeingDragged) {
       ctx.globalAlpha = 1.0 // Reset alpha
