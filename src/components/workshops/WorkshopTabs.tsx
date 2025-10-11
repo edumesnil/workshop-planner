@@ -1,13 +1,14 @@
 import { Tabs, Tab } from '@heroui/react'
 import { Workshop } from '@/types/workshop'
 import { OverviewTab } from './OverviewTab'
+import { ConstraintsTab } from './ConstraintsTab'
 
 interface WorkshopTabsProps {
   workshop: Workshop
   onUpdate: () => void
 }
 
-export function WorkshopTabs({ workshop }: WorkshopTabsProps) {
+export function WorkshopTabs({ workshop, onUpdate }: WorkshopTabsProps) {
   return (
     <div className="mt-6">
       <Tabs aria-label="Workshop sections">
@@ -18,9 +19,7 @@ export function WorkshopTabs({ workshop }: WorkshopTabsProps) {
         </Tab>
         <Tab key="constraints" title="Constraints">
           <div className="py-6">
-            <p className="text-default-500">
-              Constraint management coming in next step
-            </p>
+            <ConstraintsTab workshop={workshop} onUpdate={onUpdate} />
           </div>
         </Tab>
         <Tab key="tools" title="Tools">
