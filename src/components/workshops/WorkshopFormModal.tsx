@@ -15,11 +15,13 @@ interface WorkshopFormModalProps {
 export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: WorkshopFormModalProps) {
   const { user } = useAuthStore()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (data: WorkshopFormData) => {
     if (!user) return
 
     setLoading(true)
+    setError(null)
 
     try {
       if (workshop) {
@@ -45,8 +47,8 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
         onSuccess()
       }
     } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save workshop. Please try again.')
       console.error('Failed to save workshop:', err)
-      // TODO: Show error toast/notification
     } finally {
       setLoading(false)
     }
@@ -67,6 +69,11 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
               {workshop ? 'Edit Workshop' : 'Create Workshop'}
             </ModalHeader>
             <ModalBody className="pb-6">
+              {error && (
+                <div className="bg-danger-50 border border-danger-200 rounded-lg p-4 mb-4">
+                  <p className="text-danger-800 text-sm">{error}</p>
+                </div>
+              )}
               <WorkshopForm
                 workshop={workshop}
                 onSubmit={handleSubmit}

@@ -35,35 +35,37 @@ export function WorkshopCard({ workshop, onEdit, onDelete }: WorkshopCardProps) 
   }
 
   return (
-    <Card className="cursor-pointer" isPressable onPress={handleCardClick}>
-      <CardHeader className="flex flex-col items-start gap-1 pb-0">
-        <h3 className="text-lg font-semibold">{workshop.name}</h3>
-        {workshop.description && (
-          <p className="text-sm text-default-500 line-clamp-2">
-            {workshop.description}
-          </p>
-        )}
-      </CardHeader>
-      <CardBody className="pt-3">
-        <div className="flex flex-col gap-2 text-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-default-600">Dimensions:</span>
-            <span className="font-medium">
-              {lengthFt.toFixed(1)}' × {widthFt.toFixed(1)}' × {heightFt.toFixed(1)}'
-            </span>
+    <Card>
+      <div className="cursor-pointer" onClick={handleCardClick}>
+        <CardHeader className="flex flex-col items-start gap-1 pb-0">
+          <h3 className="text-lg font-semibold">{workshop.name}</h3>
+          {workshop.description && (
+            <p className="text-sm text-default-500 line-clamp-2">
+              {workshop.description}
+            </p>
+          )}
+        </CardHeader>
+        <CardBody className="pt-3">
+          <div className="flex flex-col gap-2 text-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-default-600">Dimensions:</span>
+              <span className="font-medium">
+                {lengthFt.toFixed(1)}' × {widthFt.toFixed(1)}' × {heightFt.toFixed(1)}'
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-default-600">Constraints:</span>
+              <Chip size="sm" variant="flat">
+                {constraintCount}
+              </Chip>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-default-600">Last updated:</span>
+              <span className="text-default-500">{lastUpdated}</span>
+            </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-default-600">Constraints:</span>
-            <Chip size="sm" variant="flat">
-              {constraintCount}
-            </Chip>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-default-600">Last updated:</span>
-            <span className="text-default-500">{lastUpdated}</span>
-          </div>
-        </div>
-      </CardBody>
+        </CardBody>
+      </div>
       <CardFooter className="gap-2">
         <Button
           size="sm"
