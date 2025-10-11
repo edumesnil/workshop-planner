@@ -15,6 +15,11 @@ interface DropAnimation {
   scale: number
 }
 
+interface FocusedElement {
+  type: 'wall' | 'obstacle'
+  id: string
+}
+
 interface RenderContext {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
@@ -24,12 +29,13 @@ interface RenderContext {
   gridSize: number // inches
   selectedWall?: WallSide | null
   selectedObstacle?: string | null
+  focusedElement?: FocusedElement | null
   dragState?: DragState
   dropAnimation?: DropAnimation | null
 }
 
 export function renderFloorPlan(context: RenderContext): void {
-  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle, dragState, dropAnimation } = context
+  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle, focusedElement, dragState, dropAnimation } = context
 
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -42,9 +48,9 @@ export function renderFloorPlan(context: RenderContext): void {
 
   // Draw components in order (back to front)
   drawGrid(ctx, workshop, scale, gridSize)
-  drawWorkshopBoundary(ctx, workshop, scale, selectedWall)
+  drawWorkshopBoundary(ctx, workshop, scale, selectedWall, focusedElement)
   drawWallConstraints(ctx, workshop, scale, selectedWall, dragState, dropAnimation)
-  drawObstacles(ctx, workshop, scale, selectedObstacle, dragState, dropAnimation)
+  drawObstacles(ctx, workshop, scale, selectedObstacle, focusedElement, dragState, dropAnimation)
 
   // Restore context state
   ctx.restore()
@@ -106,7 +112,8 @@ function drawWorkshopBoundary(
   ctx: CanvasRenderingContext2D,
   workshop: Workshop,
   scale: number,
-  selectedWall?: WallSide | null
+  selectedWall?: WallSide | null,
+  focusedElement?: FocusedElement | null
 ): void {
   const { length, width } = workshop.dimensions
   const pixelWidth = length * scale
@@ -130,13 +137,13 @@ function drawWorkshopBoundary(
   ctx.strokeRect(0, 0, pixelWidth, pixelHeight)
   ctx.restore()
 
-  // Highlight selected wall
-  if (selectedWall) {
-    ctx.strokeStyle = '#3b82f6' // blue-500
-    ctx.lineWidth = 4
-    ctx.setLineDash([])
+  // Helper function to draw wall line
+  const drawWallLine = (wallSide: WallSide, strokeStyle: string, lineWidth: number, lineDash: number[] = []) => {
+    ctx.strokeStyle = strokeStyle
+    ctx.lineWidth = lineWidth
+    ctx.setLineDash(lineDash)
 
-    switch (selectedWall) {
+    switch (wallSide) {
       case WallSide.NORTH:
         ctx.beginPath()
         ctx.moveTo(0, 0)
@@ -162,6 +169,16 @@ function drawWorkshopBoundary(
         ctx.stroke()
         break
     }
+  }
+
+  // Draw focus ring (outer) if wall is focused
+  if (focusedElement?.type === 'wall') {
+    drawWallLine(focusedElement.id as WallSide, '#3b82f6', 8, []) // blue-500, thick
+  }
+
+  // Draw selection indicator (inner)
+  if (selectedWall) {
+    drawWallLine(selectedWall, '#3b82f6', 4, []) // blue-500
   }
 }
 
@@ -326,6 +343,7 @@ function drawObstacles(
   workshop: Workshop,
   scale: number,
   selectedObstacle?: string | null,
+  focusedElement?: FocusedElement | null,
   dragState?: DragState,
   dropAnimation?: DropAnimation | null
 ): void {
@@ -334,6 +352,7 @@ function drawObstacles(
   obstacles.forEach((obstacle) => {
     const isBeingDragged = dragState?.dragType === 'obstacle' && dragState?.dragId === obstacle.id
     const isSelected = selectedObstacle === obstacle.id
+    const isFocused = focusedElement?.type === 'obstacle' && focusedElement.id === obstacle.id
 
     // Get animation scale - prioritize drag animation, then drop animation
     const animScale =
@@ -361,6 +380,16 @@ function drawObstacles(
       ctx.translate(centerX, centerY)
       ctx.scale(animScale, animScale)
       ctx.translate(-centerX, -centerY)
+    }
+
+    // Draw focus ring (outer) with offset
+    if (isFocused) {
+      ctx.strokeStyle = '#3b82f6' // blue-500
+      ctx.lineWidth = 3
+      ctx.setLineDash([5, 5]) // Dashed for focus ring
+      const focusOffset = 4 // 4px offset per style guide
+      ctx.strokeRect(x - focusOffset, y - focusOffset, w + focusOffset * 2, h + focusOffset * 2)
+      ctx.setLineDash([])
     }
 
     // Fill
