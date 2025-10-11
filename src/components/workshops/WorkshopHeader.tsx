@@ -46,6 +46,12 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
           </div>
 
           <div className="flex gap-2">
+            <Button
+              color="primary"
+              onPress={() => navigate(`/workshops/${workshop.id}/builder`)}
+            >
+              Open Builder
+            </Button>
             <Button variant="flat" onPress={() => setIsEditOpen(true)}>
               Modify Workshop
             </Button>
