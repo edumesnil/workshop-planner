@@ -1,6 +1,13 @@
 import { Workshop } from '@/types/workshop'
 import { WallSide } from '@/types/constraints'
 
+interface DragState {
+  isDragging: boolean
+  dragType: 'wall-constraint' | 'obstacle' | null
+  dragId: string | null
+  currentPos: { x: number; y: number }
+}
+
 interface RenderContext {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
@@ -10,10 +17,11 @@ interface RenderContext {
   gridSize: number // inches
   selectedWall?: WallSide | null
   selectedObstacle?: string | null
+  dragState?: DragState
 }
 
 export function renderFloorPlan(context: RenderContext): void {
-  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle } = context
+  const { canvas, ctx, workshop, scale, offset, gridSize, selectedWall, selectedObstacle, dragState } = context
 
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -27,8 +35,8 @@ export function renderFloorPlan(context: RenderContext): void {
   // Draw components in order (back to front)
   drawGrid(ctx, workshop, scale, gridSize)
   drawWorkshopBoundary(ctx, workshop, scale, selectedWall)
-  drawWallConstraints(ctx, workshop, scale, selectedWall)
-  drawObstacles(ctx, workshop, scale, selectedObstacle)
+  drawWallConstraints(ctx, workshop, scale, selectedWall, dragState)
+  drawObstacles(ctx, workshop, scale, selectedObstacle, dragState)
 
   // Restore context state
   ctx.restore()
@@ -153,12 +161,14 @@ function drawWallConstraints(
   ctx: CanvasRenderingContext2D,
   workshop: Workshop,
   scale: number,
-  selectedWall?: WallSide | null
+  selectedWall?: WallSide | null,
+  dragState?: DragState
 ): void {
   const { walls } = workshop.constraints
   const { length, width } = workshop.dimensions
 
   walls.forEach((wall) => {
+    const isBeingDragged = dragState?.dragType === 'wall-constraint' && dragState?.dragId === wall.id
     const isSelected = selectedWall === wall.wall
 
     // Color by type
@@ -172,7 +182,7 @@ function drawWallConstraints(
     }
 
     const color = colors[wall.type] || '#6b7280'
-    ctx.fillStyle = isSelected ? color : `${color}88` // Add transparency if not selected
+    ctx.fillStyle = isBeingDragged ? `${color}AA` : isSelected ? color : `${color}88` // Higher opacity when dragging
     ctx.strokeStyle = color
     ctx.lineWidth = isSelected ? 3 : 2
 
@@ -184,36 +194,50 @@ function drawWallConstraints(
 
     const barThickness = 8 // pixels
 
-    switch (wall.wall) {
-      case WallSide.NORTH: // Top wall
-        x = wall.position * scale
-        y = -barThickness
-        w = wall.width * scale
-        h = barThickness
-        break
-      case WallSide.SOUTH: // Bottom wall
-        x = wall.position * scale
-        y = width * scale
-        w = wall.width * scale
-        h = barThickness
-        break
-      case WallSide.EAST: // Right wall
-        x = length * scale
-        y = wall.position * scale
-        w = barThickness
-        h = wall.width * scale
-        break
-      case WallSide.WEST: // Left wall
-        x = -barThickness
-        y = wall.position * scale
-        w = barThickness
-        h = wall.width * scale
-        break
+    // Use drag position if being dragged
+    if (isBeingDragged && dragState) {
+      x = dragState.currentPos.x * scale
+      y = dragState.currentPos.y * scale
+      w = wall.width * scale
+      h = barThickness
+      // Show as draggable/semi-transparent
+      ctx.globalAlpha = 0.7
+    } else {
+      switch (wall.wall) {
+        case WallSide.NORTH: // Top wall
+          x = wall.position * scale
+          y = -barThickness
+          w = wall.width * scale
+          h = barThickness
+          break
+        case WallSide.SOUTH: // Bottom wall
+          x = wall.position * scale
+          y = width * scale
+          w = wall.width * scale
+          h = barThickness
+          break
+        case WallSide.EAST: // Right wall
+          x = length * scale
+          y = wall.position * scale
+          w = barThickness
+          h = wall.width * scale
+          break
+        case WallSide.WEST: // Left wall
+          x = -barThickness
+          y = wall.position * scale
+          w = barThickness
+          h = wall.width * scale
+          break
+      }
     }
 
     // Draw wall constraint bar
     ctx.fillRect(x, y, w, h)
     ctx.strokeRect(x, y, w, h)
+
+    if (isBeingDragged) {
+      ctx.globalAlpha = 1.0 // Reset alpha
+    }
 
     // Draw clearance indicator if present
     if (wall.clearance > 0) {
@@ -247,17 +271,24 @@ function drawObstacles(
   ctx: CanvasRenderingContext2D,
   workshop: Workshop,
   scale: number,
-  selectedObstacle?: string | null
+  selectedObstacle?: string | null,
+  dragState?: DragState
 ): void {
   const { obstacles } = workshop.constraints
 
   obstacles.forEach((obstacle) => {
+    const isBeingDragged = dragState?.dragType === 'obstacle' && dragState?.dragId === obstacle.id
     const isSelected = selectedObstacle === obstacle.id
 
-    const x = obstacle.position.x * scale
-    const y = obstacle.position.y * scale
+    // Use drag position if being dragged, otherwise use stored position
+    const x = (isBeingDragged && dragState ? dragState.currentPos.x : obstacle.position.x) * scale
+    const y = (isBeingDragged && dragState ? dragState.currentPos.y : obstacle.position.y) * scale
     const w = obstacle.dimensions.length * scale
     const h = obstacle.dimensions.width * scale
+
+    if (isBeingDragged) {
+      ctx.globalAlpha = 0.7 // Semi-transparent when dragging
+    }
 
     // Fill
     ctx.fillStyle = isSelected ? '#3b82f6' : '#93c5fd' // blue-500 : blue-300
@@ -274,5 +305,9 @@ function drawObstacles(
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(obstacle.name, x + w / 2, y + h / 2)
+
+    if (isBeingDragged) {
+      ctx.globalAlpha = 1.0 // Reset alpha
+    }
   })
 }

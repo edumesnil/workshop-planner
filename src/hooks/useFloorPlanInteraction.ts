@@ -2,9 +2,10 @@ import { Workshop } from '@/types/workshop'
 import { WallSide } from '@/types/constraints'
 
 interface ClickResult {
-  type: 'wall' | 'obstacle' | 'empty'
+  type: 'wall' | 'obstacle' | 'wall-constraint' | 'empty'
   wallSide?: WallSide
   obstacleId?: string
+  constraintId?: string
 }
 
 export function detectClick(
@@ -20,6 +21,51 @@ export function detectClick(
 
   const { length, width } = workshop.dimensions
   const wallClickMargin = 15 / scale // 15 pixels tolerance in workshop units
+
+  // Check if click is on a wall constraint first (higher priority than wall boundary)
+  const barThickness = 8 / scale // Convert pixels to workshop units
+  for (const constraint of workshop.constraints.walls) {
+    let x = 0
+    let y = 0
+    let w = 0
+    let h = 0
+
+    switch (constraint.wall) {
+      case WallSide.NORTH:
+        x = constraint.position
+        y = -barThickness
+        w = constraint.width
+        h = barThickness
+        break
+      case WallSide.SOUTH:
+        x = constraint.position
+        y = width
+        w = constraint.width
+        h = barThickness
+        break
+      case WallSide.EAST:
+        x = length
+        y = constraint.position
+        w = barThickness
+        h = constraint.width
+        break
+      case WallSide.WEST:
+        x = -barThickness
+        y = constraint.position
+        w = barThickness
+        h = constraint.width
+        break
+    }
+
+    if (
+      workshopX >= x &&
+      workshopX <= x + w &&
+      workshopY >= y &&
+      workshopY <= y + h
+    ) {
+      return { type: 'wall-constraint', constraintId: constraint.id, wallSide: constraint.wall }
+    }
+  }
 
   // Check if click is on a wall (outside workshop boundary but within margin)
   // North wall (top)
