@@ -1,9 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Safelist for HeroUI Modal classes (Tailwind v4) */
-@source inline('fixed inset-0 z-50 flex items-center items-end justify-center w-screen overflow-x-auto');
+@import "tailwindcss";
+@plugin '../hero.ts';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   html {
@@ -14,10 +12,5 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Manual utility for HeroUI Modal wrapper - Tailwind v4 doesn't generate this from dynamic classes */
-  .inset-0 {
-    inset: 0px;
   }
 }
