@@ -105,7 +105,13 @@ export function WallConstraintPanel({
     }
   }
 
-  const wallLabel = wallSide.charAt(0).toUpperCase() + wallSide.slice(1)
+  const wallNames = {
+    [WallSide.NORTH]: 'North',
+    [WallSide.SOUTH]: 'South',
+    [WallSide.EAST]: 'East',
+    [WallSide.WEST]: 'West',
+  }
+  const wallLabel = wallNames[wallSide]
 
   return (
     <div className="p-4 space-y-4">
@@ -139,7 +145,7 @@ export function WallConstraintPanel({
                 className="flex items-start justify-between p-2 bg-default-100 rounded"
               >
                 <div className="flex-1 text-sm">
-                  <p className="font-medium capitalize">{constraint.type.replace('_', ' ')}</p>
+                  <p className="font-medium capitalize">{String(constraint.type).replace('_', ' ')}</p>
                   <p className="text-xs text-default-600">
                     Position: {constraint.position}" | Width: {constraint.width}" | Clearance: {constraint.clearance}"
                   </p>
