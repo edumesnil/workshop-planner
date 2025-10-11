@@ -94,22 +94,28 @@ Features:
 
 **UX Refinement Note:** Currently clicking wall *boundary* selects the wall and shows all its constraints. Future enhancement: click individual constraint bars on canvas to edit just that constraint (more direct manipulation).
 
-### Stage 3: Obstacle Drag-Drop with Context Menu (Day 2-3)
+### Stage 3: Obstacle Drag-Drop with Context Menu ✅ COMPLETE
 **Goal:** Drag obstacles from sidebar to canvas with context menus
 
-Components to create:
+Components created:
 8. `src/components/workshops/ObstaclePalette.tsx` - Sidebar obstacle templates
 9. `src/components/workshops/ContextMenu.tsx` - Right-click menu component
 10. `src/hooks/useDragDrop.ts` - Drag-drop logic with grid snapping
 
 Features:
-- [ ] Obstacle palette in sidebar (common items: column, furnace, etc.)
-- [ ] Drag from sidebar palette to canvas
-- [ ] Grid snapping (6" intervals)
-- [ ] Right-click obstacle → context menu (Edit/Delete)
-- [ ] Edit opens obstacle form in sidebar
-- [ ] Delete removes from canvas and constraints
-- [ ] Collision detection (warn on overlap)
+- ✅ Obstacle palette in sidebar (6 common templates: columns, furnace, water heater, stairs, electrical panel)
+- ✅ Click template to add obstacle at workshop center
+- ✅ Drag wall constraints and obstacles around workshop
+- ✅ Grid snapping (6" intervals)
+- ✅ Wall snapping for constraints (12" threshold)
+- ✅ Smooth drag without jarring snaps (only snaps on release)
+- ✅ Visual rotation preview when dragging constraints between walls
+- ✅ Right-click context menu (Edit/Delete)
+- ✅ Delete removes from canvas and constraints
+- ✅ Pick animation on grab (scale up 1.0 → 1.1)
+- ✅ Drop animation on release (elastic bounce 1.1 → 1.0)
+- ✅ Debounced auto-save (60 seconds) with manual save button
+- ⚠️ Collision detection deferred to Stage 5
 
 ### Stage 4: Zoom & Pan Controls (Day 3)
 **Goal:** Navigate large workshops

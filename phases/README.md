@@ -72,13 +72,18 @@ Phase 1 (Research) ✅ → Phase 2 (Auth) ✅ → Phase 3A (Workshop CRUD) → P
 - ✅ HeroUI components with UX copywriting frameworks
 - ✅ Optimistic UI updates and keyboard accessibility
 
-### 2D Floor Plan Editor (Phase 3B) - IN PROGRESS
-- Canvas-based 2D workshop renderer with grid overlay
-- Interactive wall selection and constraint editing
-- Drag-drop obstacle placement with grid snapping
-- Zoom/pan controls for large workshops
-- Performance optimization (60fps target)
-- Accessibility support (keyboard, screen readers)
+### 2D Floor Plan Editor (Phase 3B) - IN PROGRESS (Stage 3/5 Complete)
+- ✅ Canvas-based 2D workshop renderer with grid overlay
+- ✅ Interactive wall selection and constraint editing in sidebar
+- ✅ Drag-drop for wall constraints (between walls with rotation preview)
+- ✅ Drag-drop for obstacles with grid snapping (6" intervals)
+- ✅ Obstacle palette in sidebar (6 common templates)
+- ✅ Context menus on right-click (edit/delete)
+- ✅ Pick and drop animations with easing
+- ✅ Debounced auto-save (60 seconds) + manual save button
+- ⏳ Zoom/pan controls for large workshops (Stage 4 - pending)
+- ⏳ Undo/redo system (Stage 5 - pending)
+- ⏳ Performance optimization and testing (Stage 5 - pending)
 
 ### Tool System (Phase 4)
 - Comprehensive tool database with specifications
