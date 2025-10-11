@@ -45,7 +45,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
       setEditingWall(null)
       setShowWallForm(false)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save wall constraint. Please try again.')
+      setError(err instanceof Error ? err.message : "Couldn't save wall constraint. Check your connection and try again.")
       console.error('Failed to save wall constraint:', err)
     } finally {
       setLoading(false)
@@ -69,7 +69,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
       if (error) throw error
       onUpdate({ constraints: updatedConstraints })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete wall constraint. Please try again.')
+      setError(err instanceof Error ? err.message : "Couldn't delete wall constraint. Check your connection and try again.")
       console.error('Failed to delete wall constraint:', err)
     } finally {
       setLoading(false)
@@ -98,7 +98,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
       setEditingObstacle(null)
       setShowObstacleForm(false)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save obstacle. Please try again.')
+      setError(err instanceof Error ? err.message : "Couldn't save obstacle. Check your connection and try again.")
       console.error('Failed to save obstacle:', err)
     } finally {
       setLoading(false)
@@ -122,7 +122,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
       if (error) throw error
       onUpdate({ constraints: updatedConstraints })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete obstacle. Please try again.')
+      setError(err instanceof Error ? err.message : "Couldn't delete obstacle. Check your connection and try again.")
       console.error('Failed to delete obstacle:', err)
     } finally {
       setLoading(false)
@@ -149,11 +149,11 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
           <div>
             <h3 className="text-lg font-semibold">Wall Constraints</h3>
             <p className="text-sm text-default-500">
-              Define features like doors, windows, and electrical outlets
+              Map essential wall features that impact your workshop layout
             </p>
           </div>
           <Button color="primary" onPress={() => setShowWallForm(true)}>
-            Add Wall Constraint
+            Add Wall Feature
           </Button>
         </div>
 
@@ -161,7 +161,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
           <Card>
             <CardBody>
               <p className="text-center text-default-500 py-8">
-                No wall constraints defined. Add features like doors, windows, or electrical outlets to improve layout optimization.
+                Your workshop walls tell a story. Add doors, windows, and outlets to help us optimize your space more precisely.
               </p>
             </CardBody>
           </Card>
@@ -210,7 +210,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
           <div>
             <h3 className="text-lg font-semibold">Obstacles</h3>
             <p className="text-sm text-default-500">
-              Mark fixed elements like pillars, HVAC units, or built-in furniture
+              Identify immovable elements that define your workshop's unique layout
             </p>
           </div>
           <Button color="primary" onPress={() => setShowObstacleForm(true)}>
@@ -222,7 +222,7 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
           <Card>
             <CardBody>
               <p className="text-center text-default-500 py-8">
-                No obstacles defined. Add fixed elements that tools must work around.
+                Every workshop has its challenges. Add fixed elements to help us design around them.
               </p>
             </CardBody>
           </Card>

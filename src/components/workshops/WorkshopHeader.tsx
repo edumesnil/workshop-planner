@@ -32,7 +32,7 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
       <div className="mb-6">
         <Breadcrumbs className="mb-4">
           <BreadcrumbItem onPress={() => navigate('/workshops')}>
-            Workshops
+            My Workshops
           </BreadcrumbItem>
           <BreadcrumbItem>{workshop.name}</BreadcrumbItem>
         </Breadcrumbs>
@@ -47,10 +47,10 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
 
           <div className="flex gap-2">
             <Button variant="flat" onPress={() => setIsEditOpen(true)}>
-              Edit Workshop
+              Modify Workshop
             </Button>
             <Button color="danger" variant="light" onPress={() => setIsDeleteOpen(true)}>
-              Delete
+              Remove Workshop
             </Button>
           </div>
         </div>

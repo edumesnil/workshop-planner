@@ -47,7 +47,7 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
         onSuccess()
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save workshop. Please try again.')
+      setError(err instanceof Error ? err.message : "Couldn't save workshop. Check your connection and try again.")
       console.error('Failed to save workshop:', err)
     } finally {
       setLoading(false)
@@ -66,7 +66,7 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
         {(onClose) => (
           <>
             <ModalHeader>
-              {workshop ? 'Edit Workshop' : 'Create Workshop'}
+              {workshop ? 'Update Workshop Details' : 'Design Your Workshop Space'}
             </ModalHeader>
             <ModalBody className="pb-6">
               {error && (
