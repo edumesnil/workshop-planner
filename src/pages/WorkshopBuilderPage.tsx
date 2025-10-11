@@ -7,7 +7,6 @@ import { db } from '@/services/supabase'
 import { useAuthStore } from '@/stores/authStore'
 import { FloorPlan2D } from '@/components/workshops/FloorPlan2D'
 import { BuilderSidebar } from '@/components/workshops/BuilderSidebar'
-import { FloorPlanControls } from '@/components/workshops/FloorPlanControls'
 import { useDebouncedSave } from '@/hooks/useDebouncedSave'
 
 function formatRelativeTime(date: Date): string {
@@ -168,8 +167,6 @@ export function WorkshopBuilderPage() {
             >
               Save
             </Button>
-
-            <FloorPlanControls />
           </div>
         </div>
 

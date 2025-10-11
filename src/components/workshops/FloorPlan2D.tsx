@@ -2,10 +2,12 @@ import { useRef, useEffect, useState } from 'react'
 import { Workshop } from '@/types/workshop'
 import { WallSide } from '@/types/constraints'
 import { useCanvasContext } from '@/hooks/useCanvasContext'
+import { useFloorPlanZoom } from '@/hooks/useFloorPlanZoom'
 import { renderFloorPlan } from '@/utils/floorPlanRenderer'
 import { detectClick } from '@/hooks/useFloorPlanInteraction'
 import { useDragDrop } from '@/hooks/useDragDrop'
 import { ContextMenu } from './ContextMenu'
+import { FloorPlanControls } from './FloorPlanControls'
 
 interface FloorPlan2DProps {
   workshop: Workshop
@@ -34,7 +36,28 @@ export function FloorPlan2D({
 }: FloorPlan2DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const { ctx, scale, offset } = useCanvasContext(canvasRef, containerRef, workshop)
+  const { ctx, scale: baseScale, offset: baseOffset } = useCanvasContext(canvasRef, containerRef, workshop)
+
+  const {
+    zoom,
+    panOffset,
+    isPanning,
+    handleWheel,
+    handlePanStart,
+    handlePanMove,
+    handlePanEnd,
+    zoomIn,
+    zoomOut,
+    resetView,
+    fitToView,
+  } = useFloorPlanZoom(canvasRef, workshop, baseScale, baseOffset)
+
+  // Combined scale and offset (base + zoom/pan)
+  const scale = baseScale * zoom
+  const offset = {
+    x: baseOffset.x + panOffset.x,
+    y: baseOffset.y + panOffset.y,
+  }
 
   const [contextMenu, setContextMenu] = useState<ContextMenuState>({
     show: false,
@@ -46,6 +69,7 @@ export function FloorPlan2D({
 
   const [dropAnimationId, setDropAnimationId] = useState<string | null>(null)
   const [dropAnimationScale, setDropAnimationScale] = useState<number>(1.0)
+  const [spacePressed, setSpacePressed] = useState(false)
 
   const {
     dragState,
@@ -151,6 +175,12 @@ export function FloorPlan2D({
   }, [dropAnimationId])
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // Handle pan start (middle button or left button with spacebar)
+    if (e.button === 1 || (e.button === 0 && spacePressed)) {
+      handlePanStart(e)
+      return
+    }
+
     // Don't start drag on right-click
     if (e.button !== 0) return
 
@@ -175,6 +205,12 @@ export function FloorPlan2D({
   }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // Handle panning
+    if (isPanning) {
+      handlePanMove(e)
+      return
+    }
+
     if (!dragState.isDragging) return
 
     const canvas = canvasRef.current
@@ -191,6 +227,12 @@ export function FloorPlan2D({
   }
 
   const handleMouseUp = () => {
+    // End panning
+    if (isPanning) {
+      handlePanEnd()
+      return
+    }
+
     if (!dragState.isDragging) return
 
     const dragId = dragState.dragId
@@ -322,28 +364,79 @@ export function FloorPlan2D({
     onSelectObstacle(null)
   }
 
-  // Handle Escape key to cancel drag
+  // Handle keyboard events (Escape to cancel drag, Space to enable pan mode)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && dragState.isDragging) {
         cancelDrag()
       }
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault()
+        setSpacePressed(true)
+      }
+    }
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault()
+        setSpacePressed(false)
+        // End panning if space is released
+        if (isPanning) {
+          handlePanEnd()
+        }
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [dragState.isDragging, cancelDrag])
+    window.addEventListener('keyup', handleKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [dragState.isDragging, isPanning, cancelDrag, handlePanEnd])
+
+  // Prevent default wheel behavior on canvas to stop page scrolling
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const preventScroll = (e: WheelEvent) => {
+      e.preventDefault()
+    }
+
+    // Use passive: false to allow preventDefault
+    canvas.addEventListener('wheel', preventScroll, { passive: false })
+    return () => canvas.removeEventListener('wheel', preventScroll)
+  }, [canvasRef])
 
   return (
-    <div ref={containerRef} className="w-full h-full bg-default-100">
+    <div ref={containerRef} className="w-full h-full bg-default-100 relative">
+      {/* Zoom controls - positioned top-left */}
+      <div className="absolute top-4 left-4 z-10">
+        <FloorPlanControls
+          zoom={zoom}
+          onZoomIn={zoomIn}
+          onZoomOut={zoomOut}
+          onFitToView={fitToView}
+          onReset={resetView}
+        />
+      </div>
+
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        onMouseLeave={handlePanEnd}
+        onWheel={handleWheel}
         onContextMenu={handleContextMenu}
-        className={`w-full h-full ${dragState.isDragging ? 'cursor-grabbing' : 'cursor-crosshair'}`}
+        className={`w-full h-full ${
+          isPanning ? 'cursor-grabbing' :
+          spacePressed ? 'cursor-grab' :
+          dragState.isDragging ? 'cursor-grabbing' :
+          'cursor-crosshair'
+        }`}
       />
       {contextMenu.show && (
         <ContextMenu

@@ -1,25 +1,39 @@
 import { Button } from '@heroui/react'
 
-export function FloorPlanControls() {
+interface FloorPlanControlsProps {
+  zoom: number
+  onZoomIn: () => void
+  onZoomOut: () => void
+  onFitToView: () => void
+  onReset: () => void
+}
+
+export function FloorPlanControls({ zoom, onZoomIn, onZoomOut, onFitToView, onReset }: FloorPlanControlsProps) {
+  const zoomPercent = Math.round(zoom * 100)
+
   return (
     <div className="flex items-center gap-2">
-      <div className="flex items-center gap-1 border rounded-lg px-2 py-1 bg-white">
+      <div className="flex items-center gap-1 border rounded-lg px-2 py-1 bg-white shadow-sm">
         <Button
           size="sm"
           variant="light"
           isIconOnly
-          onPress={() => console.log('Zoom out - Stage 4')}
+          onPress={onZoomOut}
           title="Zoom Out"
+          isDisabled={zoom <= 0.25}
         >
           −
         </Button>
-        <span className="text-xs text-default-600 min-w-[50px] text-center">100%</span>
+        <span className="text-xs text-default-600 min-w-[50px] text-center font-medium">
+          {zoomPercent}%
+        </span>
         <Button
           size="sm"
           variant="light"
           isIconOnly
-          onPress={() => console.log('Zoom in - Stage 4')}
+          onPress={onZoomIn}
           title="Zoom In"
+          isDisabled={zoom >= 4.0}
         >
           +
         </Button>
@@ -28,15 +42,17 @@ export function FloorPlanControls() {
       <Button
         size="sm"
         variant="light"
-        onPress={() => console.log('Fit to view - Stage 4')}
+        onPress={onFitToView}
+        title="Fit workshop to view"
       >
-        Fit
+        Fit to View
       </Button>
 
       <Button
         size="sm"
         variant="light"
-        onPress={() => console.log('Reset view - Stage 4')}
+        onPress={onReset}
+        title="Reset zoom and pan"
       >
         Reset
       </Button>
