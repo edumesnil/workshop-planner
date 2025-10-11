@@ -12,6 +12,7 @@ export function WorkshopDetailPage() {
   const [workshop, setWorkshop] = useState<Workshop | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedTab, setSelectedTab] = useState('overview')
 
   useEffect(() => {
     if (id) loadWorkshop()
@@ -43,6 +44,11 @@ export function WorkshopDetailPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const updateWorkshop = (updates: Partial<Workshop>) => {
+    if (!workshop) return
+    setWorkshop({ ...workshop, ...updates })
   }
 
   if (loading) {
@@ -87,8 +93,13 @@ export function WorkshopDetailPage() {
 
   return (
     <div className="container mx-auto p-6">
-      <WorkshopHeader workshop={workshop} onUpdate={loadWorkshop} />
-      <WorkshopTabs workshop={workshop} onUpdate={loadWorkshop} />
+      <WorkshopHeader workshop={workshop} onUpdate={updateWorkshop} />
+      <WorkshopTabs
+        workshop={workshop}
+        onUpdate={updateWorkshop}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+      />
     </div>
   )
 }

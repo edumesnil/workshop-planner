@@ -5,13 +5,19 @@ import { ConstraintsTab } from './ConstraintsTab'
 
 interface WorkshopTabsProps {
   workshop: Workshop
-  onUpdate: () => void
+  onUpdate: (updates: Partial<Workshop>) => void
+  selectedTab: string
+  onTabChange: (tab: string) => void
 }
 
-export function WorkshopTabs({ workshop, onUpdate }: WorkshopTabsProps) {
+export function WorkshopTabs({ workshop, onUpdate, selectedTab, onTabChange }: WorkshopTabsProps) {
   return (
     <div className="mt-6">
-      <Tabs aria-label="Workshop sections">
+      <Tabs
+        aria-label="Workshop sections"
+        selectedKey={selectedTab}
+        onSelectionChange={(key) => onTabChange(key as string)}
+      >
         <Tab key="overview" title="Overview">
           <div className="py-6">
             <OverviewTab workshop={workshop} />

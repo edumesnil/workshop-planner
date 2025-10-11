@@ -26,18 +26,16 @@ export function WorkshopCard({ workshop, onEdit, onDelete }: WorkshopCardProps) 
     navigate(`/workshops/${workshop.id}`)
   }
 
-  const handleEdit = (e: React.MouseEvent) => {
-    e.stopPropagation()
+  const handleEdit = () => {
     onEdit(workshop)
   }
 
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation()
+  const handleDelete = () => {
     onDelete(workshop)
   }
 
   return (
-    <Card className="cursor-pointer" onClick={handleCardClick}>
+    <Card className="cursor-pointer" isPressable onPress={handleCardClick}>
       <CardHeader className="flex flex-col items-start gap-1 pb-0">
         <h3 className="text-lg font-semibold">{workshop.name}</h3>
         {workshop.description && (
@@ -71,7 +69,7 @@ export function WorkshopCard({ workshop, onEdit, onDelete }: WorkshopCardProps) 
           size="sm"
           variant="flat"
           className="flex-1"
-          onClick={handleEdit}
+          onPress={handleEdit}
         >
           Edit
         </Button>
@@ -79,7 +77,7 @@ export function WorkshopCard({ workshop, onEdit, onDelete }: WorkshopCardProps) 
           size="sm"
           color="danger"
           variant="light"
-          onClick={handleDelete}
+          onPress={handleDelete}
         >
           Delete
         </Button>

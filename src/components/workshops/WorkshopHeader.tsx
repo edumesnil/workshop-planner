@@ -7,13 +7,20 @@ import { DeleteConfirmModal } from './DeleteConfirmModal'
 
 interface WorkshopHeaderProps {
   workshop: Workshop
-  onUpdate: () => void
+  onUpdate: (updates: Partial<Workshop>) => void
 }
 
 export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
   const navigate = useNavigate()
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+
+  const handleEditSuccess = (updates?: Partial<Workshop>) => {
+    setIsEditOpen(false)
+    if (updates) {
+      onUpdate(updates)
+    }
+  }
 
   const handleDeleteSuccess = () => {
     setIsDeleteOpen(false)
@@ -53,10 +60,7 @@ export function WorkshopHeader({ workshop, onUpdate }: WorkshopHeaderProps) {
         isOpen={isEditOpen}
         workshop={workshop}
         onClose={() => setIsEditOpen(false)}
-        onSuccess={() => {
-          setIsEditOpen(false)
-          onUpdate()
-        }}
+        onSuccess={handleEditSuccess}
       />
 
       <DeleteConfirmModal

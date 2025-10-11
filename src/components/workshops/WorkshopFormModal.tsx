@@ -9,7 +9,7 @@ interface WorkshopFormModalProps {
   isOpen: boolean
   workshop?: Workshop | null
   onClose: () => void
-  onSuccess: () => void
+  onSuccess: (updates?: Partial<Workshop>) => void
 }
 
 export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: WorkshopFormModalProps) {
@@ -24,12 +24,14 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
     try {
       if (workshop) {
         // Update existing workshop
-        const { error } = await db.workshops.update(workshop.id, {
+        const updates = {
           name: data.name,
           description: data.description,
           dimensions: data.dimensions,
-        })
+        }
+        const { error } = await db.workshops.update(workshop.id, updates)
         if (error) throw error
+        onSuccess(updates)
       } else {
         // Create new workshop
         const { error } = await db.workshops.create({
@@ -40,9 +42,8 @@ export function WorkshopFormModal({ isOpen, workshop, onClose, onSuccess }: Work
           constraints: { walls: [], obstacles: [] },
         })
         if (error) throw error
+        onSuccess()
       }
-
-      onSuccess()
     } catch (err) {
       console.error('Failed to save workshop:', err)
       // TODO: Show error toast/notification

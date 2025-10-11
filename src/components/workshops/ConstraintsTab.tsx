@@ -8,7 +8,7 @@ import { db } from '@/services/supabase'
 
 interface ConstraintsTabProps {
   workshop: Workshop
-  onUpdate: () => void
+  onUpdate: (updates: Partial<Workshop>) => void
 }
 
 export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
@@ -28,15 +28,18 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
         ? walls.map((w) => (w.id === wall.id ? wall : w))
         : [...walls, wall]
 
+      const updatedConstraints = {
+        walls: updatedWalls,
+        obstacles,
+      }
+
       const { error } = await db.workshops.update(workshop.id, {
-        constraints: {
-          walls: updatedWalls,
-          obstacles,
-        },
+        constraints: updatedConstraints,
       })
 
       if (error) throw error
-      onUpdate()
+
+      onUpdate({ constraints: updatedConstraints })
       setEditingWall(null)
       setShowWallForm(false)
     } catch (err) {
@@ -50,15 +53,17 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
     setLoading(true)
     try {
       const updatedWalls = walls.filter((w) => w.id !== wallId)
+      const updatedConstraints = {
+        walls: updatedWalls,
+        obstacles,
+      }
+
       const { error } = await db.workshops.update(workshop.id, {
-        constraints: {
-          walls: updatedWalls,
-          obstacles,
-        },
+        constraints: updatedConstraints,
       })
 
       if (error) throw error
-      onUpdate()
+      onUpdate({ constraints: updatedConstraints })
     } catch (err) {
       console.error('Failed to delete wall constraint:', err)
     } finally {
@@ -73,15 +78,17 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
         ? obstacles.map((o) => (o.id === obstacle.id ? obstacle : o))
         : [...obstacles, obstacle]
 
+      const updatedConstraints = {
+        walls,
+        obstacles: updatedObstacles,
+      }
+
       const { error } = await db.workshops.update(workshop.id, {
-        constraints: {
-          walls,
-          obstacles: updatedObstacles,
-        },
+        constraints: updatedConstraints,
       })
 
       if (error) throw error
-      onUpdate()
+      onUpdate({ constraints: updatedConstraints })
       setEditingObstacle(null)
       setShowObstacleForm(false)
     } catch (err) {
@@ -95,15 +102,17 @@ export function ConstraintsTab({ workshop, onUpdate }: ConstraintsTabProps) {
     setLoading(true)
     try {
       const updatedObstacles = obstacles.filter((o) => o.id !== obstacleId)
+      const updatedConstraints = {
+        walls,
+        obstacles: updatedObstacles,
+      }
+
       const { error} = await db.workshops.update(workshop.id, {
-        constraints: {
-          walls,
-          obstacles: updatedObstacles,
-        },
+        constraints: updatedConstraints,
       })
 
       if (error) throw error
-      onUpdate()
+      onUpdate({ constraints: updatedConstraints })
     } catch (err) {
       console.error('Failed to delete obstacle:', err)
     } finally {
