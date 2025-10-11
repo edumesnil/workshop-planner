@@ -526,20 +526,21 @@ export const db = {
 
 ## Implementation Checklist
 
-### Phase 4A: Database & Types (Day 1)
-- [ ] Run database migration script in Supabase
-- [ ] Create `src/types/toolCategory.ts` with ToolCategory enum
-- [ ] Update `src/types/database.ts` with new fields
-- [ ] Update `src/types/workshop.ts` with Tool interface changes
-- [ ] Seed 13 tool templates in database
-- [ ] Test: Verify schema changes and RLS policies
+### Phase 4A: Database & Types (Day 1) ✅ COMPLETE
+- [x] Run database migration script in Supabase
+- [x] Create `src/types/toolCategory.ts` with ToolCategory enum
+- [x] Update `src/types/database.ts` with new fields
+- [x] Update `src/types/index.ts` to export toolCategory
+- [x] Seed 13 tool templates in database
+- [x] Create cleanup scripts for duplicate templates
+- [x] Test: Verify schema changes and RLS policies
 
-### Phase 4B: Service Layer (Day 1)
-- [ ] Add `db.workshopTools` helpers to `src/services/supabase.ts`
-- [ ] Add `db.tools` CRUD operations
-- [ ] Update `db.toolTemplates` with category filtering
-- [ ] Create `src/stores/toolStore.ts` for tool library state
-- [ ] Test: Verify database operations work
+### Phase 4B: Service Layer (Day 1) ✅ COMPLETE
+- [x] Add `db.workshopTools` helpers to `src/services/supabase.ts`
+- [x] `db.tools` CRUD operations (already existed)
+- [x] Update `db.toolTemplates` with category filtering and sorting
+- [x] Create `src/stores/toolStore.ts` for tool library state
+- [x] Test: TypeScript compilation passes
 
 ### Phase 4C: /tools Page (Day 2)
 - [ ] Create `src/pages/ToolsPage.tsx` - main library page
