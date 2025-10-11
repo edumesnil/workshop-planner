@@ -8,6 +8,7 @@ import { useAuthStore } from '@/stores/authStore'
 import { FloorPlan2D } from '@/components/workshops/FloorPlan2D'
 import { BuilderSidebar } from '@/components/workshops/BuilderSidebar'
 import { useDebouncedSave } from '@/hooks/useDebouncedSave'
+import { useUndoRedo } from '@/hooks/useUndoRedo'
 
 function formatRelativeTime(date: Date): string {
   const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
@@ -23,18 +24,42 @@ export function WorkshopBuilderPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { user } = useAuthStore()
-  const [workshop, setWorkshop] = useState<Workshop | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [selectedWall, setSelectedWall] = useState<WallSide | null>(null)
   const [selectedObstacle, setSelectedObstacle] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (!user || !id) return
-    loadWorkshop()
-  }, [user, id])
+  // Undo/Redo system
+  const {
+    state: workshop,
+    setState: setWorkshop,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    clearHistory,
+  } = useUndoRedo<Workshop | null>(null)
 
-  const loadWorkshop = async () => {
+  // Keyboard shortcuts for undo/redo
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+Z (or Cmd+Z on Mac) for undo
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        e.preventDefault()
+        undo()
+      }
+      // Ctrl+Y or Ctrl+Shift+Z (or Cmd+Y/Cmd+Shift+Z on Mac) for redo
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
+        e.preventDefault()
+        redo()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [undo, redo])
+
+  const loadWorkshop = useCallback(async () => {
     if (!id) return
 
     setLoading(true)
@@ -56,12 +81,19 @@ export function WorkshopBuilderPage() {
       }
 
       setWorkshop(transformed)
+      clearHistory() // Clear undo/redo history after loading
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load workshop')
     } finally {
       setLoading(false)
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
+  useEffect(() => {
+    if (!user || !id) return
+    loadWorkshop()
+  }, [user, id, loadWorkshop])
 
   const handleUpdateWorkshop = (updates: Partial<Workshop>) => {
     if (!workshop) return
@@ -144,6 +176,28 @@ export function WorkshopBuilderPage() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Undo/Redo Buttons */}
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant="flat"
+                isDisabled={!canUndo}
+                onPress={undo}
+                title="Undo (Ctrl+Z)"
+              >
+                ↶ Undo
+              </Button>
+              <Button
+                size="sm"
+                variant="flat"
+                isDisabled={!canRedo}
+                onPress={redo}
+                title="Redo (Ctrl+Y)"
+              >
+                ↷ Redo
+              </Button>
+            </div>
+
             {/* Save Status */}
             <div className="text-sm text-default-500">
               {isSaving ? (
