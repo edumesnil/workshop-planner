@@ -183,16 +183,16 @@ const useCanvasKeyboardNav = (workshop: Workshop) => {
 
 ---
 
-### Stage 3: Undo/Redo System Integration ⏳ PENDING
+### Stage 3: Undo/Redo System Integration ✅ COMPLETE
 **Goal:** Full undo/redo for all constraint/obstacle operations
 
 **Tasks:**
-1. Integrate `useUndoRedo` hook in WorkshopBuilderPage
-2. Wrap workshop state with undo/redo
-3. Add Ctrl+Z / Ctrl+Y keyboard shortcuts
-4. Add undo/redo buttons to header
-5. Show undo/redo state in UI (disabled when unavailable)
-6. Prevent undo during drag operations
+1. ✅ Integrate `useUndoRedo` hook in WorkshopBuilderPage
+2. ✅ Wrap workshop state with undo/redo
+3. ✅ Add Ctrl+Z / Ctrl+Y keyboard shortcuts
+4. ✅ Add undo/redo buttons to header
+5. ✅ Show undo/redo state in UI (disabled when unavailable)
+6. ⏭️ Prevent undo during drag operations (not needed - drag doesn't update state until mouseup)
 
 **Updated Files:**
 - `src/pages/WorkshopBuilderPage.tsx` - Integrate undo/redo hook

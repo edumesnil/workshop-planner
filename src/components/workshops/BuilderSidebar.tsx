@@ -58,16 +58,18 @@ export function BuilderSidebar({
       </div>
 
       {selectedObstacle && (
-        <div className="p-4 border-b">
-          <h3 className="font-semibold mb-3">Selected Obstacle</h3>
-          <p className="text-sm text-default-600 mb-3">
-            Drag to reposition, right-click for options
-          </p>
+        <div className="p-4 border-b bg-primary-50">
+          <h3 className="font-semibold mb-3 text-primary-900">Selected Obstacle</h3>
+          <div className="space-y-2 text-sm text-primary-800 mb-3">
+            <p>• Drag to move</p>
+            <p>• Arrow keys for precise positioning</p>
+            <p>• Right-click for more options</p>
+          </div>
           <button
             onClick={onClearSelection}
-            className="text-sm text-primary hover:underline"
+            className="text-sm text-primary-700 hover:text-primary-900 font-medium"
           >
-            Clear Selection
+            Deselect
           </button>
         </div>
       )}
@@ -78,6 +80,7 @@ export function BuilderSidebar({
           onAddObstacle={(template) => {
             onAddObstacle(template.name, template.dimensions)
           }}
+          hasObstacles={workshop.constraints.obstacles.length > 0}
         />
       )}
     </div>

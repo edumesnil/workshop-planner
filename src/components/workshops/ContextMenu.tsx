@@ -49,7 +49,7 @@ export function ContextMenu({ x, y, onEdit, onDelete, onClose }: ContextMenuProp
                 onEdit()
                 onClose()
               }}
-              className="w-full text-left px-3 py-2 hover:bg-default-100 rounded text-sm"
+              className="w-full text-left px-3 py-2 hover:bg-default-100 rounded text-sm focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1"
             >
               Edit
             </button>
@@ -60,7 +60,7 @@ export function ContextMenu({ x, y, onEdit, onDelete, onClose }: ContextMenuProp
                 onDelete()
                 onClose()
               }}
-              className="w-full text-left px-3 py-2 hover:bg-danger-50 text-danger rounded text-sm"
+              className="w-full text-left px-3 py-2 hover:bg-danger-50 text-danger rounded text-sm focus-visible:outline-2 focus-visible:outline-danger focus-visible:outline-offset-1"
             >
               Delete
             </button>
