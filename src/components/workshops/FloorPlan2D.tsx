@@ -364,15 +364,33 @@ export function FloorPlan2D({
     onSelectObstacle(null)
   }
 
-  // Handle keyboard events (Escape to cancel drag, Space to enable pan mode)
+  // Handle keyboard events (Escape, Space, Delete)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Escape: Cancel drag
       if (e.key === 'Escape' && dragState.isDragging) {
         cancelDrag()
       }
+
+      // Space: Enable pan mode
       if (e.key === ' ' || e.code === 'Space') {
         e.preventDefault()
         setSpacePressed(true)
+      }
+
+      // Delete/Backspace: Delete selected element
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        e.preventDefault()
+        if (selectedWall) {
+          // Delete all constraints on selected wall
+          const updatedWalls = workshop.constraints.walls.filter(c => c.wall !== selectedWall)
+          const updatedConstraints = { ...workshop.constraints, walls: updatedWalls }
+          onUpdateWorkshop({ constraints: updatedConstraints })
+          onSelectWall(null)
+        } else if (selectedObstacle) {
+          // Delete selected obstacle
+          handleDeleteObstacle(selectedObstacle)
+        }
       }
     }
 
@@ -393,7 +411,7 @@ export function FloorPlan2D({
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('keyup', handleKeyUp)
     }
-  }, [dragState.isDragging, isPanning, cancelDrag, handlePanEnd])
+  }, [dragState.isDragging, isPanning, selectedWall, selectedObstacle, workshop.constraints, cancelDrag, handlePanEnd, onUpdateWorkshop, onSelectWall])
 
   // Prevent default wheel behavior on canvas to stop page scrolling
   useEffect(() => {
