@@ -1,4 +1,5 @@
 import { Workshop } from '@/types/workshop'
+import { WallSide } from '@/types/constraints'
 
 interface RenderContext {
   canvas: HTMLCanvasElement
@@ -7,7 +8,7 @@ interface RenderContext {
   scale: number // pixels per inch
   offset: { x: number; y: number }
   gridSize: number // inches
-  selectedWall?: string | null
+  selectedWall?: WallSide | null
   selectedObstacle?: string | null
 }
 
@@ -25,7 +26,7 @@ export function renderFloorPlan(context: RenderContext): void {
 
   // Draw components in order (back to front)
   drawGrid(ctx, workshop, scale, gridSize)
-  drawWorkshopBoundary(ctx, workshop, scale)
+  drawWorkshopBoundary(ctx, workshop, scale, selectedWall)
   drawWallConstraints(ctx, workshop, scale, selectedWall)
   drawObstacles(ctx, workshop, scale, selectedObstacle)
 
@@ -88,7 +89,8 @@ function drawGrid(
 function drawWorkshopBoundary(
   ctx: CanvasRenderingContext2D,
   workshop: Workshop,
-  scale: number
+  scale: number,
+  selectedWall?: WallSide | null
 ): void {
   const { length, width } = workshop.dimensions
   const pixelWidth = length * scale
@@ -111,19 +113,53 @@ function drawWorkshopBoundary(
   ctx.shadowOffsetY = 2
   ctx.strokeRect(0, 0, pixelWidth, pixelHeight)
   ctx.restore()
+
+  // Highlight selected wall
+  if (selectedWall) {
+    ctx.strokeStyle = '#3b82f6' // blue-500
+    ctx.lineWidth = 4
+    ctx.setLineDash([])
+
+    switch (selectedWall) {
+      case WallSide.NORTH:
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(pixelWidth, 0)
+        ctx.stroke()
+        break
+      case WallSide.SOUTH:
+        ctx.beginPath()
+        ctx.moveTo(0, pixelHeight)
+        ctx.lineTo(pixelWidth, pixelHeight)
+        ctx.stroke()
+        break
+      case WallSide.EAST:
+        ctx.beginPath()
+        ctx.moveTo(pixelWidth, 0)
+        ctx.lineTo(pixelWidth, pixelHeight)
+        ctx.stroke()
+        break
+      case WallSide.WEST:
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, pixelHeight)
+        ctx.stroke()
+        break
+    }
+  }
 }
 
 function drawWallConstraints(
   ctx: CanvasRenderingContext2D,
   workshop: Workshop,
   scale: number,
-  selectedWall?: string | null
+  selectedWall?: WallSide | null
 ): void {
   const { walls } = workshop.constraints
   const { length, width } = workshop.dimensions
 
   walls.forEach((wall) => {
-    const isSelected = selectedWall === wall.id
+    const isSelected = selectedWall === wall.wall
 
     // Color by type
     const colors: Record<string, string> = {
@@ -149,25 +185,25 @@ function drawWallConstraints(
     const barThickness = 8 // pixels
 
     switch (wall.wall) {
-      case 'north': // Top wall
+      case WallSide.NORTH: // Top wall
         x = wall.position * scale
         y = -barThickness
         w = wall.width * scale
         h = barThickness
         break
-      case 'south': // Bottom wall
+      case WallSide.SOUTH: // Bottom wall
         x = wall.position * scale
         y = width * scale
         w = wall.width * scale
         h = barThickness
         break
-      case 'east': // Right wall
+      case WallSide.EAST: // Right wall
         x = length * scale
         y = wall.position * scale
         w = barThickness
         h = wall.width * scale
         break
-      case 'west': // Left wall
+      case WallSide.WEST: // Left wall
         x = -barThickness
         y = wall.position * scale
         w = barThickness
@@ -188,16 +224,16 @@ function drawWallConstraints(
       const clearancePixels = wall.clearance * scale
 
       switch (wall.wall) {
-        case 'north':
+        case WallSide.NORTH:
           ctx.strokeRect(x, 0, w, clearancePixels)
           break
-        case 'south':
+        case WallSide.SOUTH:
           ctx.strokeRect(x, width * scale - clearancePixels, w, clearancePixels)
           break
-        case 'east':
+        case WallSide.EAST:
           ctx.strokeRect(length * scale - clearancePixels, y, clearancePixels, h)
           break
-        case 'west':
+        case WallSide.WEST:
           ctx.strokeRect(0, y, clearancePixels, h)
           break
       }

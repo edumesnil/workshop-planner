@@ -1,9 +1,11 @@
 import { Workshop } from '@/types/workshop'
+import { WallSide } from '@/types/constraints'
 import { Card, CardBody, CardHeader } from '@heroui/react'
+import { WallConstraintPanel } from './WallConstraintPanel'
 
 interface BuilderSidebarProps {
   workshop: Workshop
-  selectedWall: string | null
+  selectedWall: WallSide | null
   selectedObstacle: string | null
   onUpdateWorkshop: (updates: Partial<Workshop>) => void
   onClearSelection: () => void
@@ -13,8 +15,21 @@ export function BuilderSidebar({
   workshop,
   selectedWall,
   selectedObstacle,
+  onUpdateWorkshop,
   onClearSelection,
 }: BuilderSidebarProps) {
+  // Show wall constraint panel if wall is selected
+  if (selectedWall) {
+    return (
+      <WallConstraintPanel
+        workshop={workshop}
+        wallSide={selectedWall}
+        onUpdate={onUpdateWorkshop}
+        onClearSelection={onClearSelection}
+      />
+    )
+  }
+
   return (
     <div className="p-4 space-y-4">
       {/* Workshop Info */}
@@ -43,26 +58,6 @@ export function BuilderSidebar({
           </div>
         </CardBody>
       </Card>
-
-      {/* Selection Info */}
-      {selectedWall && (
-        <Card>
-          <CardHeader>
-            <h3 className="font-semibold">Selected Wall</h3>
-          </CardHeader>
-          <CardBody>
-            <p className="text-sm text-default-600">
-              Wall constraint editing will be implemented in Stage 2
-            </p>
-            <button
-              onClick={onClearSelection}
-              className="mt-3 text-sm text-primary hover:underline"
-            >
-              Clear Selection
-            </button>
-          </CardBody>
-        </Card>
-      )}
 
       {selectedObstacle && (
         <Card>

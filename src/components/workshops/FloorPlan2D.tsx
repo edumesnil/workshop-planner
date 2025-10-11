@@ -1,13 +1,15 @@
 import { useRef, useEffect } from 'react'
 import { Workshop } from '@/types/workshop'
+import { WallSide } from '@/types/constraints'
 import { useCanvasContext } from '@/hooks/useCanvasContext'
 import { renderFloorPlan } from '@/utils/floorPlanRenderer'
+import { detectClick } from '@/hooks/useFloorPlanInteraction'
 
 interface FloorPlan2DProps {
   workshop: Workshop
-  selectedWall: string | null
+  selectedWall: WallSide | null
   selectedObstacle: string | null
-  onSelectWall: (wall: string | null) => void
+  onSelectWall: (wall: WallSide | null) => void
   onSelectObstacle: (obstacleId: string | null) => void
   onUpdateWorkshop: (updates: Partial<Workshop>) => void
 }
@@ -16,9 +18,9 @@ export function FloorPlan2D({
   workshop,
   selectedWall,
   selectedObstacle,
+  onSelectWall,
+  onSelectObstacle,
 }: FloorPlan2DProps) {
-  // TODO: Use these in Stage 2/3
-  // onSelectWall, onSelectObstacle
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const { ctx, scale, offset } = useCanvasContext(canvasRef, containerRef, workshop)
@@ -49,8 +51,18 @@ export function FloorPlan2D({
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
 
-    // TODO: Click detection logic (Stage 2)
-    console.log('Canvas clicked at:', { x, y })
+    const clickResult = detectClick(x, y, workshop, scale, offset)
+
+    if (clickResult.type === 'wall' && clickResult.wallSide) {
+      onSelectWall(clickResult.wallSide)
+      onSelectObstacle(null)
+    } else if (clickResult.type === 'obstacle' && clickResult.obstacleId) {
+      onSelectObstacle(clickResult.obstacleId)
+      onSelectWall(null)
+    } else {
+      onSelectWall(null)
+      onSelectObstacle(null)
+    }
   }
 
   const handleContextMenu = (e: React.MouseEvent<HTMLCanvasElement>) => {

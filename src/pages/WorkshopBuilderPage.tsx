@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner } from '@heroui/react'
 import { Workshop } from '@/types/workshop'
+import { WallSide } from '@/types/constraints'
 import { db } from '@/services/supabase'
 import { useAuthStore } from '@/stores/authStore'
 import { FloorPlan2D } from '@/components/workshops/FloorPlan2D'
@@ -15,7 +16,7 @@ export function WorkshopBuilderPage() {
   const [workshop, setWorkshop] = useState<Workshop | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [selectedWall, setSelectedWall] = useState<string | null>(null)
+  const [selectedWall, setSelectedWall] = useState<WallSide | null>(null)
   const [selectedObstacle, setSelectedObstacle] = useState<string | null>(null)
 
   useEffect(() => {
