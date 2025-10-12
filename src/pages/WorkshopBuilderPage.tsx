@@ -7,6 +7,8 @@ import { db } from '@/services/supabase'
 import { useAuthStore } from '@/stores/authStore'
 import { FloorPlan2D } from '@/components/workshops/FloorPlan2D'
 import { BuilderSidebar } from '@/components/workshops/BuilderSidebar'
+import { WorkshopToolsList } from '@/components/workshops/WorkshopToolsList'
+import { AddToolModal } from '@/components/workshops/AddToolModal'
 import { useDebouncedSave } from '@/hooks/useDebouncedSave'
 import { useUndoRedo } from '@/hooks/useUndoRedo'
 
@@ -28,6 +30,8 @@ export function WorkshopBuilderPage() {
   const [error, setError] = useState<string | null>(null)
   const [selectedWall, setSelectedWall] = useState<WallSide | null>(null)
   const [selectedObstacle, setSelectedObstacle] = useState<string | null>(null)
+  const [isAddToolModalOpen, setIsAddToolModalOpen] = useState(false)
+  const [toolsRefreshKey, setToolsRefreshKey] = useState(0)
 
   // Undo/Redo system
   const {
@@ -250,7 +254,27 @@ export function WorkshopBuilderPage() {
             setSelectedObstacle(null)
           }}
         />
+
+        {/* Tools Section */}
+        {!selectedWall && !selectedObstacle && (
+          <div className="p-4 border-t">
+            <WorkshopToolsList
+              key={toolsRefreshKey}
+              workshopId={workshop.id}
+              onAddToolClick={() => setIsAddToolModalOpen(true)}
+              onRefresh={() => setToolsRefreshKey(prev => prev + 1)}
+            />
+          </div>
+        )}
       </div>
+
+      {/* Add Tool Modal */}
+      <AddToolModal
+        isOpen={isAddToolModalOpen}
+        onClose={() => setIsAddToolModalOpen(false)}
+        workshopId={workshop.id}
+        onSuccess={() => setToolsRefreshKey(prev => prev + 1)}
+      />
     </div>
   )
 }
