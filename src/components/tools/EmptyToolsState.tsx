@@ -8,15 +8,15 @@ export function EmptyToolsState({ onCreateClick }: EmptyToolsStateProps) {
   return (
     <Card className="max-w-2xl mx-auto">
       <CardBody className="text-center p-12">
-        <h2 className="text-2xl font-bold mb-2">Build Your Tool Library</h2>
+        <h2 className="text-2xl font-bold mb-2">Design Your Ideal Workshop</h2>
         <p className="text-default-600 mb-6 max-w-md mx-auto">
-          Create a library of your woodworking tools to optimize workshop layouts. Choose from research-based templates or add custom tools.
+          Start by documenting your tools. We'll help you create an optimized layout using research-backed templates or your custom configurations.
         </p>
         <Button color="primary" size="lg" onPress={onCreateClick}>
-          Add Your First Tool
+          Get Started with Tool Profiles
         </Button>
         <p className="text-sm text-default-400 mt-4">
-          13 research-based templates available
+          Choose from 13 expert-validated tool templates
         </p>
       </CardBody>
     </Card>

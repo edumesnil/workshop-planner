@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button, Spinner } from '@heroui/react'
+import { Button, Spinner, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@heroui/react'
 import { useAuthStore } from '@/stores/authStore'
 import { useToolStore } from '@/stores/toolStore'
 import { ToolRow } from '@/types/database'
@@ -13,6 +13,9 @@ export function ToolsPage() {
   const { tools, setTools, loading, setLoading, error, setError } = useToolStore()
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingTool, setEditingTool] = useState<ToolRow | null>(null)
+  const [deletingTool, setDeletingTool] = useState<ToolRow | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!user) return
@@ -41,15 +44,24 @@ export function ToolsPage() {
     setIsFormOpen(true)
   }
 
-  const handleDelete = async (tool: ToolRow) => {
-    if (!confirm(`Delete ${tool.name}? This cannot be undone.`)) return
+  const handleDelete = (tool: ToolRow) => {
+    setDeletingTool(tool)
+  }
 
+  const handleConfirmDelete = async () => {
+    if (!deletingTool) return
+
+    setIsDeleting(true)
+    setDeleteError(null)
     try {
-      const { error } = await db.tools.delete(tool.id)
+      const { error } = await db.tools.delete(deletingTool.id)
       if (error) throw error
       await loadTools()
+      setDeletingTool(null)
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to delete tool')
+      setDeleteError(err instanceof Error ? err.message : 'Unable to delete tool. Please try again.')
+    } finally {
+      setIsDeleting(false)
     }
   }
 
@@ -89,13 +101,13 @@ export function ToolsPage() {
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold">My Tools</h1>
+          <h1 className="text-3xl font-bold">Your Workshop Tool Library</h1>
           <p className="text-default-500 mt-1">
-            Manage your tool library for workshop planning
+            Organize and optimize your tools for efficient workspace design
           </p>
         </div>
         <Button color="primary" onPress={() => setIsFormOpen(true)}>
-          Add Tool
+          Create Tool Profile
         </Button>
       </div>
 
@@ -116,6 +128,54 @@ export function ToolsPage() {
         onClose={handleFormClose}
         onSuccess={handleFormSuccess}
       />
+
+      <Modal
+        isOpen={!!deletingTool}
+        onOpenChange={(open) => {
+          if (!open) {
+            setDeletingTool(null)
+            setDeleteError(null)
+          }
+        }}
+        size="sm"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Remove Tool from Library
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  Remove <strong>{deletingTool?.name}</strong> from your workshop planning?
+                </p>
+                <p className="text-sm text-default-500 mt-2">
+                  This tool will be deleted from your library and removed from all workshop layouts. This cannot be reversed.
+                </p>
+                {deleteError && (
+                  <div className="mt-3 p-3 bg-danger-50 border border-danger-200 rounded-md">
+                    <p className="text-sm text-danger-800 font-medium">Unable to delete tool</p>
+                    <p className="text-sm text-danger-600 mt-1">{deleteError}</p>
+                  </div>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="flat" onPress={onClose} isDisabled={isDeleting}>
+                  Cancel
+                </Button>
+                <Button
+                  color="danger"
+                  variant="solid"
+                  onPress={handleConfirmDelete}
+                  isLoading={isDeleting}
+                >
+                  Delete Tool
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   )
 }

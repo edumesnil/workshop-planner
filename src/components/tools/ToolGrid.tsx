@@ -38,16 +38,18 @@ export function ToolGrid({ tools, onEdit, onDelete, onCreateClick }: ToolGridPro
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <Input
           className="flex-1"
-          placeholder="Search tools..."
+          placeholder="Find tools by name or type"
           value={searchQuery}
           onValueChange={setSearchQuery}
           isClearable
+          aria-label="Search tools by name or type"
         />
         <Select
           className="sm:w-64"
-          placeholder="Category"
+          placeholder="Filter by Tool Category"
           selectedKeys={[categoryFilter]}
           onChange={(e) => setCategoryFilter(e.target.value)}
+          aria-label="Filter tools by category"
         >
           {categoryOptions.map((option) => (
             <SelectItem key={option.key}>

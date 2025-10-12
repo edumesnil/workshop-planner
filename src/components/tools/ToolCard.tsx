@@ -14,7 +14,19 @@ export function ToolCard({ tool, onEdit, onDelete }: ToolCardProps) {
 
   return (
     <Card>
-      <div className="cursor-pointer" onClick={() => onEdit(tool)}>
+      <div
+        className="cursor-pointer"
+        onClick={() => onEdit(tool)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            onEdit(tool)
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label={`Edit ${tool.name} tool`}
+      >
         <CardHeader className="flex flex-col items-start gap-1 pb-0">
           <div className="flex items-center gap-2 w-full">
             <h3 className="text-lg font-semibold flex-1">{tool.name}</h3>

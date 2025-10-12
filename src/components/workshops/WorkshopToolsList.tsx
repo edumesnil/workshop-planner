@@ -15,6 +15,7 @@ export function WorkshopToolsList({ workshopId, onAddToolClick, onRefresh }: Wor
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [removing, setRemoving] = useState<string | null>(null)
+  const [removeError, setRemoveError] = useState<string | null>(null)
 
   useEffect(() => {
     loadTools()
@@ -39,13 +40,14 @@ export function WorkshopToolsList({ workshopId, onAddToolClick, onRefresh }: Wor
 
   const handleRemoveTool = async (toolId: string) => {
     setRemoving(toolId)
+    setRemoveError(null)
     try {
       const { error } = await db.workshopTools.removeFromWorkshop(workshopId, toolId)
       if (error) throw error
       await loadTools()
       onRefresh?.()
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to remove tool')
+      setRemoveError(err instanceof Error ? err.message : 'Unable to remove tool from workshop. Please try again.')
     } finally {
       setRemoving(null)
     }
@@ -95,6 +97,13 @@ export function WorkshopToolsList({ workshopId, onAddToolClick, onRefresh }: Wor
           Add Tool
         </Button>
       </div>
+
+      {removeError && (
+        <div className="p-3 bg-danger-50 border border-danger-200 rounded-md">
+          <p className="text-sm text-danger-800 font-medium">Error removing tool</p>
+          <p className="text-sm text-danger-600 mt-1">{removeError}</p>
+        </div>
+      )}
 
       {tools.map((tool) => (
         <Card key={tool.id} className="border border-default-200">

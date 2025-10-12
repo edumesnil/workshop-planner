@@ -211,7 +211,7 @@ export function ToolFormModal({ isOpen, tool, onClose, onSuccess }: ToolFormModa
         {(onClose) => (
           <>
             <ModalHeader>
-              {tool ? 'Edit Tool' : 'Add Tool to Library'}
+              {tool ? 'Update Tool Profile' : 'Create Tool Configuration'}
             </ModalHeader>
             <ModalBody>
               {error && (

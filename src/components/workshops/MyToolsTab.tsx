@@ -17,6 +17,7 @@ export function MyToolsTab({ workshopId, onToolsChange }: MyToolsTabProps) {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [toggling, setToggling] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!user) return
@@ -46,6 +47,7 @@ export function MyToolsTab({ workshopId, onToolsChange }: MyToolsTabProps) {
 
   const handleToggleTool = async (toolId: string, isChecked: boolean) => {
     setToggling(toolId)
+    setError(null)
     try {
       if (isChecked) {
         const { error } = await db.workshopTools.addToWorkshop(workshopId, toolId)
@@ -62,7 +64,17 @@ export function MyToolsTab({ workshopId, onToolsChange }: MyToolsTabProps) {
       }
       onToolsChange()
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to update tool')
+      setError(err instanceof Error ? err.message : 'Unable to update workshop tools. Please try again.')
+      // Revert checkbox state on error
+      if (isChecked) {
+        setWorkshopToolIds(prev => {
+          const next = new Set(prev)
+          next.delete(toolId)
+          return next
+        })
+      } else {
+        setWorkshopToolIds(prev => new Set([...prev, toolId]))
+      }
     } finally {
       setToggling(null)
     }
@@ -92,12 +104,20 @@ export function MyToolsTab({ workshopId, onToolsChange }: MyToolsTabProps) {
 
   return (
     <div className="py-4">
+      {error && (
+        <div className="mb-4 p-3 bg-danger-50 border border-danger-200 rounded-md">
+          <p className="text-sm text-danger-800 font-medium">Error updating tools</p>
+          <p className="text-sm text-danger-600 mt-1">{error}</p>
+        </div>
+      )}
+
       <Input
         placeholder="Search your tools..."
         value={searchQuery}
         onValueChange={setSearchQuery}
         isClearable
         className="mb-4"
+        aria-label="Search tools from your library"
       />
 
       <div className="space-y-2 max-h-[400px] overflow-y-auto">

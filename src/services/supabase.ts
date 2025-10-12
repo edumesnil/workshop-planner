@@ -101,6 +101,9 @@ export const db = {
   },
 
   tools: {
+    /**
+     * Get all tools for a specific user, ordered by name
+     */
     getAll: async (userId: string) => {
       return await supabase
         .from('tools')
@@ -109,6 +112,9 @@ export const db = {
         .order('name')
     },
 
+    /**
+     * Create a new tool in the user's library
+     */
     create: async (tool: ToolInsert) => {
       return await supabase
         .from('tools')
@@ -117,6 +123,9 @@ export const db = {
         .single()
     },
 
+    /**
+     * Update an existing tool's properties
+     */
     update: async (id: string, updates: ToolUpdate) => {
       return await supabase
         .from('tools')
@@ -126,6 +135,10 @@ export const db = {
         .single()
     },
 
+    /**
+     * Delete a tool from the user's library
+     * Note: Cascade delete will remove from all workshops via workshop_tools foreign key
+     */
     delete: async (id: string) => {
       return await supabase
         .from('tools')
@@ -135,6 +148,10 @@ export const db = {
   },
 
   toolTemplates: {
+    /**
+     * Get all public tool templates, sorted by category then name
+     * Returns research-based tool specifications with dimensions and clearances
+     */
     getAll: async () => {
       return await supabase
         .from('tool_templates')
@@ -150,6 +167,9 @@ export const db = {
         })
     },
 
+    /**
+     * Get tool templates filtered by category
+     */
     getByCategory: async (category: ToolCategory) => {
       return await supabase
         .from('tool_templates')
