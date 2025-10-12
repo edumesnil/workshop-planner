@@ -9,23 +9,23 @@ This directory contains detailed progress tracking and implementation guidance f
 | [Phase 1](./phase-1-research-knowledge-base.md) | Week 1-2 | ✅ **COMPLETED** | Research & Knowledge Base |
 | [Phase 2](./phase-2-foundation-authentication.md) | Week 2-3 | ✅ **COMPLETED** | Foundation & Authentication |
 | [Phase 3A](./phase-3-workshop-management.md) | Week 3-4 | ✅ **COMPLETED** | Workshop Management (CRUD) |
-| [Phase 3B](./phase-3b-2d-floor-plan.md) | Week 4 | **IN PROGRESS** | 2D Floor Plan Editor |
+| [Phase 3B](./phase-3b-2d-floor-plan.md) | Week 4 | ✅ **COMPLETED** | 2D Floor Plan Editor |
+| [Phase 3C](./phase-3c-accessibility-undo.md) | Week 4 | ✅ **COMPLETED** | Accessibility & Undo/Redo |
 | [Phase 4](./phase-4-tool-system.md) | Week 4-5 | PENDING | Tool System |
 | [Phase 5](./phase-5-optimization-engine.md) | Week 5-7 | PENDING | **Automated Optimization Engine** ⭐ |
 | [Phase 6](./phase-6-3d-visualization.md) | Week 7-8 | PENDING | 3D Visualization |
 | [Phase 7](./phase-7-polish-ux.md) | Week 8-9 | PENDING | Polish & User Experience |
 
-## Current Priority: Phase 3B
+## Current Priority: Phase 4
 
-**Focus**: Interactive Canvas-based 2D floor plan editor with visual constraint configuration.
+**Focus**: Comprehensive tool system with specifications and management.
 
 **Key Tasks**:
-- Canvas-based 2D workshop renderer with grid overlay
-- Interactive wall selection and constraint editing
-- Drag-drop obstacle placement with grid snapping
-- Zoom/pan controls for navigation
-- Performance optimization (60fps target)
-- Accessibility support (keyboard navigation, screen readers)
+- Tool database with detailed specifications
+- Tool selection and customization interface
+- Mobile tool flagging and caster management
+- Tool constraint definitions and clearance requirements
+- Integration with workshop layouts
 
 ## Phase Dependencies
 
@@ -72,7 +72,7 @@ Phase 1 (Research) ✅ → Phase 2 (Auth) ✅ → Phase 3A (Workshop CRUD) → P
 - ✅ HeroUI components with UX copywriting frameworks
 - ✅ Optimistic UI updates and keyboard accessibility
 
-### 2D Floor Plan Editor (Phase 3B) - IN PROGRESS (Stage 3/5 Complete)
+### 2D Floor Plan Editor (Phase 3B) ✅
 - ✅ Canvas-based 2D workshop renderer with grid overlay
 - ✅ Interactive wall selection and constraint editing in sidebar
 - ✅ Drag-drop for wall constraints (between walls with rotation preview)
@@ -81,9 +81,17 @@ Phase 1 (Research) ✅ → Phase 2 (Auth) ✅ → Phase 3A (Workshop CRUD) → P
 - ✅ Context menus on right-click (edit/delete)
 - ✅ Pick and drop animations with easing
 - ✅ Debounced auto-save (60 seconds) + manual save button
-- ⏳ Zoom/pan controls for large workshops (Stage 4 - pending)
-- ⏳ Undo/redo system (Stage 5 - pending)
-- ⏳ Performance optimization and testing (Stage 5 - pending)
+- ✅ Zoom/pan controls (mouse wheel, spacebar+drag)
+- ✅ Smart wall snapping (corners and edges)
+- ✅ Bounds checking (obstacles stay within floor)
+
+### Accessibility & Undo/Redo (Phase 3C) ✅
+- ✅ Keyboard navigation (Tab cycling, Arrow key movement)
+- ✅ Focus rings on all interactive elements
+- ✅ Undo/redo system (20-state history, Ctrl+Z/Y)
+- ✅ Color contrast improvements (WCAG 2.2 AA)
+- ✅ Empty state guidance and UX copy polish
+- ✅ Global drag handling (mouseup outside canvas)
 
 ### Tool System (Phase 4)
 - Comprehensive tool database with specifications

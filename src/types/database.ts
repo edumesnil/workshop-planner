@@ -28,6 +28,11 @@ export interface Database {
         Insert: UserProfileInsert
         Update: UserProfileUpdate
       }
+      workshop_tools: {
+        Row: WorkshopToolRow
+        Insert: WorkshopToolInsert
+        Update: WorkshopToolUpdate
+      }
     }
   }
 }
@@ -79,6 +84,7 @@ export interface ToolRow {
   user_id: string
   name: string
   type: string
+  category: string
   dimensions: {
     length: number
     width: number
@@ -97,6 +103,7 @@ export interface ToolRow {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile: boolean
   deployed_position?: {
     x: number
@@ -119,6 +126,7 @@ export interface ToolInsert {
   user_id: string
   name: string
   type: string
+  category: string
   dimensions: {
     length: number
     width: number
@@ -137,6 +145,7 @@ export interface ToolInsert {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile?: boolean
   deployed_position?: {
     x: number
@@ -157,6 +166,7 @@ export interface ToolInsert {
 export interface ToolUpdate {
   name?: string
   type?: string
+  category?: string
   dimensions?: {
     length: number
     width: number
@@ -175,6 +185,7 @@ export interface ToolUpdate {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile?: boolean
   deployed_position?: {
     x: number
@@ -330,6 +341,7 @@ export interface ToolTemplateRow {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile: boolean
   description?: string
   is_public: boolean
@@ -358,6 +370,7 @@ export interface ToolTemplateInsert {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile?: boolean
   description?: string
   is_public?: boolean
@@ -385,7 +398,27 @@ export interface ToolTemplateUpdate {
     right: number
     top: number
   }
+  material_feed_length?: number
   is_mobile?: boolean
   description?: string
   is_public?: boolean
+}
+
+export interface WorkshopToolRow {
+  id: string
+  workshop_id: string
+  tool_id: string
+  added_at: string
+}
+
+export interface WorkshopToolInsert {
+  id?: string
+  workshop_id: string
+  tool_id: string
+  added_at?: string
+}
+
+export interface WorkshopToolUpdate {
+  // Workshop tools junction table doesn't have updatable fields
+  // Only INSERT and DELETE operations
 }
