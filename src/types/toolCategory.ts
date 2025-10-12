@@ -16,3 +16,12 @@ export const ToolCategoryLabels: Record<ToolCategory, string> = {
   [ToolCategory.WORK_SURFACES]: 'Work Surfaces',
   [ToolCategory.DUST_COLLECTION]: 'Dust Collection'
 }
+
+/**
+ * Human-readable labels accessible by string key for database values
+ */
+export const TOOL_CATEGORY_LABELS: Record<string, string> = {
+  power_tools: 'Power Tools',
+  work_surfaces: 'Work Surfaces',
+  dust_collection: 'Dust Collection'
+}
